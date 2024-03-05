@@ -82,6 +82,8 @@
 \newcommand{\status}[1]{\def\@status{#1}}
 \newcommand{\titleineng}[1]{\def\@titleineng{#1}}
 \newcommand{\secondauthor}[1]{\def\@secondauthor{#1}}
+\newcommand{\thirdauthor}[1]{\def\@thirdauthor{#1}}
+\newcommand{\fourthauthor}[1]{\def\@fourthauthor{#1}}
 
 % Pirma pastraipos eilutė atitraukiama 1 cm
 \setlength{\parindent}{1cm}
@@ -195,8 +197,6 @@
     {Tituliniame puslapyje nenurodyta studijų programa (komanda \protect\department)}
   \checkifdefined{@papertype}%
     {Tituliniame puslapyje nenurodytas darbo tipas (komanda \protect\papertype)}
-  \checkifdefined{@supervisor}%
-    {Tituliniame puslapyje nenurodytas darbo vadovas (komanda \protect\supervisor)}
   \checkifdefined{@reviewer}%
     {Tituliniame puslapyje nenurodytas darbo recenzentas (komanda \protect\reviewer)}
   ~
@@ -211,8 +211,7 @@
         {\singlespacing \LARGE \textbf{\@title} \par}
         {\singlespacing \Large \textbf{\textenglish{\@titleineng}} \par}%
     }{%
-        {\singlespacing \LARGE \textbf{\@titleineng} \par}%
-        {\singlespacing \Large \textbf{\textlithuanian{\@title}} \par}
+        {\singlespacing \LARGE \textbf{\@title} \par}%
     }%
      \vskip 0.8cm
      {\large \@papertype}%
@@ -230,7 +229,6 @@
         }{%
             \bigskip Author: &\; \@status \\
             \medskip\bigskip &\; \@author \hfill \hfill \@signatureplace \\
-            \bigskip Supervisor: &\; \@supervisor \hfill \@signatureplace \\
         }%
         \end{tabular} \par}%
      \end{flushright}
@@ -248,8 +246,9 @@
         }{%
             \bigskip Authors: &\; \@status \\
             \bigskip &\; \@author \hfill \hfill \@signatureplace \\
-            \medskip\bigskip &\; \@secondauthor \hfill \@signatureplace \\
-            \bigskip Supervisor: &\; \@supervisor \hfill \@signatureplace \\
+            \bigskip &\; \@secondauthor \hfill \@signatureplace \\
+            \bigskip &\; \@thirdauthor \hfill \@signatureplace \\
+            \bigskip &\; \@fourthauthor \hfill \@signatureplace \\
         }%
         \end{tabular} \par}%
      \end{flushright}
