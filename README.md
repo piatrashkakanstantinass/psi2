@@ -11,27 +11,20 @@ Here's the supported setup. Use devcontainer if you don't want to bother with al
 1. Use VSCode
 2. Install [LaTeX Workshop extension](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
 3. Setup LaTeX (there are many ways to install, refer to [our template recommendations](https://github.com/LIKS/course_work_template_vu_mif_se))
-4. Install [PlantUML extension](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
-5. Install `plantuml` locally
+4. Ensure that [Inkscape](https://inkscape.org/) is in your PATH
 
 ## Working with LaTeX
 
 - You don't work with LaTeX, you just write text and ask Google or Uncle GPT for some specific formatting help
 
-- You don't write PlantUML directly in LaTeX (LaTeX compilation is too long for interactive editing)
-
 - Use LaTeX extension pdf preview feature to check the pdf. Pdf will be regenerated after save. It takes about 10 seconds, so I suggest only checking it when necessary.
 
 - Final project can be built using `make` command.
 
-## Working with PlantUML
+## Working with Draw.io
 
-- Refer to [official docs](https://plantuml.com/)
+- We write valid UML with proper understanding of what arrows do what.
 
-- We store diagrams in `lab2diags/` directory using `.wsd` extension
+- We store diagrams in `lab2diags/` directory using `.drawio.svg` extension
 
-- You will be able to click preview button to get a diagram preview
-
-- You also can use [online live server](https://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000) if you want faster speeds.
-
-- !!!Make sure to put TODO comments in latex file to know where to add which diagram when building!!!
+- Use `\includesvg{}` to include svg in latex. Note: if diagram is huge use `\includesvg[width=\textwidth]{}`.
