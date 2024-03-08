@@ -42,7 +42,37 @@
 \tableofcontents
 
 \section{Context}
+EduPal is a learning aid system designed to enhance
+the educational experience for both students and teachers. With a user-friendly interface and a comprehensive set of features, EduPal aims to streamline the learning process, fostering a more efficient and engaging educational environment.
 
+\subsection{Functionality overview}
+List features here
+
+\subsection{Tech stack}
+List tech stack here
+
+\subsection{Selected requirements}
+In this document we will focus on system changes needed to fulfil the follwing set of requirements:
+
+\begin{itemize}
+    \item \textbf{FR1.} User shall be able to archive\footnote{Archived subject is a read-only subject} the subject.
+    \item \textbf{FR2.} User shall be able to unarchive the subject.
+    \item \textbf{FR3.} System shall automatically archive subjects with no recent changes.
+    \item \textbf{FR4.} Users shall be notified about automatic archivation.
+    \item \textbf{FR5.} Administrator shall be able create other adminstrator accounts.
+    \item \textbf{FR6.} Administrator actions shall be logged.
+    \item \textbf{FR7.} Administrator shall be able to access OpenAI service usage statistics.
+    \item \textbf{FR8.} Administrator shall be able to set OpenAI usage limits.
+    \item \textbf{FR9.} System shall notify administrator if OpenAI usage exceeds limits.
+    \item \textbf{FR10.} Users shall be able to leave feedback.
+    \item \textbf{FR11.} Administrators shall be able to access user feedback.
+    \item \textbf{NR1.} System shall handle heavy load.
+\end{itemize}
+
+\section{Use Case View}
+
+\includesvg{../lab2diags/use-cases/archivation.drawio.svg}
+weawdw
 \section{Logical View}
 
 \section{Development View}
@@ -50,8 +80,6 @@
 \section{Process View}
 
 \section{Physical View}
-
-\section{Use Case View}
 
 \section{Traceability}
 
