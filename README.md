@@ -21,6 +21,19 @@ Here's the supported setup. Use devcontainer if you don't want to bother with al
 
 - Final project can be built using `make` command.
 
+- Put references into `bibliografija.bib` file and use `\cite{}` when needed
+
+- Use captions for every figure
+
+Some helpful commands:
+
+```latex
+\subsection{}
+\subsubsection{}
+\subsubsubsection{}
+\footnote{}
+```
+
 ## Working with Draw.io
 
 - We write valid UML with proper understanding of what arrows do what.
