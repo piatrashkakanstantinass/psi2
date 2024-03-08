@@ -163,5 +163,6 @@
       ],
       "env": {}
     }
-  ]
+  ],
+  "editor.wordWrap": "wordWrapColumn"
 }
