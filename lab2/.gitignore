@@ -15,3 +15,4 @@ out/
 *.snm
 svg-inkscape/
 *.pdf
+*.lof
