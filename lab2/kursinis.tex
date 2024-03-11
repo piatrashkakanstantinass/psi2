@@ -53,13 +53,13 @@ List features here
 List tech stack here
 
 \subsection{Selected requirements}
-In this document we will focus on system changes needed to fulfil the follwing set of requirements:
+In this document we will focus on system changes needed to fulfill the following set of requirements:
 
 \begin{itemize}
     \item \textbf{FR1.} User shall be able to archive and unarchive\footnote{Archived subject is a read-only subject} the subject.
     \item \textbf{FR2.} System shall automatically archive subjects with no recent changes.
     \item \textbf{FR3.} Users shall be notified about automatic archivation.
-    \item \textbf{FR4.} Administrator shall be able create other adminstrator accounts.
+    \item \textbf{FR4.} Administrator shall be able create other administrator accounts.
     \item \textbf{FR5.} Administrator actions shall be logged.
     \item \textbf{FR6.} Administrator shall be able to access OpenAI service usage statistics.
     \item \textbf{FR7.} Administrator shall be able to set OpenAI usage limits.
@@ -86,7 +86,7 @@ In this document we will focus on system changes needed to fulfil the follwing s
 \begin{description}
     \item[Actors] User
     \item[Requirements] FR1, FR11
-    \item[Description] User can request subject archivation or unarchivation. In both cases system must check whether user is the owner of a particular subject. If that is the case, subjcet archivation state is updated, otherwise nothing happens.
+    \item[Description] User can request subject archivation or unarchivation. In both cases system must check whether user is the owner of a particular subject. If that is the case, subject archivation state is updated, otherwise nothing happens.
 \end{description}
 
 \subsubsection{Automatic subject archivation}
@@ -101,7 +101,7 @@ In this document we will focus on system changes needed to fulfil the follwing s
 \begin{description}
     \item[Actors] User, System clock
     \item[Requirements] FR2, FR3, FR11
-    \item[Description] System clock regularly initates automatic archivation check process. All users who own subjects that were not updated in a specified amount of time will be notified about archivation. If they do not respond, their subject will be automatically archived.
+    \item[Description] System clock regularly initiates automatic archivation check process. All users who own subjects that were not updated in a specified amount of time will be notified about archivation. If they do not respond, their subject will be automatically archived.
 \end{description}
 
 \subsection{Administration}
@@ -134,7 +134,7 @@ In this document we will focus on system changes needed to fulfil the follwing s
 \begin{description}
     \item[Actors] Administrator, User
     \item[Requirements] FR8
-    \item[Description] Every time user uses OpenAI integration, system calculates usage and notifies administrator if it exceeds limits.
+    \item[Description] Every time a user uses OpenAI integration, system calculates usage and notifies administrator if it exceeds limits.
 \end{description}
 
 \subsubsection{Feedback collection}
