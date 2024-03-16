@@ -56,18 +56,17 @@ List tech stack here
 In this document we will focus on system changes needed to fulfil the follwing set of requirements:
 
 \begin{itemize}
-    \item \textbf{FR1.} User shall be able to archive and unarchive\footnote{Archived subject is a read-only subject} the subject.
-    \item \textbf{FR2.} System shall automatically archive subjects with no recent changes.
-    \item \textbf{FR3.} Users shall be notified about automatic archivation.
-    \item \textbf{FR4.} Administrator shall be able create other adminstrator accounts.
-    \item \textbf{FR5.} Administrator actions shall be logged.
-    \item \textbf{FR6.} Administrator shall be able to access OpenAI service usage statistics.
-    \item \textbf{FR7.} Administrator shall be able to set OpenAI usage limits.
-    \item \textbf{FR8.} System shall notify administrator if OpenAI usage exceeds limits.
-    \item \textbf{FR9.} Users shall be able to leave feedback.
-    \item \textbf{FR10.} Administrators shall be able to access user feedback.
-    \item \textbf{FR11.} Only user who created the subject shall be able to change its contents, request archivation and handle other changes.
-    \item \textbf{NR1.} System shall handle heavy load.
+    \item \textbf{FR1.} Subject owner shall be able to archive and unarchive the subject. Archived subject does not support adding, deleting or changing topics and uploaded conspectuses.
+    \item \textbf{FR2.} System shall automatically archive subjects with no recent topic or conspectus changes after 1 month.
+    \item \textbf{FR3.} Subject owner shall be notified about automatic archivation.
+    \item \textbf{FR4.} Users and administrators shall be able to be notified via system notification and email.
+    \item \textbf{FR5.} Administrator shall be able create other adminstrator accounts.
+    \item \textbf{FR6.} Administrator actions shall be logged.
+    \item \textbf{FR7.} Administrator shall be able to access OpenAI service usage statistics.
+    \item \textbf{FR8.} Administrator shall be able to set OpenAI usage limits.
+    \item \textbf{FR9.} System shall notify administrator if OpenAI usage exceeds limits.
+    \item \textbf{FR10.} Users shall be able to leave feedback that administrators can access. Administrators shall be notified.
+    \item \textbf{FR11.} Only user who created the subject shall be able to change subject metadata, create, update or delete new topics and conspectuses.
 \end{itemize}
 
 \section{Logical View}
