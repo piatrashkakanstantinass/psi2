@@ -70,6 +70,38 @@ In this document we will focus on system changes needed to fulfil the follwing s
     \item \textbf{NR1.} System shall handle heavy load.
 \end{itemize}
 
+\section{Logical View}
+
+\subsection{System models}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/models.drawio.svg}
+    \label{system-models}
+    \caption{System models}
+\end{figure}
+
+\begin{description}
+    \item[Subjects and topics] Subject is a primary organizational unit of the system. Subject is owned by user. Inside subjects there are topics. Last update date is used by automatic archivation process.
+    \item[Conspectuses] Conspectuses are files stored in topics.
+    \item[Users] User model store login and contact information. Users are able to specificy knowledge level of a particular topic.
+    \item[Comments] Users are able to post text comments on topics
+    \item[Goals] User can have multiple goals all of which are linked to a particular set of subjects.
+    \item[Notifications] Notifications are sent to user and can be accessed in the UI. Subclasses are used to provide additional functionality, such as linking subject, so UI can display a button that redirects to subject page or offers a different set of controls.
+    \item[ChatMessages] ChatMessages are stored for OpenAI chat.
+    \item[Notes] Every user can have global text notes.
+    \item[Pomodoro] User has a single pomodoro session that they can tweak and control.
+    \item[Administrators] Administrators are detached from the system and have their own views and controls.
+    \item[AdministratorActions] System stores different types of administrator actions to ensure that administrators are responsible.
+    \item[OpenAIStats] Object of this class is used by system to store token usage by day and it is sinced with data from OpenAI servers from time to time.
+\end{description}
+
+\section{Development View}
+
+\section{Process View}
+
+\section{Physical View}
+
 \section{Use Case View}
 
 \subsection{Subject archivation}
@@ -144,38 +176,6 @@ In this document we will focus on system changes needed to fulfil the follwing s
     \item[Requirements] FR9
     \item[Description] Users can leave feedback that administrators have access to.
 \end{description}
-
-\section{Logical View}
-
-\subsection{System models}
-
-\begin{figure}[ht]
-    \centering
-    \includesvg[width=\textwidth]{../lab2diags/logical-view/models.drawio.svg}
-    \label{system-models}
-    \caption{System models}
-\end{figure}
-
-\begin{description}
-    \item[Subjects and topics] Subject is a primary organizational unit of the system. Subject is owned by user. Inside subjects there are topics. Last update date is used by automatic archivation process.
-    \item[Conspectuses] Conspectuses are files stored in topics.
-    \item[Users] User model store login and contact information. Users are able to specificy knowledge level of a particular topic.
-    \item[Comments] Users are able to post text comments on topics
-    \item[Goals] User can have multiple goals all of which are linked to a particular set of subjects.
-    \item[Notifications] Notifications are sent to user and can be accessed in the UI. Subclasses are used to provide additional functionality, such as linking subject, so UI can display a button that redirects to subject page or offers a different set of controls.
-    \item[ChatMessages] ChatMessages are stored for OpenAI chat.
-    \item[Notes] Every user can have global text notes.
-    \item[Pomodoro] User has a single pomodoro session that they can tweak and control.
-    \item[Administrators] Administrators are detached from the system and have their own views and controls.
-    \item[AdministratorActions] System stores different types of administrator actions to ensure that administrators are responsible.
-    \item[OpenAIStats] Object of this class is used by system to store token usage by day and it is sinced with data from OpenAI servers from time to time.
-\end{description}
-
-\section{Development View}
-
-\section{Process View}
-
-\section{Physical View}
 
 \section{Traceability}
 
