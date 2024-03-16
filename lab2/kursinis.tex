@@ -51,25 +51,24 @@ the educational experience for both students and teachers. With a user-friendly 
 At present, EduPal has these functionalities:
 
 \begin{itemize}
-    \item \textbf{Create and Manage Subjects}: Users can create and manage subjects, their topics, and upload notes in PDF format to those topics.
-    \item \textbf{Note Sharing and Interaction}: Each user can view notes created by other users, rate them, and engage in discussions within the topic's section.
-    \item \textbf{Pomodoro Timer System}: The system incorporates a Pomodoro timer system that allows users to customize their study/break times.
-    \item \textbf{Notes exportation}: Users can export created notes to a PDF section, download them to their device, or save them as drafts.
-    \item \textbf{Goal Setting}: Users can set study goals, selecting desired subjects and their study times.
-    \item \textbf{Integration with GPT API}: The project is integrated with Chat GPT, which stores user chat history and responds to user inquiries.
-\end{itemize}
+    \item \textbf{Create and Manage Subjects}: Users have the ability to create new subjects and manage existing ones within the system. This includes creating topics under each subject and uploading notes in PDF format related to those topics. Additionally, users can conveniently access all their own notes as well as notes shared by peers within the system.
+    \item \textbf{Note Sharing and Interaction}: Users can interact with notes shared by others by viewing, ranking, and engaging in discussions within the topic's section. The system allows users to rank notes based on usefulness to promote the most valuable ones. Users also have options to export notes to a PDF section, download them to their device, or save them as drafts for further editing. 
+    \item \textbf{Pomodoro Timer System}: The system features a Pomodoro timer system designed to enhance productivity. Users can customize their study and break times according to their preferences. The timer notifies users when it's time to take a break, helping them maintain focus and manage their study sessions effectively.
+    \item \textbf{Goal Setting}: Users can set study goals within the system, specifying desired subjects and study times. This feature enables users to plan and organize their study sessions more efficiently, helping them stay on track with their academic or learning objectives.
+    \item \textbf{Integration with GPT API}: The project integrates with Chat GPT, providing users with additional functionalities. This integration allows the system to store user chat history and respond to user inquiries using the capabilities of Chat GPT. Users can leverage this feature to seek assistance, clarify doubts, or engage in interactive conversations within the system.
+    \end{itemize}
 
-\subsection{Tech stack}
+\subsection{Tech stack and services}
 
 The EduPal system was created using a modern technology stack to support its functionalities. The basic structure of the system:
 
 \begin{itemize}
-    \item \textbf{Frontend}: The frontend of the system is developed using the React framework, providing a responsive and interactive user interface.
-    \item \textbf{Backend}: The backend of the system is built using ASP.NET, offering scalability, security, and integration capabilities.
-    \item \textbf{Database}: Data storage and management are handled by a relational database management system (PostgreSQL), ensuring data integrity and reliability.
-    \item \textbf{OpenAI Service}: The system uses OpenAI API, to provide Chat GPT services for advanced user experience.
-    \item \textbf{Tests}: System is tested using a combination of unity and integration tests.
-    \item \textbf{Version Control}: Git is used for version control, enabling collaborative development and code management.
+    \item \textbf{Frontend}: The frontend of the system is developed using the React framework and JavaScript. Main component libraries were ej2-react-dropdowns, which provides UI components and specifically refers to dropdown components in React, and react-pdf, which allows the display of PDF documents. Frontend allows communication with server via fetch function which sends the HTTP request to the particular API endpoint in the backend. After the backend sends HTTP response to the frontend, React components are updated accordingly, mainly thorugh setting component state or triggering UI updates.
+    \item \textbf{Backend}: The system is built using ASP.NET Core and uses Entity Framework Core which helps following monolithic architecture, where backend is tightly integrated with frontend and database. The backend is built using .NET 7.0 and follows a RESTful API architecture, enabling it to handle HTTP requests and responses using standard methods such as GET, POST, PUT, and DELETE, with data exchanged in JSON format.Additionally, WebSocket communication is facilitated by SignalR and is used for ChatHub endpoint which, enables real-time communication.
+    \item\textbf{Data Storage}: The system stores and manages conspectus data as files locally using the object-relational database PostgreSQL. The use of Entity Framework Core provides tighter integration with the backend for database operations.
+    \item \textbf{OpenAI Service}: The system uses OpenAI API, to provide Chat GPT services. API helps connecting to the server and sending any user inqueries. The prompt sent to Open AI is modified so that length of the response would be reasonable.
+    \item \textbf{Tests}: System is tested using a combination of unity and integration tests, which checks for any vulnerabilities in particular functions and in particular combined services. Any found vulnerabilities are covered via exceptions in the backend.
+    \item \textbf{Version Control}: Git is used for code publishing and reviewing processes. It prevents direct modifications and faulty code.
 \end{itemize}
 
 \subsection{Selected requirements}
