@@ -66,7 +66,6 @@ In this document we will focus on system changes needed to fulfil the follwing s
     \item \textbf{FR8.} Administrator shall be able to set OpenAI usage limits.
     \item \textbf{FR9.} System shall notify administrator if OpenAI usage exceeds limits.
     \item \textbf{FR10.} Users shall be able to leave feedback that administrators can access. Administrators shall be notified.
-    \item \textbf{FR11.} Only user who created the subject shall be able to change subject metadata, create, update or delete new topics and conspectuses.
 \end{itemize}
 
 \section{Logical View}
@@ -105,11 +104,24 @@ EduPal uses Entity Framework Core ORM and PostgreSQL DBMS that impose certain re
 
 \subsubsection{Notification subsystem}
 
+Other subsystems can send notifications via INotificationService interface. Its implementation is used to send email to account and send ping message using SignalR so that client can send request to get unread notifications. NotificationDto is used to send notifications to client and combines all subclasses into 1 class, client will use type attribute to determine what subclass to use.
+
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/notification.drawio.svg}
     \label{notification-model}
     \caption{Notification subsystem diagram}
+\end{figure}
+
+\subsubsection{Archivation subsystem}
+
+System users can send archivation and unarchivation requests as well as access archived subjects. Updating archived subject would cause a fail. Automatic service is scheduled to perform automatic archivation every month and notify owner.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/archivation.drawio.svg}
+    \label{archivation-model}
+    \caption{Archivation subsystem diagram}
 \end{figure}
 
 \section{Development View}
