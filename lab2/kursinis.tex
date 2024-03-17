@@ -115,14 +115,34 @@ Other subsystems can send notifications via INotificationService interface. Its 
 
 \subsubsection{Archivation subsystem}
 
-System users can send archivation and unarchivation requests as well as access archived subjects. Updating archived subject would cause a fail. Automatic service is scheduled to perform automatic archivation every month and notify owner.
-
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/archivation.drawio.svg}
-    \label{archivation-model}
     \caption{Archivation subsystem diagram}
+    \label{archivation-model}
 \end{figure}
+
+System users can send archivation and unarchivation requests as well as access archived subjects. Updating archived subject would cause a fail. Automatic service is scheduled to perform automatic archivation every month and notify owner. Figure \ref{archivation-model} shows archivation subsystem diagram.
+
+\subsubsection{Administration and feedback subsystem}
+
+Figures \ref{administration-model} and \ref{feedback-model} shows administration and feedback subsystem diagrams. AccountController is capable of creating both administrator and regular users, process differs, as only administrator can create other administrator accounts.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/administration.drawio.svg}
+    \caption{Administration subsystem diagram}
+    \label{administration-model}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/feedback.drawio.svg}
+    \caption{Feedback subsystem diagram}
+    \label{feedback-model}
+\end{figure}
+
+
 
 \section{Development View}
 
