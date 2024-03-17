@@ -1,0 +1,23 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="231px" height="80px" viewBox="-0.5 -0.5 231 80" content="&lt;mxfile&gt;&lt;diagram id=&quot;gnaSKXRjjKzsgG90sBvk&quot; name=&quot;Page-1&quot;&gt;rZXfb5swEMf/GqTtYVOAQrfHQtrtIZWqZdKeHTBg1fiQufzqX78zHCGUVE21vUS+793ZvvuciRem9eGHFU31CLnUXrDID1649IIgjGL6dcKRhcDvhdKqvJfOhLV6kSwuWN2qXLaTQATQqJqpmIExMsOJJqyF/TSsAD09tRGlnAnrTOi5+kflWPXqt+B21H9KVVbDyX78vffUYgjmStpK5LA/k8J7L0wtAPar+pBK7Xo39KXPe3jDe7qYlQavSQj7hJ3QW67tQcp8I7LnFAxa0Fpavikeh/Lbvaq1MGQlBUWt2eOTLbQqDa0zOp8yw2QnLSrq3B07EBpSs0rpfCWOsHW3bJHOG6ykAqteaFuheU9yW+QhCOJJxNplkrwg1cqWYp6G0v1X0qM4TAJXokUWMipTNK3anMqohS2VSQARag7iRlE58vBms/0TQhp9CbVEe6QQTogZOk/9aZz34wwFIWvV2fzc8nMRPLblaeeRLC0Y7mXQ0Qz0DKtWHdKWsD+f5tp1o1Bap6CBeC4NdEEDZy0LvEC5Vnmuu80akSlT/nbUl1/8UVl1ictwVH5xwU6ygAJFz8M1X4uN1E/QKlTg9rd9bNKAMth1JUq8aNkpFml0qQihOiqSOO+lY82VDZUoU0mr8Fq04WW0A8v4OpTBzb+jjC+gpBoWa2ny4fV+KnjhhXfOhZY6/Lk3dkA7vYZPpc9bxLA/zr9/5VPUN3PUTgLKLXT3DaxoaqS5gH+KOaG+pouvkQMepGT7o/3uDPwH1tGVzzb4+LMlc/z2d76zP9Dw/i8=&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs>
+        <clipPath id="mx-clip-4-55-222-26-0">
+            <rect x="4" y="55" width="222" height="26"/>
+        </clipPath>
+    </defs>
+    <g>
+        <path d="M 0 26 L 0 0 L 230 0 L 230 26" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 0 26 L 0 76 L 230 76 L 230 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 0 26 L 230 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="12px">
+            <text x="114.5" y="17.5">
+                FeedbackController
+            </text>
+        </g>
+        <path d="M 0 38 L 230 38" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" pointer-events="none" clip-path="url(#mx-clip-4-55-222-26-0)" font-size="12px">
+            <text x="5.5" y="67.5">
+                + SendFeedback(feedback: String): void
+            </text>
+        </g>
+    </g>
+</svg>
