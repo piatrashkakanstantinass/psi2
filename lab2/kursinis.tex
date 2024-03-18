@@ -56,19 +56,99 @@ List tech stack here
 In this document we will focus on system changes needed to fulfill the following set of requirements:
 
 \begin{itemize}
-    \item \textbf{FR1.} User shall be able to archive and unarchive\footnote{Archived subject is a read-only subject} the subject.
-    \item \textbf{FR2.} System shall automatically archive subjects with no recent changes.
-    \item \textbf{FR3.} Users shall be notified about automatic archivation.
-    \item \textbf{FR4.} Administrator shall be able create other administrator accounts.
-    \item \textbf{FR5.} Administrator actions shall be logged.
-    \item \textbf{FR6.} Administrator shall be able to access OpenAI service usage statistics.
-    \item \textbf{FR7.} Administrator shall be able to set OpenAI usage limits.
-    \item \textbf{FR8.} System shall notify administrator if OpenAI usage exceeds limits.
-    \item \textbf{FR9.} Users shall be able to leave feedback.
-    \item \textbf{FR10.} Administrators shall be able to access user feedback.
-    \item \textbf{FR11.} Only user who created the subject shall be able to change its contents, request archivation and handle other changes.
-    \item \textbf{NR1.} System shall handle heavy load.
+    \item \textbf{FR1.} Subject owner shall be able to archive and unarchive the subject. Archived subject does not support adding, deleting or changing topics and uploaded conspectuses.
+    \item \textbf{FR2.} System shall automatically archive subjects with no recent topic or conspectus changes after 1 month.
+    \item \textbf{FR3.} Subject owner shall be notified about automatic archivation.
+    \item \textbf{FR4.} Users and administrators shall be able to be notified via system notification and email.
+    \item \textbf{FR5.} Administrator shall be able create other adminstrator accounts.
+    \item \textbf{FR6.} Administrator creation and OpenAI limit setting actions shall be logged.
+    \item \textbf{FR7.} Administrator shall be able to access OpenAI service usage statistics.
+    \item \textbf{FR8.} Administrator shall be able to set OpenAI usage limits.
+    \item \textbf{FR9.} System shall notify administrator if OpenAI usage exceeds limits.
+    \item \textbf{FR10.} Users shall be able to leave feedback that administrators can access. Administrators shall be notified.
 \end{itemize}
+
+\section{Logical View}
+
+\subsection{Informational model}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/informational.drawio.svg}
+    \label{informational-model}
+    \caption{Informational model}
+\end{figure}
+
+\begin{description}
+    \item[Subjects and topics] Subject is a primary organizational unit of the system. Subject is owned by user. Inside subjects there are topics. Last update timestamp is used by automatic archivation process and is updated whenever topics or conspectuses are updated or subject name is changed..
+    \item[Conspectuses] Conspectuses are files stored in topics.
+    \item[Accounts] System has 2 account types: user and administrator. User accounts are regular accounts used for interacting with the system and encapsulate student and teacher functionality. Administrator accounts are separate from user accounts and are only used for system administration.
+    \item[Notifications] Notifications are sent to account and can be accessed in the UI (email message is sent as well). Subclasses are used to provide additional functionality, such as linking subject, so UI can display a button that redirects to subject page or offers a different set of controls.
+    \item[ChatMessages] ChatMessages are stored for OpenAI chat.
+    \item[AccountActions] System stores different types of account actions, currently only administrator related actions are stored but it may change in the future.
+    \item[OpenAIStats] Object of this class is used by system to store token usage by day.
+\end{description}
+
+\subsection{Detailed subsystems}
+
+\subsubsection{Data access classes}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/data-access.drawio.svg}
+    \label{data-access-model}
+    \caption{Data access diagram}
+\end{figure}
+
+EduPal uses Entity Framework Core ORM and PostgreSQL DBMS that impose certain restrictions on classes, instances of which need to be stored. Every class must have a primary key and it was decided to use Id string attribute. In order to abstract data access, repository pattern is used. Downside of such approach is that every class must extend BaseEntity class. In following model diagrams BaseEntity and Repository classes will be shown without attributes and methods. System settings are not stored in database, instead a json file is loaded when object is instantiated. SystemSettings class is injected as singleton. Usage of ASP.NET Identity allows all controllers to have access to account id from request context.
+
+\subsubsection{Notification subsystem}
+
+Other subsystems can send notifications via INotificationService interface. Its implementation is used to send email to account and send ping message using SignalR so that client can send request to get unread notifications. NotificationDto is used to send notifications to client and combines all subclasses into 1 class, client will use type attribute to determine what subclass to use.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/notification.drawio.svg}
+    \label{notification-model}
+    \caption{Notification subsystem diagram}
+\end{figure}
+
+\subsubsection{Archivation subsystem}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/archivation.drawio.svg}
+    \caption{Archivation subsystem diagram}
+    \label{archivation-model}
+\end{figure}
+
+System users can send archivation and unarchivation requests as well as access archived subjects. Updating archived subject would cause a fail. Automatic service is scheduled to perform automatic archivation every month and notify owner. Figure \ref{archivation-model} shows archivation subsystem diagram.
+
+\subsubsection{Administration and feedback subsystem}
+
+Figures \ref{administration-model} and \ref{feedback-model} shows administration and feedback subsystem diagrams. AccountController is capable of creating both administrator and regular users, process differs, as only administrator can create other administrator accounts.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/administration.drawio.svg}
+    \caption{Administration subsystem diagram}
+    \label{administration-model}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/feedback.drawio.svg}
+    \caption{Feedback subsystem diagram}
+    \label{feedback-model}
+\end{figure}
+
+
+
+\section{Development View}
+
+\section{Process View}
+
+\section{Physical View}
 
 \section{Use Case View}
 
