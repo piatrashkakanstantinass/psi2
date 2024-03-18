@@ -256,12 +256,11 @@ The diagram below showcases how the deployed containers look like in the Azure K
 \begin{itemize}
     \item Free Tier Availability: Azure offers a generous free tier that allows you to experiment and deploy your application without initial costs.
     \item Scalability: Azure offers a wide range of services and resources that can easily scale up or down based on your application's needs.
-    \item Integration with GitLab: While Azure DevOps is a native option, GitLab integrates well with Azure for deployments and managing resources.
 \end{itemize}
 
 \textbf{Plan/Tier:}
 \begin{itemize}
-    \item Azure Free Trial: Free tier offered by Azure provides access to various services with limitations on compute hours, storage, etc. This is sufficient for development and initial deployment.
+    \item Azure Student Tier: Azure offers free access to university students, providing a 100 credit for 12 months and access to over 25 free services. This is a good option for small scale applications and showing the deployment process
 \end{itemize}
 
 \textbf{Database Management System:}
@@ -272,17 +271,17 @@ The diagram below showcases how the deployed containers look like in the Azure K
 \textbf{Security Considerations:}
 \begin{itemize}
     \item Secure Coding Practices: Implement secure coding practices in both the React app and .NET backend to prevent common vulnerabilities.
-    \item Secret Management: Store sensitive information like database connection strings and API keys as environment variables or app settings in Azure App Service. This keeps sensitive information separate from the code and helps with managing different environments.
+    \item Secret Management: Store sensitive information in kubernetes secrets or Azure Key Vault to easily access stored secrets and prevent unauthorized access.
     \item Network Security Groups: Use NSGs to restrict inbound and outbound traffic to your Azure resources, only allowing access from authorized sources.
+    \item Azure Managed Identity: Kubernetes cluster is authenticated with Azure Managed Identity. That way CI pipeline's runner can have authorization to deploy to the cluster and pull images from ACR.
     \item Regular Updates: Keep your application code, libraries, and frameworks updated with the latest security patches to address known vulnerabilities.
 \end{itemize}
 
 \textbf{Operating System:}
 \begin{itemize}
-    \item Linux Images:
+    \item Linux Docker Images:
         \begin{itemize}
             \item Cost-Effective: Linux typically has lower licensing costs compared to Windows Server.
-            \item Open-Source Community: Linux benefits from a large and active open-source community, providing extensive support and resources.
             \item Lightweight: Linux distributions are generally lightweight which can improve performance, especially for containerized deployments.
         \end{itemize}
 \end{itemize}
@@ -292,6 +291,29 @@ The diagram below showcases how the deployed containers look like in the Azure K
     \item Vertical Scaling: This involves upgrading the resources allocated to your existing Azure App Service instances (e.g., increasing CPU cores or memory). This can improve performance without adding additional instances.
 \end{itemize}
 
+\textbf{Azure services:}
+\begin{itemize}
+    \item Azure Kubernetes Service:
+        \begin{itemize}
+            \item 1 node pool.
+            \item Standard B2s (2 vCPU, 4 GB memory) nodes.
+            \item Autoscaling Enabled.
+        \end{itemize}
+    \item Azure PostgreSQL service: This is a managed PostgreSQL database service offered by Azure. The database is accessible 24/7 that allows for convenient access to the database.
+    \item Azure Container Registry: This is a managed, private Docker registry service offered by Azure. It is used for React and ASP.NET docker image uploading to use in Helm Charts. Also, it contains a custom docker image for testing and building the application in CI stage.
+\end{itemize}
+
+\subsection{Deployment Physical View Diagram}
+
+The diagram below showcases how deployment works on a physical level.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/PhysicalView/physical.svg}
+    \label{physical-view-showcase}
+    \caption{Physical view showcase}
+\end{figure}
+
 \subsection{Deployment process}
 
 The deployment process involves the following steps:
@@ -299,10 +321,14 @@ The deployment process involves the following steps:
 \begin{enumerate}
     \item User develops a frontend React application and an ASP.NET API with a PostgreSQL database.
     \item User pushes code to GitLab repository.
-    \item The CI pipeline tests the code (Unit, Integration tests).
-    \item The CI pipeline publishes artifacts to Azure Container Registry.
-    \item The CD pipeline pulls artifact images from Azure Container Registry.
-    \item The CD pipeline deploys the web application on the Azure cloud.
+    \item Code push triggers the CI/CD pipeline.
+    \item The pipeline's build stage tests the code (Unit, Integration tests).
+    \item The pipeline's build stage publishes artifacts to Azure Container Registry.
+    \item The pipeline's deploy stage pulls artifact images from Azure Container Registry.
+    \item The pipeline's deploy stage deploys premade helm charts with the published docker images to the Azure Kubernetes Service.
+    \item Inside the kubernetes cluster, React frontend acts as a client and communicates with the ASP.NET API.
+    \item The ASP.NET API communicates with the PostgreSQL database.
+    \item Web App is published to the internet and is accessible to the end-user.
 \end{enumerate}
 
 \section{Traceability}
