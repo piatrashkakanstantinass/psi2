@@ -70,13 +70,13 @@ In this document we will focus on system changes needed to fulfill the following
 
 \section{Logical View}
 
-\subsection{Informational model}
+\subsection{Information model}
 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/informational.drawio.svg}
     \label{informational-model}
-    \caption{Informational model}
+    \caption{Information model}
 \end{figure}
 
 \begin{description}
@@ -128,6 +128,8 @@ System users can send archivation and unarchivation requests as well as access a
 
 Figures \ref{administration-model} and \ref{feedback-model} shows administration and feedback subsystem diagrams. AccountController is capable of creating both administrator and regular users, process differs, as only administrator can create other administrator accounts.
 
+Feedback is handled by feedback controller. User accounts are only able to submit feedback, while administrator accounts can access fedback from a particular date.
+
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/administration.drawio.svg}
@@ -142,7 +144,13 @@ Figures \ref{administration-model} and \ref{feedback-model} shows administration
     \label{feedback-model}
 \end{figure}
 
+\subsubsection{Architectural deficiencies}
 
+EduPal software system was originally developed by a different team of software engineers leading to certain deficiencies that, while not critical, may obfuscate software growth and maintenance as codebase size increases. Core identified issue is \textbf{Lack of separation of layers}.
+
+Many monolithic applications are developed following Domain Driven Design principles which dictate that there are 3 decoupled layer: Application, Infrastructure and Domain. Application layer depends on interfaces exposed by Domain layer and Infrastructure provides implementation for those interfaces. EduPal does not follow this architecture resulting in more tightly coupled codebase.
+
+Despite such problem, considering current scale of aplication, such deficiency is not critical to application maintenance. However, in the future a need for a rewrite or restructurization may arise, therefore Stakeholders should be informed about it.
 
 \section{Development View}
 
