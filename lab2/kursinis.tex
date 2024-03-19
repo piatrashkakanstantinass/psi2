@@ -148,8 +148,6 @@ Figures \ref{administration-model} and \ref{feedback-model} shows administration
 
 \section{Process View}
 
-\section{Physical View}
-
 \section{Use Case View}
 
 \subsection{Subject archivation}
@@ -225,12 +223,6 @@ Figures \ref{administration-model} and \ref{feedback-model} shows administration
     \item[Description] Users can leave feedback that administrators have access to.
 \end{description}
 
-\section{Logical View}
-
-\section{Development View}
-
-\section{Process View}
-
 \section{Physical View}
 
 \subsection{Deployment Diagram}
@@ -252,15 +244,22 @@ The diagram below showcases how the deployed containers look like in the Azure K
     \item CI/CD Platform: Gitlab
 \end{itemize}
 
-\textbf{Reasons for choosing Azure:}
-\begin{itemize}
-    \item Free Tier Availability: Azure offers a generous free tier that allows you to experiment and deploy your application without initial costs.
-    \item Scalability: Azure offers a wide range of services and resources that can easily scale up or down based on your application's needs.
-\end{itemize}
-
 \textbf{Plan/Tier:}
 \begin{itemize}
     \item Azure Student Tier: Azure offers free access to university students, providing a 100 credit for 12 months and access to over 25 free services. This is a good option for small scale applications and showing the deployment process
+\end{itemize}
+
+\textbf{Azure services:}
+All Azure resources are created in the same resource group to simplify management and billing. Region used: East US.
+\begin{itemize}
+    \item Azure Kubernetes Service:
+        \begin{itemize}
+            \item 1 node pool.
+            \item Standard B2s (2 vCPU, 4 GB memory) nodes.
+            \item Autoscaling Enabled.
+        \end{itemize}
+    \item Azure PostgreSQL service: This is a managed PostgreSQL database service offered by Azure. The database is accessible 24/7 that allows for convenient access to the database.
+    \item Azure Container Registry: This is a managed, private Docker registry service offered by Azure. It is used for React and ASP.NET docker image uploading to use in Helm Charts. Also, it contains a custom docker image for testing and building the application in CI stage.
 \end{itemize}
 
 \textbf{Database Management System:}
@@ -291,46 +290,14 @@ The diagram below showcases how the deployed containers look like in the Azure K
     \item Vertical Scaling: This involves upgrading the resources allocated to your existing Azure App Service instances (e.g., increasing CPU cores or memory). This can improve performance without adding additional instances.
 \end{itemize}
 
-\textbf{Azure services:}
-All Azure resources are created in the same resource group to simplify management and billing. Region used: East US.
-\begin{itemize}
-    \item Azure Kubernetes Service:
-        \begin{itemize}
-            \item 1 node pool.
-            \item Standard B2s (2 vCPU, 4 GB memory) nodes.
-            \item Autoscaling Enabled.
-        \end{itemize}
-    \item Azure PostgreSQL service: This is a managed PostgreSQL database service offered by Azure. The database is accessible 24/7 that allows for convenient access to the database.
-    \item Azure Container Registry: This is a managed, private Docker registry service offered by Azure. It is used for React and ASP.NET docker image uploading to use in Helm Charts. Also, it contains a custom docker image for testing and building the application in CI stage.
-\end{itemize}
-
-\subsection{Deployment Physical View Diagram}
-
-The diagram below showcases how deployment works on a physical level.
+\subsection{Deployment process}
 
 \begin{figure}[ht]
     \centering
-    \includesvg[width=\textwidth]{../lab2diags/PhysicalView/physical.svg}
-    \label{physical-view-showcase}
-    \caption{Physical view showcase}
+    \includesvg[width=\textwidth]{../lab2diags/PhysicalView/activity.svg}
+    \label{activity-diagram}
+    \caption{Activity Diagram}
 \end{figure}
-
-\subsection{Deployment process}
-
-The deployment process involves the following steps:
-
-\begin{enumerate}
-    \item User develops a frontend React application and an ASP.NET API with a PostgreSQL database.
-    \item User pushes code to GitLab repository.
-    \item Code push triggers the CI/CD pipeline.
-    \item The pipeline's build stage tests the code (Unit, Integration tests).
-    \item The pipeline's build stage publishes artifacts to Azure Container Registry.
-    \item The pipeline's deploy stage pulls artifact images from Azure Container Registry.
-    \item The pipeline's deploy stage deploys premade helm charts with the published docker images to the Azure Kubernetes Service.
-    \item Inside the kubernetes cluster, React frontend acts as a client and communicates with the ASP.NET API.
-    \item The ASP.NET API communicates with the PostgreSQL database.
-    \item Web App is published to the internet and is accessible to the end-user.
-\end{enumerate}
 
 \section{Traceability}
 
