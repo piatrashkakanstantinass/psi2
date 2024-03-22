@@ -52,23 +52,24 @@ At present, EduPal has these functionalities:
 
 \begin{itemize}
     \item \textbf{Creation and Management of Subjects}: Users have the ability to create new subjects and manage existing ones within the system. This includes creating topics under each subject and uploading conspectuses as files related to those topics.
-    \item \textbf{Note Sharing and Interaction}: Users can interact with notes by creating them, viewing them or engaging in discussions within the comment section. Users also have options to export notes to a PDF section, download them to their device, or save them as drafts for further editing. 
+    \item \textbf{Note taking}: Users can interact with notes by creating them, Users also have options to export notes to PDF and download.
+    \item \textbf{Commenting}: Users can comment on topics in a live-updated comments section.
     \item \textbf{Pomodoro Timer System}: The system features a Pomodoro timer system designed to enhance productivity. Users can customize their study and break times according to their preferences. The timer notifies users when it's time to take a break, helping them maintain focus and manage their study sessions effectively.
     \item \textbf{Goal Setting}: Users can set study goals within the system, specifying desired subjects and study times. This feature starts a timer that counts the time spent learning and stops when the time limit is reached. This enables users to plan and organize their study sessions more efficiently, helping them stay on track with their academic or learning objectives.
-    \item \textbf{Integration with GPT API}: The project integrates with Chat GPT, providing users with additional functionalities. This integration allows the system to store user chat history and respond to user inquiries using the capabilities of Chat GPT. Users can leverage this feature to seek assistance, clarify doubts, or engage in interactive conversations within the system.
-    \end{itemize}
+    \item \textbf{Integration with ChatGPT}: The project integrates with Chat GPT, providing users with additional functionalities. This integration allows the system to store user chat history and respond to user inquiries using the capabilities of Chat GPT. Users can leverage this feature to seek assistance, clarify doubts, or engage in interactive conversations within the system.
+\end{itemize}
 
 \subsection{Tech stack and services}
 
 The EduPal system was created using a modern technology stack to support its functionalities. The basic structure of the system:
 
 \begin{itemize}
-    \item \textbf{Frontend}: The frontend of the system is developed using the React framework and JavaScript with custom CSS. Via the fetch API frontend allows communication with the server by sending HTTP requests to the particular API endpoint in the backend.
-    \item \textbf{Backend}: The system is built using ASP.NET Core and uses Entity Framework Core which helps following monolithic architecture. It incorporates the Repository Pattern for handling data access, particularly for ASP.NET Identity user management. The backend is built using .NET 8.0 and follows a RESTful API architecture. Additionally, WebSocket communication is facilitated by SignalR and is used for ChatHub endpoint which allows communication via comment section. Passwords are stored within the database. Logs are managed by the interceptor, tracking database changes. Also, tokens are generated upon successful user authentication. These tokens contain user information and are used for subsequent authentication and authorization requests between the client and the server.
-    \item\textbf{Data Storage}: Conspectuses are stored locally within the application's file system. Upon upload, each conspectus is saved as a separate file in a directory named "Files" relative to the application's working directory. When users request to download a conspectus, the application retrieves the corresponding file from this directory and streams it back as downloadable content. PostgreSQL is used to store any other data, such as information about the users. Entity framework core ORM is used for interfacing the database in the backend.
+    \item \textbf{Frontend}: The frontend of the system is developed using the React framework and JavaScript with custom CSS. Communication with the backend is done using fetch api and SignalR client library.
+    \item \textbf{Backend}: The system is built using ASP.NET Core 8 and follows a monolithic architecture. Entity Framework Core is used to interface the database. System also relies on Repository pattern to abstract data access. Backend exposes REST API and WebSocket endpoints, WebSocket communication is facilitated by SignalR. User authentication is managed by ASP.NET Identity and session is persisted using cookies.
+          \item\textbf{Data Storage}: Conspectuses are stored locally within the application's file system. Upon upload, each conspectus is saved as a separate file in a local directory. When users request to download a conspectus, the application retrieves the corresponding file from this directory and streams it back as downloadable content. PostgreSQL is used as the main database management system.
     \item \textbf{OpenAI Service}: The system uses OpenAI API, to provide Chat GPT services. The prompt sent to Open AI is modified so that length of the response would be reasonable.
     \item \textbf{Tests}: System is tested using a combination of unit and integration tests.
-    \item \textbf{Version Control and Hosting}: Git and GitLab are used for project collaboration, such as distribution of issues, pull requests handling, with GitLab being used as hosting platform as well.
+    \item \textbf{Version Control and Hosting}: Git is used as version control system. Code is hosted on private GitLab instance that is also used for issues tracking.
 \end{itemize}
 
 \subsection{Selected requirements}
