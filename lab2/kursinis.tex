@@ -21,6 +21,8 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{diagbox}
+\usepackage{afterpage}
+\usepackage{makecell}
 \usepackage[inkscapelatex=false]{svg}
 \renewcommand{\cftdotsep}{1} 
 
@@ -226,88 +228,110 @@ TODO
 left=0.25\paperwidth-\tablewidth,
 right=0.25\paperwidth-\tablewidth,
 }
+\renewcommand{\thead}[1]{\bfseries\makecell{#1}}
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|}
-\hline
-\multirow{3}{*}{\diagbox[dir=NW]{\textbf{Class}}{\textbf{Components}}} 
-& \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-& \textbf{Web} & \textbf{Notification System} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} \\
-& \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-\hline
-Conspectus & X & & & & & \\
-\hline
-Topic & X & & & & & \\
-\hline
-Subject & X & & & & & \\
-\hline
-User Account & X & & & & & \\
-\hline
-Admin Account & X & & X & & & \\
-\hline
-OpenAI Chat Message & X & & & X & X & \\
-\hline
-Account & X & & & & & \\
-\hline
-Account Action & X & & X & & & \\
-\hline
-Administrator Creation Account & X & & X & & & \\
-\hline
-Notification & X & X & & & & \\
-\hline
-Subject Archivation Notification & X & X & & & & \\
-\hline
-Feedback Notification & X & X & & & & \\
-\hline
-OpenAI Usage Notification & X & X & & X & X & \\
-\hline
-OpenAI Limit Change Action & & & & X & X & \\
-\hline
-OpenAI Token Usage & & & & X & X & \\
-\hline
-System Settings & X & & X & & & \\
-\hline
-Feedback & & & & & & X \\
-\hline
-\end{tabular}
-\caption{Traceability Table: Classes to Components}
-\end{table}
-
-
-\begin{table}[H]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|}
-\hline
-\multirow{3}{*}{\diagbox[dir=NW]{\textbf{Requirements}}{\textbf{Components}}} 
-& \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-& \textbf{Web} & \textbf{Notification System} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} \\
-& \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-\hline
-FR1 & X & & & & & \\
-\hline
-FR2 & X & & & & & \\
-\hline
-FR3 & & X & & & & \\
-\hline
-FR4 & & X & & & & \\
-\hline
-FR5 & & & X & & & \\
-\hline
-FR6 & & & X & X & X & \\
-\hline
-FR7 & & & X & X & & \\
-\hline
-FR8 & & & X & X & & \\
-\hline
-FR9 & & X & X & X & & \\
-\hline
-FR10 & X & X & & & X &\\
-\hline
-\end{tabular}
-\caption{Traceability Table: Requirements to Components}
-\end{table}
-
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Class}}{\textbf{Components}}} 
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    \hline
+    Conspectus & X & & & & & & X \\
+    \hline
+    Topic & X & & & & & & X \\
+    \hline
+    Subject & X & & & & & & X \\
+    \hline
+    User Account & X & & & & & & X \\
+    \hline
+    Admin Account & X & & X & & & & X \\
+    \hline
+    OpenAI Chat Message & X & & & X & X & & \\
+    \hline
+    Account & X & & & & & & X \\
+    \hline
+    Account Action & X & & X & & & & X \\
+    \hline
+    Administrator Creation Account & X & & X & & & & X \\
+    \hline
+    Notification & X & X & & & & & \\
+    \hline
+    Subject Archivation Notification & X & X & & & & & \\
+    \hline
+    Feedback Notification & X & X & & & & X & \\
+    \hline
+    OpenAI Usage Notification & X & X & & X & X & & \\
+    \hline
+    OpenAI Limit Change Action & & & & X & X & & \\
+    \hline
+    OpenAI Token Usage & & & & X & X & & X \\
+    \hline
+    System Settings & X & & X & & & & X \\
+    \hline
+    Feedback & X & & & & & X & X \\
+    \hline
+    \end{tabular}
+    \caption{Traceability Table: Classes to Components}
+    \end{table}
+    
+    \clearpage
+    
+    \begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Requirements}}{\textbf{Components}}} 
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    \hline
+    FR1 & X & & & & & & X \\
+    \hline
+    FR2 & X & & & & & & \\
+    \hline
+    FR3 & & X & & & & & \\
+    \hline
+    FR4 & & X & & & & & \\
+    \hline
+    FR5 & & & X & & & & \\
+    \hline
+    FR6 & & & X & X & X & & X \\
+    \hline
+    FR7 & & & X & X & & & X \\
+    \hline
+    FR8 & & & X & X & & & \\
+    \hline
+    FR9 & X & X & X & X & & X & \\
+    \hline
+    FR10 & X & X & & & X & X & \\
+    \hline
+    \end{tabular}
+    \caption{Traceability Table: Requirements to Components}
+    \end{table}
+    
+    \clearpage
+    
+    \begin{table}[htbp]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Artifacts}}{\textbf{Components}}} 
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    \hline
+    react-app.tgz & X & X & X & & & & \\
+    \hline
+    api.dll & & & & & X & & \\
+    \hline
+    db.sql & & & & & X & & X \\
+    \hline
+    \end{tabular}
+    \caption{Artifact-Component Relationship}
+    \end{table}
 \restoregeometry
 
 \listoffigures
