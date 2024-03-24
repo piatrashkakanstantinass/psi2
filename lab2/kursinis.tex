@@ -227,12 +227,11 @@ left=0.25\paperwidth-\tablewidth,
 right=0.25\paperwidth-\tablewidth,
 }
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Traceability Table: Classes to Components}
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{\diagbox[dir=NW]{\textbf{Class}}{\textbf{Components}}} 
+\multirow{3}{*}{\diagbox[dir=NW]{\textbf{Class}}{\textbf{Components}}} 
 & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
 & \textbf{Web} & \textbf{Notification System} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} \\
 & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
@@ -272,14 +271,15 @@ System Settings & X & & X & & & \\
 Feedback & & & & & & X \\
 \hline
 \end{tabular}
+\caption{Traceability Table: Classes to Components}
 \end{table}
 
-\begin{table}[htbp]
+
+\begin{table}[H]
 \centering
-\caption{Traceability Table: Requirements to Components}
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
-\multirow{2}{*}{\diagbox[dir=NW]{\textbf{Requirements}}{\textbf{Components}}} 
+\multirow{3}{*}{\diagbox[dir=NW]{\textbf{Requirements}}{\textbf{Components}}} 
 & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
 & \textbf{Web} & \textbf{Notification System} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} \\
 & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
@@ -305,7 +305,10 @@ FR9 & & X & X & X & & \\
 FR10 & X & X & & & X &\\
 \hline
 \end{tabular}
+\caption{Traceability Table: Requirements to Components}
 \end{table}
+
+\restoregeometry
 
 \listoffigures
 \printbibliography[heading=bibintoc]
