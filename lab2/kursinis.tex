@@ -202,76 +202,16 @@ Despite such problem, considering current scale of aplication, such deficiency i
 
 \subsection{Subject archivation}
 
-\subsubsection{Archive and unarchive subject}
-
-\begin{figure}[ht]
-    \centering
-    \includesvg[width=\textwidth]{../lab2diags/use-cases/archivation.drawio.svg}
-    \label{archivation-use-case}
-    \caption{Subject archivation and unarchivation use case diagram}
-\end{figure}
-
-\begin{description}
-    \item[Actors] User
-    \item[Requirements] FR1, FR11
-    \item[Description] User can request subject archivation or unarchivation. In both cases system must check whether user is the owner of a particular subject. If that is the case, subjcet archivation state is updated, otherwise nothing happens.
-\end{description}
-
-\subsubsection{Automatic subject archivation}
-
-\begin{figure}[ht]
-    \centering
-    \includesvg{../lab2diags/use-cases/automatic-archivation.drawio.svg}
-    \label{automatic-archivation-use-case}
-    \caption{Automatic subject archivation diagram}
-\end{figure}
-
-\begin{description}
-    \item[Actors] User, System clock
-    \item[Requirements] FR2, FR3, FR11
-    \item[Description] System clock regularly initates automatic archivation check process. All users who own subjects that were not updated in a specified amount of time will be notified about archivation. If they do not respond, their subject will be automatically archived.
-\end{description}
+TODO
 
 \subsection{Administration}
 
-\begin{figure}[ht]
-    \centering
-    \includesvg[width=\textwidth]{../lab2diags/use-cases/administration.drawio.svg}
-    \label{administration-use-cases}
-    \caption{Administration use cases}
-\end{figure}
+TODO: admin account creation, openai usage control
 
-\subsubsection{Administrator account creation}
 
-\begin{description}
-    \item[Actors] Administrator
-    \item[Requirements] FR4, FR5
-    \item[Description] Administrator can create other administrator accounts. This action is logged.
-\end{description}
+\subsection{Feedback collection}
 
-\subsubsection{OpenAI usage control}
-
-\begin{description}
-    \item[Actors] Administrator
-    \item[Requirements] FR5, FR6, FR7
-    \item[Description] Administrator can view OpenAI usage (used tokens, price) and set limits. Action of setting limits is logged.
-\end{description}
-
-\subsubsection{Notification on OpenAI usage}
-
-\begin{description}
-    \item[Actors] Administrator, User
-    \item[Requirements] FR8
-    \item[Description] Every time user uses OpenAI integration, system calculates usage and notifies administrator if it exceeds limits.
-\end{description}
-
-\subsubsection{Feedback collection}
-
-\begin{description}
-    \item[Actors] Administrator, User
-    \item[Requirements] FR9
-    \item[Description] Users can leave feedback that administrators have access to.
-\end{description}
+TODO
 
 \section{Traceability}
 
