@@ -17,6 +17,10 @@
 \usepackage{listings}
 \usepackage{subcaption}
 \usepackage{biblatex}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{diagbox}
 \usepackage[inkscapelatex=false]{svg}
 \renewcommand{\cftdotsep}{1} 
 
@@ -214,6 +218,94 @@ TODO: admin account creation, openai usage control
 TODO
 
 \section{Traceability}
+
+\newlength{\tablewidth}
+\setlength{\tablewidth}{0.5\textwidth}
+
+\newgeometry{
+left=0.25\paperwidth-\tablewidth,
+right=0.25\paperwidth-\tablewidth,
+}
+
+\begin{table}[htbp]
+\centering
+\caption{Traceability Table: Classes to Components}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\diagbox[dir=NW]{\textbf{Class}}{\textbf{Components}}} 
+& \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+& \textbf{Web} & \textbf{Notification System} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} \\
+& \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+\hline
+Conspectus & X & & & & & \\
+\hline
+Topic & X & & & & & \\
+\hline
+Subject & X & & & & & \\
+\hline
+User Account & X & & & & & \\
+\hline
+Admin Account & X & & X & & & \\
+\hline
+OpenAI Chat Message & X & & & X & X & \\
+\hline
+Account & X & & & & & \\
+\hline
+Account Action & X & & X & & & \\
+\hline
+Administrator Creation Account & X & & X & & & \\
+\hline
+Notification & X & X & & & & \\
+\hline
+Subject Archivation Notification & X & X & & & & \\
+\hline
+Feedback Notification & X & X & & & & \\
+\hline
+OpenAI Usage Notification & X & X & & X & X & \\
+\hline
+OpenAI Limit Change Action & & & & X & X & \\
+\hline
+OpenAI Token Usage & & & & X & X & \\
+\hline
+System Settings & X & & X & & & \\
+\hline
+Feedback & & & & & & X \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Traceability Table: Requirements to Components}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\diagbox[dir=NW]{\textbf{Requirements}}{\textbf{Components}}} 
+& \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+& \textbf{Web} & \textbf{Notification System} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} \\
+& \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+\hline
+FR1 & X & & & & & \\
+\hline
+FR2 & X & & & & & \\
+\hline
+FR3 & & X & & & & \\
+\hline
+FR4 & & X & & & & \\
+\hline
+FR5 & & & X & & & \\
+\hline
+FR6 & & & X & X & X & \\
+\hline
+FR7 & & & X & X & & \\
+\hline
+FR8 & & & X & X & & \\
+\hline
+FR9 & & X & X & X & & \\
+\hline
+FR10 & X & X & & & X &\\
+\hline
+\end{tabular}
+\end{table}
 
 \listoffigures
 \printbibliography[heading=bibintoc]
