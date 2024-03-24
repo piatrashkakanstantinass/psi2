@@ -76,16 +76,18 @@ The EduPal system was created using a modern technology stack to support its fun
 In this document we will focus on system changes needed to fulfil the follwing set of requirements:
 
 \begin{itemize}
-    \item \textbf{FR1.} Subject owner shall be able to archive and unarchive the subject. Archived subject does not support adding, deleting or changing topics and uploaded conspectuses.
-    \item \textbf{FR2.} System shall automatically archive subjects with no recent topic or conspectus changes after 1 month.
-    \item \textbf{FR3.} Subject owner shall be notified about automatic archivation.
-    \item \textbf{FR4.} Users and administrators shall be able to be notified via system notification and email.
-    \item \textbf{FR5.} Administrator shall be able create other adminstrator accounts.
-    \item \textbf{FR6.} Administrator creation and OpenAI limit setting actions shall be logged.
-    \item \textbf{FR7.} Administrator shall be able to access OpenAI service usage statistics.
-    \item \textbf{FR8.} Administrator shall be able to set OpenAI usage limits.
-    \item \textbf{FR9.} System shall notify administrator if OpenAI usage exceeds limits.
-    \item \textbf{FR10.} Users shall be able to leave feedback that administrators can access. Administrators shall be notified.
+    \item \textbf{FR1.} Subject owner shall be able to toggle archivation state of the subject.
+    \item \textbf{FR2.} Archived subject does not support adding, deleting or changing topics and uploaded conspectuses.
+    \item \textbf{FR3.} System shall automatically archive subjects with no recent topic or conspectus changes after 1 month.
+    \item \textbf{FR4.} Subject owner shall be notified about automatic archivation and given a week to cancel it.
+    \item \textbf{FR5.} Users and administrators shall be able to be notified via system notification and email.
+    \item \textbf{FR6.} Administrator shall be able to create other adminstrator accounts.
+    \item \textbf{FR7.} Administrator creation and OpenAI limit setting actions shall be logged.
+    \item \textbf{FR8.} Administrator shall be able to access OpenAI service usage statistics.
+    \item \textbf{FR9.} Administrator shall be able to set OpenAI usage limits.
+    \item \textbf{FR10.} System shall notify administrator if OpenAI usage exceeds limits.
+    \item \textbf{FR11.} Users shall be able to leave feedback that administrators can access.
+    \item \textbf{FR12.} Administrators shall be notified when users submit feedback.
 \end{itemize}
 
 \section{Logical View}
