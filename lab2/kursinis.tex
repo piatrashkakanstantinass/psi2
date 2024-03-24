@@ -154,42 +154,38 @@ Despite such problem, considering current scale of aplication, such deficiency i
 
 \section{Development View}
 
-\subsubsection{Packages}
+\subsection{Package diagram}
 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/development-view/package.drawio.svg}
-    \label{Package diagram}
-    \caption{Packages of the model}
+    \label{package-diagram}
+    \caption{Package diagram}
 \end{figure}
 
 \begin{description}
-    \item[Description] Description of the package diagram
+    \item[Description] This diagram showcases the relationships between packages - groups of classes. Classes that make up the packages are detailed in the above diagrams (Figure \ref{data-access-model}, \ref{notification-model}, \ref{archivation-model}, \ref{administration-model}, \ref{feedback-model})
 \end{description}
 
-
-\subsubsection{Components}
+\subsection{Components}
 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/development-view/component_l1.drawio.svg}
-    \label{Component level 1}
-    \caption{Top level component diagram}
+    \label{component-level-1}
+    \caption{Contextual component diagram}
 \end{figure}
 
-\begin{description}
-    \item[Description] Top level components of the systemfffaa
+\subsubsection*{} Contextual component diagram provides relationship context between actors (Admin, User) and the EduPal conspectus system in a high level of abstraction. Both admin and user can interact with the system through and API and a UI.
 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/development-view/component_l2.drawio.svg}
-    \label{Component level 2}
-    \caption{Lower level component diagram}
+    \label{component-level-2}
+    \caption{Lower level component diagram of the conspectus system}
 \end{figure}
 
-\begin{description}
-    \item[Description] Lower level components of the system
-\end{description}
+\subsubsection*{} A more detailed diagram is needed to delve deeper into the inner components of the EduPal conspectus system. The diagram showcases the relationships between the components and the interfaces they expose. "OpenAI" component has access to the external OpenAI API, which adds two interfaces: one for OpenAI administration used by the component "Admin UI" and one for general chatting with the AI assistant used by the component "API". "DB" component exposes an interface that is used by the "Feedback" component for feedback collection and "API" component for general data storage. The "API" component's interface is used by the "Admin UI" and "Web" components. "Web" component also makes use of the "Notification" component's interface for sending notifications to the user.
 
 \section{Process View}
 
