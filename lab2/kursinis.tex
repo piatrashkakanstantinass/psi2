@@ -96,8 +96,8 @@ In this document we will focus on system changes needed to fulfill the following
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/data-access.drawio.svg}
-    \label{data-access-model}
     \caption{Data access diagram}
+    \label{data-access-model}
 \end{figure}
 
 EduPal uses Entity Framework Core ORM and PostgreSQL DBMS that impose certain restrictions on classes, instances of which need to be stored. Every class must have a primary key and it was decided to use Id string attribute. In order to abstract data access, repository pattern is used. Downside of such approach is that every class must extend BaseEntity class. In following model diagrams BaseEntity and Repository classes will be shown without attributes and methods. System settings are not stored in database, instead a json file is loaded when object is instantiated. SystemSettings class is injected as singleton. Usage of ASP.NET Identity allows all controllers to have access to account id from request context.
@@ -109,8 +109,8 @@ Other subsystems can send notifications via INotificationService interface. Its 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/notification.drawio.svg}
-    \label{notification-model}
     \caption{Notification subsystem diagram}
+    \label{notification-model}
 \end{figure}
 
 \subsubsection{Archivation subsystem}
@@ -159,30 +159,30 @@ Despite such problem, considering current scale of aplication, such deficiency i
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/development-view/package.drawio.svg}
-    \label{package-diagram}
     \caption{Package diagram}
+    \label{package-diagram}
 \end{figure}
 
 \begin{description}
-    \item[Description] This diagram showcases the relationships between packages - groups of classes. Classes that make up the packages are detailed in the above diagrams (Figure \ref{data-access-model}, \ref{notification-model}, \ref{archivation-model}, \ref{administration-model}, \ref{feedback-model})
+    This diagram showcases the relationships between packages - groups of classes. Classes that make up the packages are detailed in the above diagrams (Figure \ref{data-access-model}, \ref{notification-model}, \ref{archivation-model}, \ref{administration-model}, \ref{feedback-model})
 \end{description}
 
 \subsection{Components}
 
+\subsubsection*{} Contextual component diagram provides relationship context between Admins, Users and the EduPal conspectus system in a high level of abstraction. Both admin and user can interact with the system through an API and a UI.
+
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/development-view/component_l1.drawio.svg}
-    \label{component-level-1}
     \caption{Contextual component diagram}
+    \label{component-level-1}
 \end{figure}
-
-\subsubsection*{} Contextual component diagram provides relationship context between actors (Admin, User) and the EduPal conspectus system in a high level of abstraction. Both admin and user can interact with the system through and API and a UI.
 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/development-view/component_l2.drawio.svg}
-    \label{component-level-2}
     \caption{Lower level component diagram of the conspectus system}
+    \label{component-level-2}
 \end{figure}
 
 \subsubsection*{} A more detailed diagram is needed to delve deeper into the inner components of the EduPal conspectus system. The diagram showcases the relationships between the components and the interfaces they expose. "OpenAI" component has access to the external OpenAI API, which adds two interfaces: one for OpenAI administration used by the component "Admin UI" and one for general chatting with the AI assistant used by the component "API". "DB" component exposes an interface that is used by the "Feedback" component for feedback collection and "API" component for general data storage. The "API" component's interface is used by the "Admin UI" and "Web" components. "Web" component also makes use of the "Notification" component's interface for sending notifications to the user.
