@@ -227,7 +227,25 @@ Figures \ref{administration-model} and \ref{feedback-model} shows administration
 
 \subsection{Deployment Diagram}
 
-The diagram below showcases how the deployed containers look like in the Azure Kubernetes Cluster.
+The diagram below showcases how the deployed applications look in the infrastructure. 
+\begin{enumerate}
+    \item Both frontend and backend are deployed to separate Azure Web App Services as docker containers. 
+    \item Both frontend and backend are using a Linux Web App Service Plan.
+    \item Both frontend and backend are using B1 Service Plan which contains:
+        \begin{itemize}
+            \item 1.75 GB of memory
+            \item 1 vCPU
+            \item 10 GB of storage
+            \item 3 slots
+            \item Manual Scaling
+        \end{itemize}
+    \item Azure Postgresql Server uses Standard\_D4ads\_v5 
+        \begin{itemize}
+            \item 4 vCPUs
+            \item 16 GB of memory
+            \item 128 GB of storage
+        \end{itemize}
+\end{enumerate}
 
 \begin{figure}[ht]
     \centering
@@ -252,45 +270,48 @@ The diagram below showcases how the deployed containers look like in the Azure K
 \textbf{Azure services:}
 All Azure resources are created in the same resource group to simplify management and billing. Region used: East US.
 \begin{itemize}
-    \item Azure Kubernetes Service:
+    \item 2 Azure Web App Services
         \begin{itemize}
-            \item 1 node pool.
-            \item Standard B2s (2 vCPU, 4 GB memory) nodes.
-            \item Autoscaling Enabled.
+            \item 1.75 GB of memory
+            \item 1 vCPU
+            \item 10 GB of storage
+            \item 3 slots
+            \item Manual Scaling
         \end{itemize}
-    \item Azure PostgreSQL service: This is a managed PostgreSQL database service offered by Azure. The database is accessible 24/7 that allows for convenient access to the database.
-    \item Azure Container Registry: This is a managed, private Docker registry service offered by Azure. It is used for React and ASP.NET docker image uploading to use in Helm Charts. Also, it contains a custom docker image for testing and building the application in CI stage.
-\end{itemize}
-
-\textbf{Database Management System:}
-\begin{itemize}
-    \item Azure SQL Database: This is a managed relational database service offered by Azure. It provides a familiar SQL experience with automatic scaling, high availability, and built-in security features.
-\end{itemize}
-
-\textbf{Security Considerations:}
-\begin{itemize}
-    \item Secure Coding Practices: Implement secure coding practices in both the React app and .NET backend to prevent common vulnerabilities.
-    \item Secret Management: Store sensitive information in kubernetes secrets or Azure Key Vault to easily access stored secrets and prevent unauthorized access.
-    \item Network Security Groups: Use NSGs to restrict inbound and outbound traffic to your Azure resources, only allowing access from authorized sources.
-    \item Azure Managed Identity: Kubernetes cluster is authenticated with Azure Managed Identity. That way CI pipeline's runner can have authorization to deploy to the cluster and pull images from ACR.
-    \item Regular Updates: Keep your application code, libraries, and frameworks updated with the latest security patches to address known vulnerabilities.
+    \item Azure PostgreSQL server
+        \begin{itemize}
+            \item 4 vCPUs
+            \item 16 GB of memory
+            \item 128 GB of storage
+        \end{itemize}
+    \item Azure Container Registry: This is a managed, private Docker registry service offered by Azure. It is used for React and .NET deployment. When a new image is uploaded webhook picks up the change and redeploys Azure Web App.
 \end{itemize}
 
 \textbf{Operating System:}
 \begin{itemize}
     \item Linux Docker Images:
         \begin{itemize}
-            \item Cost-Effective: Linux typically has lower licensing costs compared to Windows Server.
-            \item Lightweight: Linux distributions are generally lightweight which can improve performance, especially for containerized deployments.
+            \item Frontend: node:20 image
+            \item Backend: mcr.microsoft.com/dotnet/sdk:8.0 image
         \end{itemize}
 \end{itemize}
 
 \textbf{Scaling Strategy:}
 \begin{itemize}
-    \item Vertical Scaling: This involves upgrading the resources allocated to your existing Azure App Service instances (e.g., increasing CPU cores or memory). This can improve performance without adding additional instances.
+    \item Manual Scaling: Both frontend and backend are set to manual scaling. This means that the number of instances can be manually adjusted based on the load.
+\end{itemize}
+
+\textbf{Security Considerations:}
+\begin{itemize}
+    \item Secure Coding Practices: Implement secure coding practices in both the React app and .NET backend to prevent common vulnerabilities.
+    \item Secret Management: Sensitive information is stored in GitLab variables to be accessed during the CI/CD pipeline.
+    \item Private Endpoint: Azure PostgreSQL server is configured with a private endpoint which connects to backend Azure Web App Service VNet. This ensures that the database is not exposed to the public internet.
+    \item Regular Updates: Keep your application code, libraries, and frameworks updated with the latest security patches to address known vulnerabilities.
 \end{itemize}
 
 \subsection{Deployment process}
+
+It is assumed that the PostgreSQL database is already deployed and migrations are applied. During the CI/CD pipeline, when the docker images are pushed to the Azure Container Registry, a webhook detects the updated image and redeploys the Azure Web App Service automatically.
 
 \begin{figure}[ht]
     \centering
