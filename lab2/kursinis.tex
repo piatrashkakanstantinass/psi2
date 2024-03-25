@@ -213,13 +213,13 @@ Figure \ref{deployment-diagram} showcases how the deployed applications look in 
     \label{deployment-diagram}
 \end{figure}
 
-\subsection{Providers:}
+\subsection{Providers}
 \begin{itemize}
     \item Cloud Provider: Microsoft Azure
     \item CI/CD Platform: Gitlab
 \end{itemize}
 
-\subsection{Azure services:}
+\subsection{Azure services}
 Frontend and Backend Azure resources are created in separate Resource Groups. This is done to separate the resources and manage them more effectively. Region: North Europe
 \begin{itemize}
     \item Plan: Azure Student Tier 
@@ -242,23 +242,23 @@ Frontend and Backend Azure resources are created in separate Resource Groups. Th
     \item Azure Container Registry: This is a managed, private Docker registry service offered by Azure. It is used for React and .NET deployment. When a new image is uploaded webhook picks up the change and redeploys Azure Web App.
 \end{itemize}
 
-\subsection{Linux Docker Images:}
+\subsection{Linux Docker Images}
 \begin{itemize}
     \item Frontend: node:20 image
     \item Backend: mcr.microsoft.com/dotnet/sdk:8.0 image
 \end{itemize}
 
-\subsection{Browser requirements:}
+\subsection{Browser requirements}
 \begin{itemize}
     \item Chrome: 45 and above
     \item Firefox: 40 and above
     \item Safari: 10.1 and above
 \end{itemize}
 
-\subsection{Scaling Strategy:}
+\subsection{Scaling Strategy}
 Manual Scaling: Both frontend and backend are set to manual scaling. This means that the number of instances can be manually adjusted based on the load.
 
-\subsection{Security Considerations:}
+\subsection{Security Considerations}
 \begin{itemize}
     \item Secret Management: Sensitive information is stored in GitLab variables to be accessed during the CI/CD pipeline.
     \item Private Endpoint: Azure PostgreSQL server is configured with a private endpoint which connects to backend Azure Web App Service VNet. This ensures that the database is not exposed to the public internet.
