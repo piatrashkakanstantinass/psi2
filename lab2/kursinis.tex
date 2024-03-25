@@ -178,6 +178,8 @@ Despite such problem, considering current scale of aplication, such deficiency i
 
 \section{Process View}
 
+This section provides activity diagrams for system processes.
+
 \subsection{Automatic subject archivation}
 
 \begin{figure}[ht]
@@ -195,6 +197,8 @@ Despite such problem, considering current scale of aplication, such deficiency i
     \caption{Notification delivery process diagram}
     \label{notification-process}
 \end{figure}
+
+It is attempted to deliver notification both via Email and WebSockets. WebSockets delivery will be attempted only if user has at least one active session to NotificationHub.
 
 \section{Physical View}
 
