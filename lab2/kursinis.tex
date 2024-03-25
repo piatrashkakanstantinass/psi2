@@ -227,24 +227,24 @@ Figures \ref{administration-model} and \ref{feedback-model} shows administration
 
 \subsection{Deployment Diagram}
 
-The diagram below showcases how the deployed applications look in the infrastructure. 
+The diagram below showcases how the deployed applications look in the infrastructure.
 \begin{enumerate}
-    \item Both frontend and backend are deployed to separate Azure Web App Services as docker containers. 
+    \item Both frontend and backend are deployed to separate Azure Web App Services as docker containers.
     \item Both frontend and backend are using a Linux Web App Service Plan.
     \item Both frontend and backend are using B1 Service Plan which contains:
-        \begin{itemize}
-            \item 1.75 GB of memory
-            \item 1 vCPU
-            \item 10 GB of storage
-            \item 3 slots
-            \item Manual Scaling
-        \end{itemize}
-    \item Azure Postgresql Server uses Standard\_D4ads\_v5 
-        \begin{itemize}
-            \item 4 vCPUs
-            \item 16 GB of memory
-            \item 128 GB of storage
-        \end{itemize}
+          \begin{itemize}
+              \item 1.75 GB of memory
+              \item 1 vCPU
+              \item 10 GB of storage
+              \item 3 slots
+              \item Manual Scaling
+          \end{itemize}
+    \item Azure Postgresql Server uses Standard\_D4ads\_v5
+          \begin{itemize}
+              \item 4 vCPUs
+              \item 16 GB of memory
+              \item 128 GB of storage
+          \end{itemize}
 \end{enumerate}
 
 \begin{figure}[ht]
@@ -271,29 +271,29 @@ The diagram below showcases how the deployed applications look in the infrastruc
 Frontend and Backend Azure resources are created in separate Resource Groups. This is done to separate the resources and manage them more effectively. Region: North Europe
 \begin{itemize}
     \item 2 Azure Web App Services
-        \begin{itemize}
-            \item 1.75 GB of memory
-            \item 1 vCPU
-            \item 10 GB of storage
-            \item 3 slots
-            \item Manual Scaling
-        \end{itemize}
+          \begin{itemize}
+              \item 1.75 GB of memory
+              \item 1 vCPU
+              \item 10 GB of storage
+              \item 3 slots
+              \item Manual Scaling
+          \end{itemize}
     \item Azure PostgreSQL server
-        \begin{itemize}
-            \item 4 vCPUs
-            \item 16 GB of memory
-            \item 128 GB of storage
-        \end{itemize}
+          \begin{itemize}
+              \item 4 vCPUs
+              \item 16 GB of memory
+              \item 128 GB of storage
+          \end{itemize}
     \item Azure Container Registry: This is a managed, private Docker registry service offered by Azure. It is used for React and .NET deployment. When a new image is uploaded webhook picks up the change and redeploys Azure Web App.
 \end{itemize}
 
 \textbf{Operating System:}
 \begin{itemize}
     \item Linux Docker Images:
-        \begin{itemize}
-            \item Frontend: node:20 image
-            \item Backend: mcr.microsoft.com/dotnet/sdk:8.0 image
-        \end{itemize}
+          \begin{itemize}
+              \item Frontend: node:20 image
+              \item Backend: mcr.microsoft.com/dotnet/sdk:8.0 image
+          \end{itemize}
 \end{itemize}
 
 \textbf{Scaling Strategy:}
@@ -316,8 +316,8 @@ It is assumed that the PostgreSQL database is already deployed and migrations ar
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/PhysicalView/activity.svg}
-    \label{activity-diagram}
-    \caption{Activity Diagram}
+    \label{deployment-process-diagram}
+    \caption{Deployment process diagram}
 \end{figure}
 
 \section{Traceability}
