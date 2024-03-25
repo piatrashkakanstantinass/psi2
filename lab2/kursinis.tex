@@ -17,6 +17,12 @@
 \usepackage{listings}
 \usepackage{subcaption}
 \usepackage{biblatex}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{diagbox}
+\usepackage{afterpage}
+\usepackage{makecell}
 \usepackage[inkscapelatex=false]{svg}
 \renewcommand{\cftdotsep}{1} 
 
@@ -73,7 +79,7 @@ The EduPal system was created using a modern technology stack to support its fun
 \end{itemize}
 
 \subsection{Selected requirements}
-In this document we will focus on system changes needed to fulfil the follwing set of requirements:
+In this document we will focus on system changes needed to fulfill the following set of requirements:
 
 \begin{itemize}
     \item \textbf{FR1.} Subject owner shall be able to toggle archivation state of the subject.
@@ -118,8 +124,8 @@ In this document we will focus on system changes needed to fulfil the follwing s
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/data-access.drawio.svg}
-    \label{data-access-model}
     \caption{Data access diagram}
+    \label{data-access-model}
 \end{figure}
 
 EduPal uses Entity Framework Core ORM and PostgreSQL DBMS that impose certain restrictions on classes, instances of which need to be stored. Every class must have a primary key and it was decided to use Id string attribute. In order to abstract data access, repository pattern is used. Downside of such approach is that every class must extend BaseEntity class. In following model diagrams BaseEntity and Repository classes will be shown without attributes and methods. System settings are not stored in database, instead a json file is loaded when object is instantiated. SystemSettings class is injected as singleton. Usage of ASP.NET Identity allows all controllers to have access to account id from request context.
@@ -131,8 +137,8 @@ Other subsystems can send notifications via INotificationService interface. Its 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/notification.drawio.svg}
-    \label{notification-model}
     \caption{Notification subsystem diagram}
+    \label{notification-model}
 \end{figure}
 
 \subsubsection{Archivation subsystem}
@@ -176,6 +182,37 @@ Despite such problem, considering current scale of aplication, such deficiency i
 
 \section{Development View}
 
+\subsection{Package diagram}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/development-view/package.drawio.svg}
+    \caption{Package diagram}
+    \label{package-diagram}
+\end{figure}
+
+\subsubsection*{} This diagram showcases the relationships between packages - groups of classes. Classes that make up the packages are detailed in the above diagrams (Figure \ref{data-access-model}, \ref{notification-model}, \ref{archivation-model}, \ref{administration-model}, \ref{feedback-model}).
+
+\subsection{Components}
+
+\subsubsection*{} Contextual component diagram provides relationship context between admins, users and the EduPal conspectus system in a high level of abstraction. Both the admins and the users can interact with the system through an API and a UI.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/development-view/component_l1.drawio.svg}
+    \caption{Contextual component diagram}
+    \label{component-level-1}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/development-view/component_l2.drawio.svg}
+    \caption{Lower level component diagram of the conspectus system}
+    \label{component-level-2}
+\end{figure}
+
+\subsubsection*{} A more detailed diagram is needed to delve deeper into the inner components of the EduPal conspectus system. The diagram showcases the relationships between the components and the interfaces they expose. "OpenAI" component requires attentions as it has access to the external OpenAI API, which adds two interfaces: one for OpenAI usage administration and monitoring used by the component "Admin UI" and one for general chatting with the AI assistant used by the component "API". "DB" component exposes an interface that is used by all the components that require storage: "OpenAI" - for storing AI generated messages, "API" - for the user messages, conspectuses, etc., "Notification system" - for storing the contents of the notifications. The "API" component's interface is used by the "Admin UI" and "Web" components and the "Notification" component's interface is utilised for sending notifications to the user.
+
 \section{Process View}
 
 This section provides activity diagrams for system processes.
@@ -213,13 +250,13 @@ Figure \ref{deployment-diagram} showcases how the deployed applications look in 
     \label{deployment-diagram}
 \end{figure}
 
-\subsection{Providers:}
+\subsection{Providers}
 \begin{itemize}
     \item \textbf{Cloud Provider:} Microsoft Azure
     \item \textbf{CI/CD Platform:} Gitlab
 \end{itemize}
 
-\subsection{Azure services:}
+\subsection{Azure services}
 Frontend and Backend Azure resources are created in separate Resource Groups. This is done to separate the resources and manage them more effectively. Region: North Europe
 \begin{enumerate}
     \item \textbf{Plan: Azure Student Tier} 
@@ -242,13 +279,13 @@ Frontend and Backend Azure resources are created in separate Resource Groups. Th
     \item \textbf{Azure Container Registry:} This is a managed, private Docker registry service offered by Azure. It is used for React and .NET deployment. When a new image is uploaded webhook picks up the change and redeploys Azure Web App.
 \end{enumerate}
 
-\subsection{Linux Docker Images:}
+\subsection{Linux Docker Images}
 \begin{itemize}
     \item \textbf{Frontend:} node:20 image
     \item \textbf{Backend:} mcr.microsoft.com/dotnet/sdk:8.0 image
 \end{itemize}
 
-\subsection{Browser requirements:}
+\subsection{Browser requirements}
 \begin{itemize}
     \item \textbf{Chrome:} 45 and above
     \item \textbf{Firefox:} 40 and above
@@ -258,7 +295,7 @@ Frontend and Backend Azure resources are created in separate Resource Groups. Th
 \subsection{Scaling Strategy:}
 \textbf{Manual Scaling:} Both frontend and backend are set to manual scaling. This means that the number of instances can be manually adjusted based on the load.
 
-\subsection{Security Considerations:}
+\subsection{Security Considerations}
 \begin{itemize}
     \item \textbf{Secret Management:} Sensitive information is stored in GitLab variables to be accessed during the CI/CD pipeline.
     \item \textbf{Private Endpoint:} Azure PostgreSQL server is configured with a private endpoint which connects to backend Azure Web App Service VNet. This ensures that the database is not exposed to the public internet.
@@ -285,12 +322,136 @@ TODO
 
 TODO: admin account creation, openai usage control
 
-
 \subsection{Feedback collection}
 
 TODO
 
 \section{Traceability}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/artifact-component.drawio.svg}
+    \caption{Artifact-Component diagram}
+    \label{artifact-diagram}
+\end{figure}
+
+\newlength{\tablewidth}
+\setlength{\tablewidth}{0.5\textwidth}
+
+\newgeometry{
+left=0.25\paperwidth-\tablewidth,
+right=0.25\paperwidth-\tablewidth,
+}
+
+\renewcommand{\thead}[1]{\bfseries\makecell{#1}}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Class}}{\textbf{Components}}} 
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    \hline
+    Conspectus & X & & & & & & X \\
+    \hline
+    Topic & X & & & & & & X \\
+    \hline
+    Subject & X & & & & & & X \\
+    \hline
+    UserAccount & X & & & & & & X \\
+    \hline
+    AdminAccount & X & & X & & & & X \\
+    \hline
+    OpenAIChatMessage & X & & & X & X & & \\
+    \hline
+    Account & X & & & & & & X \\
+    \hline
+    AccountAction & X & & X & & & & X \\
+    \hline
+    AdministratorCreationAccount & X & & X & & & & X \\
+    \hline
+    Notification & X & X & & & & & \\
+    \hline
+    SubjectArchivationNotification & X & X & & & & & \\
+    \hline
+    FeedbackNotification & X & X & & & & X & \\
+    \hline
+    OpenAIUsageNotification & X & X & & X & X & & \\
+    \hline
+    OpenAILimitChangeAction & & & & X & X & & \\
+    \hline
+    OpenAITokenUsage & & & & X & X & & X \\
+    \hline
+    SystemSettings & X & & X & & & & X \\
+    \hline
+    Feedback & X & & & & & X & X \\
+    \hline
+    \end{tabular}
+    \caption{Traceability Table: Classes to Components}
+\end{figure}
+
+\clearpage
+    
+\begin{figure}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Requirements}}{\textbf{Components}}} 
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    \hline
+    FR1 & X & & & & & & X \\
+    \hline
+    FR2 & X & & & & & & X \\
+    \hline
+    FR3 & X & & & & & & X \\
+    \hline
+    FR4 & X & & & & & & X \\
+    \hline
+    FR5 & X & X & X & & & & X \\
+    \hline
+    FR6 & X & & X & & & & X \\
+    \hline
+    FR7 & & & X & X & & & X \\
+    \hline
+    FR8 & & & X & X & & & X \\
+    \hline
+    FR9 & & & X & X & & & X \\
+    \hline
+    FR10 & X & X & & X & X & & X \\
+    \hline
+    FR11 & X & & X & & & X & X \\
+    \hline
+    FR12 & X & X & X & & & X & X \\
+    \hline
+    \end{tabular}
+    \caption{Traceability Table: Requirements to Components}
+\end{figure}
+
+\clearpage
+    
+\begin{figure}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Artifacts}}{\textbf{Components}}} 
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+    \hline
+    front.zip & X & & X & & & X & \\
+    \hline
+    PSI\_Project.dll & & X & & X & X & X & \\
+    \hline
+    db.sql & & & & & & x & X \\
+    \hline
+    \end{tabular}
+    \caption{Traceability Table: Artifact to Components}
+\end{figure}
+\restoregeometry
 
 \listoffigures
 \printbibliography[heading=bibintoc]
