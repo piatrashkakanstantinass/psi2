@@ -73,7 +73,7 @@ The EduPal system was created using a modern technology stack to support its fun
 \end{itemize}
 
 \subsection{Selected requirements}
-In this document we will focus on system changes needed to fulfil the follwing set of requirements:
+In this document we will focus on system changes needed to fulfill the following set of requirements:
 
 \begin{itemize}
     \item \textbf{FR1.} Subject owner shall be able to toggle archivation state of the subject.
@@ -118,8 +118,8 @@ In this document we will focus on system changes needed to fulfil the follwing s
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/data-access.drawio.svg}
-    \label{data-access-model}
     \caption{Data access diagram}
+    \label{data-access-model}
 \end{figure}
 
 EduPal uses Entity Framework Core ORM and PostgreSQL DBMS that impose certain restrictions on classes, instances of which need to be stored. Every class must have a primary key and it was decided to use Id string attribute. In order to abstract data access, repository pattern is used. Downside of such approach is that every class must extend BaseEntity class. In following model diagrams BaseEntity and Repository classes will be shown without attributes and methods. System settings are not stored in database, instead a json file is loaded when object is instantiated. SystemSettings class is injected as singleton. Usage of ASP.NET Identity allows all controllers to have access to account id from request context.
@@ -131,8 +131,8 @@ Other subsystems can send notifications via INotificationService interface. Its 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/notification.drawio.svg}
-    \label{notification-model}
     \caption{Notification subsystem diagram}
+    \label{notification-model}
 \end{figure}
 
 \subsubsection{Archivation subsystem}
@@ -176,6 +176,37 @@ Despite such problem, considering current scale of aplication, such deficiency i
 
 \section{Development View}
 
+\subsection{Package diagram}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/development-view/package.drawio.svg}
+    \caption{Package diagram}
+    \label{package-diagram}
+\end{figure}
+
+\subsubsection*{} This diagram showcases the relationships between packages - groups of classes. Classes that make up the packages are detailed in the above diagrams (Figure \ref{data-access-model}, \ref{notification-model}, \ref{archivation-model}, \ref{administration-model}, \ref{feedback-model}).
+
+\subsection{Components}
+
+\subsubsection*{} Contextual component diagram provides relationship context between admins, users and the EduPal conspectus system in a high level of abstraction. Both the admins and the users can interact with the system through an API and a UI.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/development-view/component_l1.drawio.svg}
+    \caption{Contextual component diagram}
+    \label{component-level-1}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/development-view/component_l2.drawio.svg}
+    \caption{Lower level component diagram of the conspectus system}
+    \label{component-level-2}
+\end{figure}
+
+\subsubsection*{} A more detailed diagram is needed to delve deeper into the inner components of the EduPal conspectus system. The diagram showcases the relationships between the components and the interfaces they expose. "OpenAI" component requires attentions as it has access to the external OpenAI API, which adds two interfaces: one for OpenAI usage administration and monitoring used by the component "Admin UI" and one for general chatting with the AI assistant used by the component "API". "DB" component exposes an interface that is used by all the components that require storage: "OpenAI" - for storing AI generated messages, "API" - for the user messages, conspectuses, etc., "Notification system" - for storing the contents of the notifications. The "API" component's interface is used by the "Admin UI" and "Web" components and the "Notification" component's interface is utilised for sending notifications to the user.
+
 \section{Process View}
 
 This section provides activity diagrams for system processes.
@@ -211,7 +242,6 @@ TODO
 \subsection{Administration}
 
 TODO: admin account creation, openai usage control
-
 
 \subsection{Feedback collection}
 
