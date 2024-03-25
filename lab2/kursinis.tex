@@ -185,13 +185,11 @@ Despite such problem, considering current scale of aplication, such deficiency i
     \label{package-diagram}
 \end{figure}
 
-\begin{description}
-    This diagram showcases the relationships between packages - groups of classes. Classes that make up the packages are detailed in the above diagrams (Figure \ref{data-access-model}, \ref{notification-model}, \ref{archivation-model}, \ref{administration-model}, \ref{feedback-model})
-\end{description}
+\subsubsection*{} This diagram showcases the relationships between packages - groups of classes. Classes that make up the packages are detailed in the above diagrams (Figure \ref{data-access-model}, \ref{notification-model}, \ref{archivation-model}, \ref{administration-model}, \ref{feedback-model}).
 
 \subsection{Components}
 
-\subsubsection*{} Contextual component diagram provides relationship context between Admins, Users and the EduPal conspectus system in a high level of abstraction. Both admin and user can interact with the system through an API and a UI.
+\subsubsection*{} Contextual component diagram provides relationship context between admins, users and the EduPal conspectus system in a high level of abstraction. Both the admins and the users can interact with the system through an API and a UI.
 
 \begin{figure}[ht]
     \centering
@@ -207,7 +205,7 @@ Despite such problem, considering current scale of aplication, such deficiency i
     \label{component-level-2}
 \end{figure}
 
-\subsubsection*{} A more detailed diagram is needed to delve deeper into the inner components of the EduPal conspectus system. The diagram showcases the relationships between the components and the interfaces they expose. "OpenAI" component has access to the external OpenAI API, which adds two interfaces: one for OpenAI administration used by the component "Admin UI" and one for general chatting with the AI assistant used by the component "API". "DB" component exposes an interface that is used by the "Feedback" component for feedback collection and "API" component for general data storage. The "API" component's interface is used by the "Admin UI" and "Web" components. "Web" component also makes use of the "Notification" component's interface for sending notifications to the user.
+\subsubsection*{} A more detailed diagram is needed to delve deeper into the inner components of the EduPal conspectus system. The diagram showcases the relationships between the components and the interfaces they expose. "OpenAI" component requires attentions as it has access to the external OpenAI API, which adds two interfaces: one for OpenAI usage administration and monitoring used by the component "Admin UI" and one for general chatting with the AI assistant used by the component "API". "DB" component exposes an interface that is used by all the components that require storage: "OpenAI" - for storing AI generated messages, "API" - for the user messages, conspectuses, etc., "Notification system" - for storing the contents of the notifications. The "API" component's interface is used by the "Admin UI" and "Web" components and the "Notification" component's interface is utilised for sending notifications to the user.
 
 \section{Process View}
 
