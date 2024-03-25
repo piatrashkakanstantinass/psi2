@@ -221,6 +221,13 @@ TODO
 
 \section{Traceability}
 
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/logical-view/artifact-component.drawio.svg}
+    \caption{Artifact-Component diagram}
+    \label{artifact-diagram}
+\end{figure}
+
 \newlength{\tablewidth}
 \setlength{\tablewidth}{0.5\textwidth}
 
@@ -228,6 +235,7 @@ TODO
 left=0.25\paperwidth-\tablewidth,
 right=0.25\paperwidth-\tablewidth,
 }
+
 \renewcommand{\thead}[1]{\bfseries\makecell{#1}}
 
 \begin{figure}[ht]
@@ -277,7 +285,7 @@ right=0.25\paperwidth-\tablewidth,
     \caption{Traceability Table: Classes to Components}
 \end{figure}
 
-    \clearpage
+\clearpage
     
 \begin{figure}[ht]
     \centering
@@ -327,14 +335,14 @@ right=0.25\paperwidth-\tablewidth,
     & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
     & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
     \hline
-    react-app.tgz & X & X & X & & & & \\
+    front.zip & X & & X & & & & \\
     \hline
-    api.dll & & & & & X & & \\
+    PSI\_Project.dll & & X & & X & X & & \\
     \hline
-    db.sql & & & & & X & & X \\
+    db.sql & & & & & & & X \\
     \hline
     \end{tabular}
-    \caption{Artifact-Component Relationship}
+    \caption{Traceability Table: Artifact to Components}
 \end{figure}
 \restoregeometry
 
