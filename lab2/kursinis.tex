@@ -47,36 +47,58 @@ EduPal is a learning aid system designed to enhance
 the educational experience for both students and teachers. With a user-friendly interface and a comprehensive set of features, EduPal aims to streamline the learning process, fostering a more efficient and engaging educational environment.
 
 \subsection{Functionality overview}
-List features here
 
-\subsection{Tech stack}
-List tech stack here
+At present, EduPal has these functionalities:
+
+\begin{itemize}
+    \item \textbf{Creation and Management of Subjects}: Users have the ability to create new subjects and manage existing ones within the system. This includes creating topics under each subject and uploading conspectuses as files related to those topics.
+    \item \textbf{Note taking}: Users can interact with notes by creating them, Users also have options to export notes to PDF and download.
+    \item \textbf{Commenting}: Users can comment on topics in a live-updated comments section.
+    \item \textbf{Pomodoro Timer System}: The system features a Pomodoro timer system designed to enhance productivity. Users can customize their study and break times according to their preferences. The timer notifies users when it's time to take a break, helping them maintain focus and manage their study sessions effectively.
+    \item \textbf{Goal Setting}: Users can set study goals within the system, specifying desired subjects and study times. This feature starts a timer that counts the time spent learning and stops when the time limit is reached. This enables users to plan and organize their study sessions more efficiently, helping them stay on track with their academic or learning objectives.
+    \item \textbf{Integration with ChatGPT}: The project integrates with Chat GPT, providing users with additional functionalities. This integration allows the system to store user chat history and respond to user inquiries using the capabilities of Chat GPT. Users can leverage this feature to seek assistance, clarify doubts, or engage in interactive conversations within the system.
+\end{itemize}
+
+\subsection{Tech stack and services}
+
+The EduPal system was created using a modern technology stack to support its functionalities. The basic structure of the system:
+
+\begin{itemize}
+    \item \textbf{Frontend}: The frontend of the system is developed using the React framework and JavaScript with custom CSS. Communication with the backend is done using fetch api and SignalR client library.
+    \item \textbf{Backend}: The system is built using ASP.NET Core 8 and follows a monolithic architecture. Entity Framework Core is used to interface the database. System also relies on Repository pattern to abstract data access. Backend exposes REST API and WebSocket endpoints, WebSocket communication is facilitated by SignalR. User authentication is managed by ASP.NET Identity and session is persisted using cookies.
+          \item\textbf{Data Storage}: Conspectuses are stored locally within the application's file system. Upon upload, each conspectus is saved as a separate file in a local directory. When users request to download a conspectus, the application retrieves the corresponding file from this directory and streams it back as downloadable content. PostgreSQL is used as the main database management system.
+    \item \textbf{OpenAI Service}: The system uses OpenAI API, to provide Chat GPT services. The prompt sent to Open AI is modified so that length of the response would be reasonable.
+    \item \textbf{Tests}: System is tested using a combination of unit and integration tests.
+    \item \textbf{Version Control and Hosting}: Git is used as version control system. Code is hosted on private GitLab instance that is also used for issues tracking.
+\end{itemize}
 
 \subsection{Selected requirements}
 In this document we will focus on system changes needed to fulfil the follwing set of requirements:
 
 \begin{itemize}
-    \item \textbf{FR1.} Subject owner shall be able to archive and unarchive the subject. Archived subject does not support adding, deleting or changing topics and uploaded conspectuses.
-    \item \textbf{FR2.} System shall automatically archive subjects with no recent topic or conspectus changes after 1 month.
-    \item \textbf{FR3.} Subject owner shall be notified about automatic archivation.
-    \item \textbf{FR4.} Users and administrators shall be able to be notified via system notification and email.
-    \item \textbf{FR5.} Administrator shall be able create other adminstrator accounts.
-    \item \textbf{FR6.} Administrator creation and OpenAI limit setting actions shall be logged.
-    \item \textbf{FR7.} Administrator shall be able to access OpenAI service usage statistics.
-    \item \textbf{FR8.} Administrator shall be able to set OpenAI usage limits.
-    \item \textbf{FR9.} System shall notify administrator if OpenAI usage exceeds limits.
-    \item \textbf{FR10.} Users shall be able to leave feedback that administrators can access. Administrators shall be notified.
+    \item \textbf{FR1.} Subject owner shall be able to toggle archivation state of the subject.
+    \item \textbf{FR2.} Archived subject does not support adding, deleting or changing topics and uploaded conspectuses.
+    \item \textbf{FR3.} System shall automatically archive subjects with no recent topic or conspectus changes after 1 month.
+    \item \textbf{FR4.} Subject owner shall be notified about automatic archivation and given a week to cancel it.
+    \item \textbf{FR5.} Users and administrators shall be able to be notified via system notification and email.
+    \item \textbf{FR6.} Administrator shall be able to create other adminstrator accounts.
+    \item \textbf{FR7.} Administrator creation and OpenAI limit setting actions shall be logged.
+    \item \textbf{FR8.} Administrator shall be able to access OpenAI service usage statistics.
+    \item \textbf{FR9.} Administrator shall be able to set OpenAI usage limits.
+    \item \textbf{FR10.} System shall notify administrator if OpenAI usage exceeds limits.
+    \item \textbf{FR11.} Users shall be able to leave feedback that administrators can access.
+    \item \textbf{FR12.} Administrators shall be notified when users submit feedback.
 \end{itemize}
 
 \section{Logical View}
 
-\subsection{Informational model}
+\subsection{Information model}
 
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/informational.drawio.svg}
     \label{informational-model}
-    \caption{Informational model}
+    \caption{Information model}
 \end{figure}
 
 \begin{description}
@@ -128,6 +150,8 @@ System users can send archivation and unarchivation requests as well as access a
 
 Figures \ref{administration-model} and \ref{feedback-model} shows administration and feedback subsystem diagrams. AccountController is capable of creating both administrator and regular users, process differs, as only administrator can create other administrator accounts.
 
+Feedback is handled by feedback controller. User accounts are only able to submit feedback, while administrator accounts can access fedback from a particular date.
+
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/logical-view/administration.drawio.svg}
@@ -142,92 +166,45 @@ Figures \ref{administration-model} and \ref{feedback-model} shows administration
     \label{feedback-model}
 \end{figure}
 
+\subsubsection{Architectural deficiencies}
 
+EduPal software system was originally developed by a different team of software engineers leading to certain deficiencies that, while not critical, may obfuscate software growth and maintenance as codebase size increases. Core identified issue is \textbf{Lack of separation of layers}.
+
+Many monolithic applications are developed following Domain Driven Design principles which dictate that there are 3 decoupled layer: Application, Infrastructure and Domain. Application layer depends on interfaces exposed by Domain layer and Infrastructure provides implementation for those interfaces. EduPal does not follow this architecture resulting in more tightly coupled codebase.
+
+Despite such problem, considering current scale of aplication, such deficiency is not critical to application maintenance. However, in the future a need for a rewrite or restructurization may arise, therefore Stakeholders should be informed about it.
 
 \section{Development View}
 
 \section{Process View}
 
-\section{Use Case View}
+This section provides activity diagrams for system processes.
 
-\subsection{Subject archivation}
-
-\subsubsection{Archive and unarchive subject}
+\subsection{Automatic subject archivation}
 
 \begin{figure}[ht]
     \centering
-    \includesvg{../lab2diags/use-cases/archivation.drawio.svg}
-    \label{archivation-use-case}
-    \caption{Subject archivation and unarchivation use case diagram}
+    \includesvg[width=\textwidth]{../lab2diags/process-view/automatic-archivation.drawio.svg}
+    \caption{Automatic subject archivation process diagram}
+    \label{automatic-archivation-process}
 \end{figure}
 
-\begin{description}
-    \item[Actors] User
-    \item[Requirements] FR1, FR11
-    \item[Description] User can request subject archivation or unarchivation. In both cases system must check whether user is the owner of a particular subject. If that is the case, subjcet archivation state is updated, otherwise nothing happens.
-\end{description}
-
-\subsubsection{Automatic subject archivation}
+\subsection{Notification delivery}
 
 \begin{figure}[ht]
     \centering
-    \includesvg{../lab2diags/use-cases/automatic-archivation.drawio.svg}
-    \label{automatic-archivation-use-case}
-    \caption{Automatic subject archivation diagram}
+    \includesvg[width=\textwidth]{../lab2diags/process-view/notification-delivery.drawio.svg}
+    \caption{Notification delivery process diagram}
+    \label{notification-process}
 \end{figure}
 
-\begin{description}
-    \item[Actors] User, System clock
-    \item[Requirements] FR2, FR3, FR11
-    \item[Description] System clock regularly initates automatic archivation check process. All users who own subjects that were not updated in a specified amount of time will be notified about archivation. If they do not respond, their subject will be automatically archived.
-\end{description}
-
-\subsection{Administration}
-
-\begin{figure}[ht]
-    \centering
-    \includesvg[width=\textwidth]{../lab2diags/use-cases/administration.drawio.svg}
-    \label{administration-use-cases}
-    \caption{Administration use cases}
-\end{figure}
-
-\subsubsection{Administrator account creation}
-
-\begin{description}
-    \item[Actors] Administrator
-    \item[Requirements] FR4, FR5
-    \item[Description] Administrator can create other administrator accounts. This action is logged.
-\end{description}
-
-\subsubsection{OpenAI usage control}
-
-\begin{description}
-    \item[Actors] Administrator
-    \item[Requirements] FR5, FR6, FR7
-    \item[Description] Administrator can view OpenAI usage (used tokens, price) and set limits. Action of setting limits is logged.
-\end{description}
-
-\subsubsection{Notification on OpenAI usage}
-
-\begin{description}
-    \item[Actors] Administrator, User
-    \item[Requirements] FR8
-    \item[Description] Every time user uses OpenAI integration, system calculates usage and notifies administrator if it exceeds limits.
-\end{description}
-
-\subsubsection{Feedback collection}
-
-\begin{description}
-    \item[Actors] Administrator, User
-    \item[Requirements] FR9
-    \item[Description] Users can leave feedback that administrators have access to.
-\end{description}
+It is attempted to deliver notification both via Email and WebSockets. WebSockets delivery will be attempted only if user has at least one active session to NotificationHub.
 
 \section{Physical View}
 
-\subsection{Deployment Diagram}
+\subsection{Deployment model}
 
-The diagram below showcases how the deployed applications look in the infrastructure.
+Figure \ref{deployment-diagram} showcases how the deployed applications look in the infrastructure. 
 \begin{enumerate}
     \item Both frontend and backend are deployed to separate Azure Web App Services as docker containers.
     \item Both frontend and backend are using a Linux Web App Service Plan.
@@ -250,8 +227,8 @@ The diagram below showcases how the deployed applications look in the infrastruc
 \begin{figure}[ht]
     \centering
     \includesvg[width=\textwidth]{../lab2diags/PhysicalView/deployment.svg}
-    \label{deployment-showcase}
-    \caption{Deployment showcase}
+    \caption{Deployment diagram}
+    \label{deployment-diagram}
 \end{figure}
 
 \subsection{Resources}
@@ -262,14 +239,13 @@ The diagram below showcases how the deployed applications look in the infrastruc
     \item CI/CD Platform: Gitlab
 \end{itemize}
 
-\textbf{Plan/Tier:}
-\begin{itemize}
-    \item Azure Student Tier: Azure offers free access to university students, providing a \$ 100 credit for 12 months and access to over 25 free services. This is a good option for small scale applications and showing the deployment process
-\end{itemize}
-
 \textbf{Azure services:}
 Frontend and Backend Azure resources are created in separate Resource Groups. This is done to separate the resources and manage them more effectively. Region: North Europe
 \begin{itemize}
+    \item Plan: Azure Student Tier 
+        \begin{itemize}
+            \item Azure offers free access to university students, providing a \$ 100 credit for 12 months and access to over 25 free services. This is a good option for small scale applications and showing the deployment process
+        \end{itemize}
     \item 2 Azure Web App Services
           \begin{itemize}
               \item 1.75 GB of memory
@@ -301,12 +277,17 @@ Frontend and Backend Azure resources are created in separate Resource Groups. Th
     \item Manual Scaling: Both frontend and backend are set to manual scaling. This means that the number of instances can be manually adjusted based on the load.
 \end{itemize}
 
+\textbf{Browser requirements:}
+\begin{itemize}
+    \item Chrome: 45 and above
+    \item Firefox: 40 and above
+    \item Safari: 10.1 and above
+\end{itemize}
+
 \textbf{Security Considerations:}
 \begin{itemize}
-    \item Secure Coding Practices: Implement secure coding practices in both the React app and .NET backend to prevent common vulnerabilities.
     \item Secret Management: Sensitive information is stored in GitLab variables to be accessed during the CI/CD pipeline.
     \item Private Endpoint: Azure PostgreSQL server is configured with a private endpoint which connects to backend Azure Web App Service VNet. This ensures that the database is not exposed to the public internet.
-    \item Regular Updates: Keep your application code, libraries, and frameworks updated with the latest security patches to address known vulnerabilities.
 \end{itemize}
 
 \subsection{Deployment process}
@@ -319,6 +300,21 @@ It is assumed that the PostgreSQL database is already deployed and migrations ar
     \label{deployment-process-diagram}
     \caption{Deployment process diagram}
 \end{figure}
+
+\section{Use Case View}
+
+\subsection{Subject archivation}
+
+TODO
+
+\subsection{Administration}
+
+TODO: admin account creation, openai usage control
+
+
+\subsection{Feedback collection}
+
+TODO
 
 \section{Traceability}
 
