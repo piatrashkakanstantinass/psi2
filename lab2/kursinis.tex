@@ -202,6 +202,105 @@ It is attempted to deliver notification both via Email and WebSockets. WebSocket
 
 \section{Physical View}
 
+\subsection{Deployment model}
+
+Figure \ref{deployment-diagram} showcases how the deployed applications look in the infrastructure. 
+\begin{enumerate}
+    \item Both frontend and backend are deployed to separate Azure Web App Services as docker containers. 
+    \item Both frontend and backend are using a Linux Web App Service Plan.
+    \item Both frontend and backend are using B1 Service Plan which contains:
+        \begin{itemize}
+            \item 1.75 GB of memory
+            \item 1 vCPU
+            \item 10 GB of storage
+            \item 3 slots
+            \item Manual Scaling
+        \end{itemize}
+    \item Azure Postgresql Server uses Standard\_D4ads\_v5 
+        \begin{itemize}
+            \item 4 vCPUs
+            \item 16 GB of memory
+            \item 128 GB of storage
+        \end{itemize}
+\end{enumerate}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/PhysicalView/deployment.svg}
+    \caption{Deployment diagram}
+    \label{deployment-diagram}
+\end{figure}
+
+\subsection{Resources}
+
+\textbf{Providers:}
+\begin{itemize}
+    \item Cloud Provider: Microsoft Azure
+    \item CI/CD Platform: Gitlab
+\end{itemize}
+
+\textbf{Azure services:}
+Frontend and Backend Azure resources are created in separate Resource Groups. This is done to separate the resources and manage them more effectively. Region: North Europe
+\begin{itemize}
+    \item Plan: Azure Student Tier 
+        \begin{itemize}
+            \item Azure offers free access to university students, providing a \$ 100 credit for 12 months and access to over 25 free services. This is a good option for small scale applications and showing the deployment process
+        \end{itemize}
+    \item 2 Azure Web App Services
+        \begin{itemize}
+            \item 1.75 GB of memory
+            \item 1 vCPU
+            \item 10 GB of storage
+            \item 3 slots
+            \item Manual Scaling
+        \end{itemize}
+    \item Azure PostgreSQL server
+        \begin{itemize}
+            \item 4 vCPUs
+            \item 16 GB of memory
+            \item 128 GB of storage
+        \end{itemize}
+    \item Azure Container Registry: A managed, private Docker registry service offered by Azure. It is used for React and .NET deployment. When a new image is uploaded webhook picks up the change and redeploys Azure Web App.
+\end{itemize}
+
+\textbf{Operating System:}
+\begin{itemize}
+    \item Linux Docker Images:
+        \begin{itemize}
+            \item Frontend: node:20 image
+            \item Backend: mcr.microsoft.com/dotnet/sdk:8.0 image
+        \end{itemize}
+\end{itemize}
+
+\textbf{Scaling Strategy:}
+\begin{itemize}
+    \item Manual Scaling: Both frontend and backend are set to manual scaling. This means that the number of instances can be manually adjusted based on the load.
+\end{itemize}
+
+\textbf{Browser requirements:}
+\begin{itemize}
+    \item Chrome: 45 and above
+    \item Firefox: 40 and above
+    \item Safari: 10.1 and above
+\end{itemize}
+
+\textbf{Security Considerations:}
+\begin{itemize}
+    \item Secret Management: Sensitive information is stored in GitLab variables to be accessed during the CI/CD pipeline.
+    \item Private Endpoint: Azure PostgreSQL server is configured with a private endpoint which connects to backend Azure Web App Service VNet. This ensures that the database is not exposed to the public internet.
+\end{itemize}
+
+\subsection{Deployment process}
+
+It is assumed that the PostgreSQL database is already deployed and migrations are applied. During the CI/CD pipeline, when the docker images are pushed to the Azure Container Registry, a webhook detects the updated image and redeploys the Azure Web App Service automatically.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/PhysicalView/activity.svg}
+    \caption{Activity Diagram}
+    \label{activity-diagram}
+\end{figure}
+
 \section{Use Case View}
 
 \subsection{Subject archivation}
