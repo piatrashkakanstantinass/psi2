@@ -259,23 +259,23 @@ Figure \ref{deployment-diagram} showcases how the deployed applications look in 
 \subsection{Azure services}
 Frontend and Backend Azure resources are created in separate Resource Groups. This is done to separate the resources and manage them more effectively. Region: North Europe
 \begin{enumerate}
-    \item \textbf{Plan: Azure Student Tier} 
-        \begin{itemize}
-            \item Azure offers free access to university students, providing a \$ 100 credit for 12 months and access to over 25 free services. This is a good option for small scale applications and showing the deployment process
-        \end{itemize}
-    \item \textbf{2 Azure Web App Services} 
-        \begin{itemize} 
-            \item 1.75 GB of memory 
-            \item 1 vCPU 
-            \item 10 GB of storage 
-            \item 3 slots
-        \end{itemize}
+    \item \textbf{Plan: Azure Student Tier}
+          \begin{itemize}
+              \item Azure offers free access to university students, providing a \$ 100 credit for 12 months and access to over 25 free services. This is a good option for small scale applications and showing the deployment process
+          \end{itemize}
+    \item \textbf{2 Azure Web App Services}
+          \begin{itemize}
+              \item 1.75 GB of memory
+              \item 1 vCPU
+              \item 10 GB of storage
+              \item 3 slots
+          \end{itemize}
     \item \textbf{Azure PostgreSQL server}
-        \begin{itemize}
-            \item 4 vCPUs
-            \item 16 GB of memory
-            \item 128 GB of storage
-        \end{itemize}
+          \begin{itemize}
+              \item 4 vCPUs
+              \item 16 GB of memory
+              \item 128 GB of storage
+          \end{itemize}
     \item \textbf{Azure Container Registry:} This is a managed, private Docker registry service offered by Azure. It is used for React and .NET deployment. When a new image is uploaded webhook picks up the change and redeploys Azure Web App.
 \end{enumerate}
 
@@ -314,17 +314,38 @@ It is assumed that the PostgreSQL database is already deployed and migrations ar
 
 \section{Use Case View}
 
-\subsection{Subject archivation}
+\subsection{UI page navigation}
 
-TODO
+Figure \ref{uistate} shows UI flow using state machine diagram. User and admin ui are separate instances. Once logged in, user is able to view notifications and send feedback from any page.
 
-\subsection{Administration}
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/use-case/uistate.drawio.svg}
+    \caption{UI navigation state diagram}
+    \label{uistate}
+\end{figure}
 
-TODO: admin account creation, openai usage control
+\subsection{OpenAI usage handling}
+
+Figure \ref{openai-use-case} show OpenAI usage handling. Clients send requests to api, api formats a query and uses OpenAI API. Its response includes the number of tokens used. That value is added to current token usage data. If it increases the limit, administrator is notified.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/use-case/openai.drawio.svg}
+    \caption{OpenAI usage handling diagram}
+    \label{openai-use-case}
+\end{figure}
 
 \subsection{Feedback collection}
 
-TODO
+Figure \ref{feedback-use-case} shows how feedback request is handled.
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{../lab2diags/use-case/feedback-collection.drawio.svg}
+    \caption{Feedback collection diagram}
+    \label{feedback-use-case}
+\end{figure}
 
 \section{Traceability}
 
@@ -339,8 +360,8 @@ TODO
 \setlength{\tablewidth}{0.5\textwidth}
 
 \newgeometry{
-left=0.25\paperwidth-\tablewidth,
-right=0.25\paperwidth-\tablewidth,
+    left=0.25\paperwidth-\tablewidth,
+    right=0.25\paperwidth-\tablewidth,
 }
 
 \renewcommand{\thead}[1]{\bfseries\makecell{#1}}
@@ -348,106 +369,106 @@ right=0.25\paperwidth-\tablewidth,
 \begin{figure}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \hline
-    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Class}}{\textbf{Components}}} 
-    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
-    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-    \hline
-    Conspectus & X & & & & & & X \\
-    \hline
-    Topic & X & & & & & & X \\
-    \hline
-    Subject & X & & & & & & X \\
-    \hline
-    UserAccount & X & & & & & & X \\
-    \hline
-    AdminAccount & X & & X & & & & X \\
-    \hline
-    OpenAIChatMessage & X & & & X & X & & \\
-    \hline
-    Account & X & & & & & & X \\
-    \hline
-    AccountAction & X & & X & & & & X \\
-    \hline
-    AdministratorCreationAccount & X & & X & & & & X \\
-    \hline
-    Notification & X & X & & & & & \\
-    \hline
-    SubjectArchivationNotification & X & X & & & & & \\
-    \hline
-    FeedbackNotification & X & X & & & & X & \\
-    \hline
-    OpenAIUsageNotification & X & X & & X & X & & \\
-    \hline
-    OpenAILimitChangeAction & & & & X & X & & \\
-    \hline
-    OpenAITokenUsage & & & & X & X & & X \\
-    \hline
-    SystemSettings & X & & X & & & & X \\
-    \hline
-    Feedback & X & & & & & X & X \\
-    \hline
+        \hline
+        \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Class}}{\textbf{Components}}}
+                                       & \textbf{}    & \textbf{}           & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+                                       & \textbf{Web} & \thead{Notification                                                             \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+                                       & \textbf{}    & \textbf{}           & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+        \hline
+        Conspectus                     & X            &                     &           &           &           &           & X         \\
+        \hline
+        Topic                          & X            &                     &           &           &           &           & X         \\
+        \hline
+        Subject                        & X            &                     &           &           &           &           & X         \\
+        \hline
+        UserAccount                    & X            &                     &           &           &           &           & X         \\
+        \hline
+        AdminAccount                   & X            &                     & X         &           &           &           & X         \\
+        \hline
+        OpenAIChatMessage              & X            &                     &           & X         & X         &           &           \\
+        \hline
+        Account                        & X            &                     &           &           &           &           & X         \\
+        \hline
+        AccountAction                  & X            &                     & X         &           &           &           & X         \\
+        \hline
+        AdministratorCreationAccount   & X            &                     & X         &           &           &           & X         \\
+        \hline
+        Notification                   & X            & X                   &           &           &           &           &           \\
+        \hline
+        SubjectArchivationNotification & X            & X                   &           &           &           &           &           \\
+        \hline
+        FeedbackNotification           & X            & X                   &           &           &           & X         &           \\
+        \hline
+        OpenAIUsageNotification        & X            & X                   &           & X         & X         &           &           \\
+        \hline
+        OpenAILimitChangeAction        &              &                     &           & X         & X         &           &           \\
+        \hline
+        OpenAITokenUsage               &              &                     &           & X         & X         &           & X         \\
+        \hline
+        SystemSettings                 & X            &                     & X         &           &           &           & X         \\
+        \hline
+        Feedback                       & X            &                     &           &           &           & X         & X         \\
+        \hline
     \end{tabular}
     \caption{Traceability Table: Classes to Components}
 \end{figure}
 
 \clearpage
-    
+
 \begin{figure}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \hline
-    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Requirements}}{\textbf{Components}}} 
-    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
-    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-    \hline
-    FR1 & X & & & & & & X \\
-    \hline
-    FR2 & X & & & & & & X \\
-    \hline
-    FR3 & X & & & & & & X \\
-    \hline
-    FR4 & X & & & & & & X \\
-    \hline
-    FR5 & X & X & X & & & & X \\
-    \hline
-    FR6 & X & & X & & & & X \\
-    \hline
-    FR7 & & & X & X & & & X \\
-    \hline
-    FR8 & & & X & X & & & X \\
-    \hline
-    FR9 & & & X & X & & & X \\
-    \hline
-    FR10 & X & X & & X & X & & X \\
-    \hline
-    FR11 & X & & X & & & X & X \\
-    \hline
-    FR12 & X & X & X & & & X & X \\
-    \hline
+        \hline
+        \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Requirements}}{\textbf{Components}}}
+             & \textbf{}    & \textbf{}           & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+             & \textbf{Web} & \thead{Notification                                                             \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+             & \textbf{}    & \textbf{}           & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+        \hline
+        FR1  & X            &                     &           &           &           &           & X         \\
+        \hline
+        FR2  & X            &                     &           &           &           &           & X         \\
+        \hline
+        FR3  & X            &                     &           &           &           &           & X         \\
+        \hline
+        FR4  & X            &                     &           &           &           &           & X         \\
+        \hline
+        FR5  & X            & X                   & X         &           &           &           & X         \\
+        \hline
+        FR6  & X            &                     & X         &           &           &           & X         \\
+        \hline
+        FR7  &              &                     & X         & X         &           &           & X         \\
+        \hline
+        FR8  &              &                     & X         & X         &           &           & X         \\
+        \hline
+        FR9  &              &                     & X         & X         &           &           & X         \\
+        \hline
+        FR10 & X            & X                   &           & X         & X         &           & X         \\
+        \hline
+        FR11 & X            &                     & X         &           &           & X         & X         \\
+        \hline
+        FR12 & X            & X                   & X         &           &           & X         & X         \\
+        \hline
     \end{tabular}
     \caption{Traceability Table: Requirements to Components}
 \end{figure}
 
 \clearpage
-    
+
 \begin{figure}[ht]
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \hline
-    \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Artifacts}}{\textbf{Components}}} 
-    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-    & \textbf{Web} & \thead{Notification \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
-    & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
-    \hline
-    front.zip & X & & X & & & X & \\
-    \hline
-    PSI\_Project.dll & & X & & X & X & X & \\
-    \hline
-    db.sql & & & & & & x & X \\
-    \hline
+        \hline
+        \multirow{3}{*}{\diagbox[dir=NW]{\textbf{Artifacts}}{\textbf{Components}}}
+                         & \textbf{}    & \textbf{}           & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+                         & \textbf{Web} & \thead{Notification                                                             \\ Systems} & \textbf{Admin UI} & \textbf{OpenAI} & \textbf{API} & \textbf{Feedback} & \textbf{Database} \\
+                         & \textbf{}    & \textbf{}           & \textbf{} & \textbf{} & \textbf{} & \textbf{} & \textbf{} \\
+        \hline
+        front.zip        & X            &                     & X         &           &           & X         &           \\
+        \hline
+        PSI\_Project.dll &              & X                   &           & X         & X         & X         &           \\
+        \hline
+        db.sql           &              &                     &           &           &           & x         & X         \\
+        \hline
     \end{tabular}
     \caption{Traceability Table: Artifact to Components}
 \end{figure}
