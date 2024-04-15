@@ -48,7 +48,53 @@
 
 \tableofcontents
 
+\section{Context}
 
+EduPal is a learning aid business which helps both students and teachers by allowing educators to conveniently upload course information for students to learn. EduPal offers unique features such as pomodoro timer, note creation and export in pdf, setting goals, chatGPT integration. EduPal lets users have subjects, create topics inside subjects and upload conspectuses.
+
+\subsection{Change request}
+
+\textbf{User need:} Students want to revise learned material in interactive and efficient way. We propose an idea to integrate quizzes into the system. Every topic should have a quiz section where subject owner  should be able to create, update and delete quizzes. Quiz consists of randomly shuffled questions, question answer interface should be simple and easy to use with mouse or touch device. Upon answering a question, student gets an instant feedback.
+
+\vspace{\baselineskip}
+
+Currently EduPal system offers no way to revise or test knowledge of a particualr topic. It is responsibility of users to check their own understanding of material by using their own aproach which takes more time than they would like and adds a complexity of choosing a third party service or methodology. Integrating quizzes into a system would boost engagement of users and simplify their studying process.
+
+\subsection{Change priority}
+
+Majority of students need to use EduPal with third party active learning tool that provides feedback (typically flashcard or quiz platform). Many major players (such as Quizlet and Kahoot) do not yet have proper conspectus storage system such as EduPal, meaning that users of those platforms tend to rely on solutions such as EduPal. Implementing quizzes can motivate active learning tool users to try EduPal while some may decide that only EduPal is enough for their needs. Additionaly, active learning tool platforms may implement data storage and sharing system similar to EduPal that would result in users migrating away from EduPal. Benefits of built in quiz capability include:
+
+\begin{enumerate}
+    \item EduPal can be treated as all-in-one system
+    \item Users will not need to search for and configure third party systems
+    \item EduPal can be advertised to a broader user base.
+    \item Quizzes would also provide valuable data insights into user engagement and performance, which could be used for strategic decisions by managers.
+\end{enumerate}
+
+And drawbacks are:
+
+\begin{enumerate}
+    \item Being all-in-one system, EduPal will have to compete with both conspectus storage systems and active learning tool systems which requires more financial investements
+    \item Some users will not want to use EduPal solution as they are acustomed to their setups
+\end{enumerate}
+
+We consider this change priority to be \textbf{medium to high}.
+
+\subsection{Affected stakeholders}
+
+The feature would affect these stakeholders:
+
+\begin{enumerate}
+    \item Teachers would get the opportunity to emphasize more important questions by creating quizzes and would have the chance to provide more helpful material in a different format.
+    \item Students would have the opportunity to learn in an easier and more useful way. The opportunity to test their own knowledge would allow students to realize which topics they know well and on which topics they should revise.
+    \item Developers and Maintainers would have to create, test and maintain the feature.
+    \item Marketers would have to advertise the feature.
+    \item Business owners and Investors will likely see increase in user base and profits.
+\end{enumerate}
+
+\subsection{Outsourcing capability}
+
+Although outsourcing the feature to other developers might help save time and be an easier option, we decided to build the feature in house. We would have complete control of how our feature would look and work. Also, this way we would avoid any dependencies on third-party services, maintain current application efficiency, and save capital.
 
 \listoffigures
 \printbibliography[heading=bibintoc]
