@@ -110,6 +110,88 @@ The second implementation alternative we were able to define is a middle ground 
 
 Our team implements a fully fledged quizzing feature in the EduPal system, allowing much easier use for everyone. The cost for this option is considerably greater than the other two previously mentioned because we would have to assign a considerable amount of developers and testers, possibly a full-fledged team would have to be assigned for this task as it comes as a separate service. However this option aligns with our vision and mission perfectly because we would be creating an effective learning environment while also having the ability to improve the feature, and we would be offering our personal services to users and in this way maintaining full control of the application. Looking from a business standpoint this implementation is good for a few reasons. Mainly having our own quizzing service increases the credibility of our software and encourages clients to use EduPal over other alternatives. Secondly, expanding this feature and providing feedback, fixing bugs would be much easier and less time consuming as opposed to asking other service providers to fix our issues or even not having them fixed at all. While it does come at a considerable price, in the long run this option is better than the two previously mentioned.
 
+\section{Domain model}
+
+TODO
+
+\section{Use cases}
+
+\subsection{List quizzes}
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
+
+User opens EduPal website; system displays login page. User enters login information and presses Login button; system verifies identity of user, starts user session and shows Subject list page. User clicks on specific subject; system loads its topics and show Topic list page for that subject. User clicks on a specific topic; system loads topic data and shows Topic page for that topic. User clicks on Quizzes button; system fetches a list of quizzes associated with that topic, checks whether user is a topic owner and shows a Quiz list page. User clicks on a particular quiz; system displays a Quiz page.
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
+
+\textbf{User enters incorrect login information:} System displays Login failed message.
+
+\textbf{User session expired:} System navigates user to Login page.
+
+\textbf{User is a topic owner:} System shows Create quiz button in Quiz list page. Systems shows edit and delete buttons in Quiz page.
+
+\subsection{Create quiz}
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
+
+Topic owner lists quizzes and clicks Create quiz button; system shows Quiz editor page. Topic owner enters quiz name in Quiz name field; system checks quiz name validity. Topic owner clicks add question button; system adds question editor component to Quiz editor page with 2 empty options, with first option marked as correct answer. Topic owner enters question name in question name field and option names in option name fields; system checks validity of entered information. Topic owner clicks Add option button; system adds a new option input to question editor. Topic owner drags the option they want to be correct to top of the question option list; system marks dragged option as correct option. Topic owner clicks on Create quiz button; system saves the quiz and shows quiz page for saved quiz.
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
+
+\textbf{Bad input: Quiz name is shorter than 5 characters or longer than 50:}:System shows name error message near quiz name field.
+
+\textbf{Bad input: Quiz has no questions:} System shows No questions text near Add question button.
+
+\textbf{Bad input: Question or option name is shorter than 5 characters or longer than 50:} System show name error message near affected fields.
+
+\textbf{There are bad inputs:} System disables Create quiz button.
+
+\textbf{Topic owner wants to add question:} Topic owner clicks on add question button; system adds new question editor component.
+
+\textbf{Topic owner wants to delete question:} Topic owner clicks on delete question button; system deletes a question and removes question editor component associated with that question.
+
+\textbf{Topic owner wants to add option to question:} Topic owner clicks on Add option button; system adds new empty option at the end of option list.
+
+\textbf{Topic owner want to remove option:} Topic owner clicks on Remove option button; system removes the option. If option was marked as the correct one (was on top of the list), second option becomes correct.
+
+\textbf{There are 4 options:} System does not show Add option button.
+
+\textbf{There are 2 optionsL} System does not show Remove option buttons.
+
+\textbf{Submitted quiz has bad inputs or questions with more than 5 or less than 2 options:} System aborts the request and displays Something wrong happenned popup.
+
+\subsection{Take a quiz}
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
+
+User lists quizzes and clicks on a particular quiz, system fetches quiz data and shows Quiz page. User clicks Play button; system creates a quiz session with the user, shuffles the questions and displays question page. User clicks on option; system records an answer and show next question. After there are no more unanswered session questions, system calculates the percentage of correctly answered questions and shows quiz completed page.
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
+
+\textbf{User answer was correct:} System displays correct answer notification for 5 seconds.
+
+\textbf{Uswer answer was wrong:} System displays a wrong answer page. User clicks on continue button; system proceeds with the next question.
+
+\textbf{User clicks on restart button on quiz completed page:} System reshufles questions and starts quiz session anew.
+
+\textbf{User leaves question page or clicks on exit button on quiz completed page:} System deletes information about the session and shows a quiz page.
+
+\subsection{Edit quiz}
+
+TODO: make sure to extract quiz editor interactions so that create quiz and edit quiz are similar.
+
+\subsection{Delete quiz}
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
+
+Topic owner lists quizzes and clicks on a particular quiz; system fetches quiz data and displays quiz page. Topic owner clicks on Delete quiz button; system shows deletion confirmation popup. Topic owner click on Confirm deletion button; system deletes, shows quiz list page for a topic that deleted quiz belonged and displays Quiz deleted notification.
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
+
+\textbf{Subject owner closes confirmation popup:} System aborts deletion.
+
+TODO: alternatives when there are active quiz sessions.
+
 \listoffigures
 \printbibliography[heading=bibintoc]
 
