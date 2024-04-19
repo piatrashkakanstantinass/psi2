@@ -112,7 +112,25 @@ Our team implements a fully fledged quizzing feature in the EduPal system, allow
 
 \section{Domain model}
 
-TODO
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/domain.drawio.png}
+    \caption{Domain model diagram}
+    \label{domain-model}
+\end{figure}
+
+\begin{description}
+    \item[User] Every EduPal customer is user - they are able to create subjects, topics, upload conspectuses, rate them and so on.
+    \item[Topic owner] User who owns a particular topic - only they are able to edit its contents, including quizzes.
+    \item[Topic] A part of subject (not related to change request). Topic consists of conspectuses, comments and quizzes.
+    \item[Quiz] A named collection of questions
+    \item[Question] Question has a name and a set of incorrect options as well as correct one.
+    \item[Option] Question option is a text answer.
+    \item[Quiz session] Users start quiz session when they take the quiz.
+    \item[Quiz session question] Questions are shufled during quiz session.
+    \item[Question feedback] Feedback whether question answer is correct or not.
+    \item[User answer] User answer is an option that was picked by user.
+\end{description}
 
 \section{Use cases}
 
