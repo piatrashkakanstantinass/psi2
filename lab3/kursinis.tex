@@ -100,15 +100,66 @@ Although outsourcing the feature to other developers might help save time and be
 
 \subsubsection{First option: use notes to provide links to third party quiz service}
 
-The simplest implementation alternative is also one that required no implementation whatsoever. Our suggestion is to use the already existing note feature to add a link that would take whoever wishes to test their knowledge to a third-party quiz app. There, a new user account would have to be created if the student is using the app for the first time, otherwise logging in is sufficient. Once authenticated the student will be presented with the quiz they wished to take. The price to implement this option will not cost our client anything if they find the suitable third-party app themselves, otherwise, if we are tasked with determining the most suitable third-party app, this implementation will cost a trivial sum. To complete this option would take very little time and virtually no qualifications, as all there is already a way to leave a message, link for a topic. The disadvantages of this approach are that both the teachers and the students will be forced to create a new account in a separate application, if any sort of progress, score tracking is available, it will stay separately in the third-party app, however the benefit of this approach is that it can be made readily available in a matter of hours and at virtually no cost. Cost for this implementation is minimal and possibly costs nothing if the user finds a suitable third-party application. This option aligns with our vision to create an effective learning environment and empower individuals on their path of continuous improvement, but differs from our mission to offer services for individual, in this case we would be offering a third-party service, which would be out of our control. However this option is good looking from a business standpoint: firstly, cost is minimal, secondly requires no qualifications for implementing this solution and lastly, this solution can be implemented within minutes, thus saving time for implementing harder features. But there are downsides as users may be discouraged by the use of third-party software and potential less than ideal user experience.
+This simple implementation alternative requires no implementation whatsoever.  We would create a note with a link to another website, where a new user account would have to be created if the student is using the app for the first time, otherwise logging in is sufficient. Once authenticated the student will be presented with the quiz they wished to take.
+
+\textbf{Duration:} 1 day. Most of the time being consumed by searching for a suitable third-party app.
+
+\textbf{Pricing:} This option will not cost our client anything if they find the suitable third-party app themselves, otherwise, if we are tasked with determining the most suitable third-party app, this implementation will cost a trivial sum. 
+
+\textbf{User impact:} High. The disadvantage of this approach is that both the teachers and the students will be forced to create a new account in a separate application. 
+
+\textbf{Scalability:} Not scalable. Meaning we can not add new features or change existing ones
+
+\textbf{Maintenance:} We do not have to maintain it as it falls upon the owners of the third-party quiz app, saving us money and time as a result. 
 
 \subsubsection{Second option: integrate third-party API}
 
-The second implementation alternative we were able to define is a middle ground between the first and the third option detailed below. Our team proposes integrating a third-party quizzing app into our system through an API, perhaps even establishing a potential partnership with a suitable quizzing app. This implementation would feature a button on every topic which would take users to a new tab or a window and immediately begin the quiz with no authorization required. If needed, quiz scores could be stored in our system and displayed to the user. This approach would be far more convenient for everyone on the platform and users would be able to enjoy a feature-rich quizzing experience, however there are a few disadvantages. Users would have to deal with different stylistic choices and system owners may have concerns for data privacy and performance which we will not be able to control. We would require a designer, 1 or 2 software engineers and a tester working on this feature for 2 – 3 weeks. Thus the budget for this implementation will have to be relatively bigger and the third party quiz API could incur more costs if it isn’t free. This option aligns with our vision and our mission alongside it. Different from the first option is that we are able to offer services partly controlled by us, thus offering more credibility and trust to our clients. Looking from a business standpoint this implementation is not ideal because of considerable costs for implementing a solution which requires back-end developers to work with a third-party API, also front-end developers are required to implement a pleasant user experience while having testers to ensure this feature works as intended. And lastly, there may be added costs if the API is not free and we are not able to establish a partnership with another service provider.
+This option is a middle ground between the first and the third option detailed below. Our team proposes integrating a third-party quizzing app into our system through an API, perhaps even establishing a potential partnership with a suitable quizzing app. This implementation would feature a button on every topic which would take users to a new tab or a window and immediately begin the quiz with no authorization required. If needed, quiz scores could be stored in our system and displayed to the user. 
+
+\textbf{Duration:} 2-4 weeks, including time for developing quiz buttons, understanding the API, and establishing potential partnerships.
+
+\textbf{Pricing:} 5-10k euros. This option incurs higher costs due to the need for developers, testers, a designer, and software engineers working on the feature for 2-3 weeks.
+
+\textbf{User impact:} Medium. Users benefit from not having to create separate accounts or navigate to another webpage, though they may encounter mismatched UI elements and occasional performance issues.
+
+\textbf{Scalability:} Limited scalability, as we lack control over the third-party API, restricting our ability to make extensive changes.
+
+\textbf{Maintenance:} Increased maintenance demands due to shared functionality ownership and the need to keep up with API changes.
 
 \subsubsection{Third option: add quiz subsystem to EduPal}
 
-Our team implements a fully fledged quizzing feature in the EduPal system, allowing much easier use for everyone. The cost for this option is considerably greater than the other two previously mentioned because we would have to assign a considerable amount of developers and testers, possibly a full-fledged team would have to be assigned for this task as it comes as a separate service. However this option aligns with our vision and mission perfectly because we would be creating an effective learning environment while also having the ability to improve the feature, and we would be offering our personal services to users and in this way maintaining full control of the application. Looking from a business standpoint this implementation is good for a few reasons. Mainly having our own quizzing service increases the credibility of our software and encourages clients to use EduPal over other alternatives. Secondly, expanding this feature and providing feedback, fixing bugs would be much easier and less time consuming as opposed to asking other service providers to fix our issues or even not having them fixed at all. While it does come at a considerable price, in the long run this option is better than the two previously mentioned.
+In our chosen implementation, our team implements a fully fledged quizzing feature in the EduPal system. In this option our team would develop the quiz app embedded in EduPal with its own API and frontend choices. 
+
+\textbf{Duration:} 1-2 months for full implementation, including development and testing.
+
+\textbf{Pricing:} >10k euros. This option is the most costly due to the need for a dedicated team of developers and testers.
+
+\textbf{User impact:} Low. Users can seamlessly access the quiz feature within EduPal without complications.
+
+\textbf{Scalability:} Highly scalable as our team maintains complete control over the system, allowing for future enhancements and quick resolution of any issues.
+
+\textbf{Maintenance:} The addition of a new service increases maintenance challenges, but it enables greater flexibility and autonomy in addressing any concerns.
+
+\subsection{Implementations comparison}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        & First option & Second option & Third option \\
+        \hline
+        Duration & 1 day & 2-4 weeks & 1-2 months \\
+        \hline
+        Cost & 0 & 5-10k euros & >10k euros \\
+        \hline
+        User impact & High & Medium & Low \\
+        \hline
+        Scalability/Maintenance & Low/Low & Low/Medium & High/High \\
+        \hline
+    \end{tabular}
+    \caption{Implementations comparison}
+    \label{tab:implementations-comparison}
+\end{table}
 
 \section{Domain model}
 
