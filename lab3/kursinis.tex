@@ -191,6 +191,13 @@ We put our business team as core management of the project. They must ensure tha
 
 \subsection{List quizzes}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/list.drawio Large.jpeg}
+    \caption{List quizzes use case}
+    \label{list-quizzes}
+\end{figure}
+
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
 \textit{The user} opens the EduPal website; the system displays the Login Page. \textit{The user} enters login information and clicks the Login Button; the system verifies identity of \textit{the user}, initiates the user session, and shows the Subject List Page. \textit{The user} clicks on a specific subject; the system loads its \textit{topics} and shows the Topic List Page for that subject. \textit{The user} clicks on a specific topic; the system loads \textit{topic} data and shows the Topic Page. \textit{The user} clicks the Quizzes Button; the system fetches a list of \textit{quizzes} associated with \textit{the topic} and shows a Quiz List page. \textit{The user} clicks on the particular \textit{quiz}; the system displays the Quiz Page.
@@ -203,7 +210,16 @@ We put our business team as core management of the project. They must ensure tha
 
 \textbf{\textit{The user} is \textit{the topic owner}} The system shows the Create Quiz button on the Quiz List Page. The system shows Edit and Delete Buttons on the Quiz Page.
 
+\pagebreak
+
 \subsection{Take the quiz}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/take-quiz.drawio.png}
+    \caption{Take quiz use case}
+    \label{take-quiz}
+\end{figure}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
@@ -221,6 +237,13 @@ Play Button; the system creates a \textit{quiz session} with \textit{the user}, 
 \textbf{\textit{The user} tries to leave the Question Page:} The system displays the Confirmation Popup; if \textit{the user} confirms, the system closes the page and deletes \textit{the quiz session}.
 
 \textbf{\textit{The quiz} was edited or deleted during \textit{the session}:} The system does not show a Restart Button on the Quiz Completed Page.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/topic-owner-actions.drawio.png}
+    \caption{Topic owner use cases}
+    \label{topic-owner}
+\end{figure}
 
 \subsection{Delete the quiz}
 
