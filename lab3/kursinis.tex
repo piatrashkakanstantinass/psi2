@@ -193,108 +193,104 @@ We put our business team as core management of the project. They must ensure tha
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
-The user opens the EduPal website; the system displays the login page. The user enters login information and clicks the login button; the system verifies identity of the user, initiates the user session, and shows the subject list page. The user clicks on a specific subject; the system loads its topics and shows the topic list page for that subject. The user clicks on a specific topic; the system loads topic data and shows the topic page. The user clicks the quizzes button; the system fetches a list of quizzes associated with the topic, checks whether the user is the topic owner, and shows a quiz list page. The user clicks on the particular quiz; the system displays the quiz page.
+\textit{The user} opens the EduPal website; the system displays the Login Page. \textit{The user} enters login information and clicks the Login Button; the system verifies identity of \textit{the user}, initiates the user session, and shows the Subject List Page. \textit{The user} clicks on a specific subject; the system loads its \textit{topics} and shows the Topic List Page for that subject. \textit{The user} clicks on a specific topic; the system loads \textit{topic} data and shows the Topic Page. \textit{The user} clicks the Quizzes Button; the system fetches a list of \textit{quizzes} associated with \textit{the topic} and shows a Quiz List page. \textit{The user} clicks on the particular \textit{quiz}; the system displays the Quiz Page.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
-\textbf{The user enters incorrect login information:} The system displays the login failed message.
+\textbf{\textit{The user} enters incorrect login information:} The system displays the Login Failed Message.
 
-\textbf{User session expired:} The system navigates the user to the login page.
+\textbf{\textit{User} session expired:} The system navigates \textit{the user} to the Login Page.
 
-\textbf{The user is the topic owner} The system shows the Create Quiz button on the quiz list page. The system shows edit and delete buttons on the quiz page.
+\textbf{\textit{The user} is \textit{the topic owner}} The system shows the Create Quiz button on the Quiz List Page. The system shows Edit and Delete Buttons on the Quiz Page.
 
 \subsection{Take the quiz}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
-The user lists quizzes and clicks on a particular quiz; the system fetches quiz data and shows the quiz page. The user clicks the play button; the system creates a quiz session with the user, shuffles the questions, and displays the question page. The user clicks on an option; the system records an answer and shows the next question. Once the user answers all the questions; the system calculates the percentage of correctly answered questions and shows the quiz completed page. The user clicks the close button; the system shows the quiz page.
+\textit{The user} is on the particular Quiz Page. \textit{The user} clicks the p
+Play Button; the system creates a \textit{quiz session} with \textit{the user}, shuffles \textit{the questions}, and displays the Question Page. \textit{The user} clicks on \textit{an option}; the system records \textit{an answer} and shows the next \textit{question}. Once \textit{the user} answers all the \textit{questions}, the system calculates the percentage of correctly answered \textit{questions} and shows the Quiz Completed Page. \textit{The user} clicks the Close Button; the system shows the Quiz Page.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
-\textbf{The question does not have an image:} The system only displays the text.
+\textbf{\textit{User answer} was correct:} System displays Correct Answer Notification for 5 seconds.
 
-\textbf{The question does not have an image:} the system only displays the text.
-User answer was correct: System displays correct answer notification for 5 seconds.
+\textbf{\textit{User answer} was wrong:} The system displays the Wrong Answer Page. \textit{The user} clicks on the Continue Button; and the system proceeds with the next \textit{question}.
 
-\textbf{User answer was wrong:} The system displays a wrong answer page. The user clicks on the continue button; and the system proceeds with the next question.
+\textbf{\textit{The user} clicks on the Restart Button on the Quiz Completed Page:} The system reshuffles \textit{the questions}, starts a new \textit{quiz session}, and shows the Question Page.
 
-\textbf{The user clicks on the restart button on the quiz completed page:} The system reshuffles questions, starts a new quiz session, and shows the question page.
+\textbf{\textit{The user} tries to leave the Question Page:} The system displays the Confirmation Popup; if \textit{the user} confirms, the system closes the page and deletes \textit{the quiz session}.
 
-\textbf{User tries to leave the question page:} The system displays the confirmation popup; if the user confirms, the system closes the page and deletes the quiz session.
-
-\textbf{The quiz was edited or deleted during the session:} The system does not show a restart button on the quiz completed page.
+\textbf{\textit{The quiz} was edited or deleted during \textit{the session}:} The system does not show a Restart Button on the Quiz Completed Page.
 
 \subsection{Delete the quiz}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
-The topic owner lists quizzes and clicks on a particular quiz; the system fetches quiz data and shows the quiz page. The topic owner clicks on the delete quiz button; the system shows a deletion confirmation popup. The topic owner clicks on the confirm deletion button; the system deletes the quiz, shows the quiz list page for the topic that the deleted quiz belonged to, and displays a quiz deleted notification.
+\textit{The topic owner} is on the particular Quiz Page. \textit{The topic owner} clicks on the Delete Quiz Button; the system shows a Deletion Confirmation Popup. \textit{The topic owner} clicks on the Confirm Deletion Button; the system deletes \textit{the quiz}, shows the Quiz List Page for \textit{the topic} that the deleted \textit{quiz} belonged to, and displays a Quiz Deleted Notification.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
-\textbf{Subject owner closes confirmation popup:} System aborts deletion.
+\textbf{\textit{Topic owner} closes Confirmation Popup:} System aborts deletion.
 
 \subsection{Create the quiz}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
-The topic owner lists quizzes and clicks the create quiz button; the system creates the quiz with no name and questions in memory and shows the quiz page editor page associated with the quiz. The user fills in the quiz information and clicks the save quiz button; the system saves the quiz and shows the quiz page for that quiz.
+\textit{The topic owner} is on the particular Quiz Page. \textit{The topic owner} clicks the Create Quiz Button; the system creates \textit{the empty quiz} in memory and shows the Quiz Editor Page associated with \textit{the quiz}. \textit{The topic owner} fills in \textit{the quiz} information and clicks the Save Quiz Button; the system saves \textit{the quiz} and shows the Quiz Page for that \textit{quiz}.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
-\textbf{User tries to leave the quiz editor page:} The system displays the confirmation popup; if the user confirms, the system shows the quiz list page and removes the quiz from memory.
+\textbf{\textit{The topic owner} tries to leave the Quiz Editor Page:} The system displays the Confirmation Popup; if \textit{the topic owner} confirms, the system shows the Quiz List Page and removes \textit{the quiz} from memory.
 
 \subsection{Edit the quiz}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
-The topic owner lists quizzes and clicks on a particular quiz; the system fetches quiz data and shows the quiz page. The topic owner clicks on the edit button; the system shows the quiz editor page associated with the quiz. The user fills in the quiz information and clicks the save quiz button; the system saves the quiz and shows the quiz page for that quiz.
+\textit{The topic owner} is on the particular Quiz Page. \textit{The topic owner} clicks on the Edit Button; the system shows the Quiz Editor Page associated with \textit{the quiz}. \textit{The topic owner} fills in the \textit{quiz} information and clicks the Save Quiz Button; the system saves \textit{the quiz} and shows the Quiz Page for that \textit{quiz}.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
-\textbf{User tries to leave the quiz editor page:} The system displays the confirmation popup; if the user confirms, the system shows the quiz page and aborts the changes.
+\textbf{\textit{The topic owner} tries to leave the Quiz Editor Page:} The system displays the Confirmation Popup; if \textit{the topic owner} confirms, the system shows the Quiz List Page and aborts the changes.
 
 \subsection{Quiz editor use cases}
 
-Use cases here assume that topic owner is on the quiz editor page.
+Use cases here assume that \textit{the topic owner} is on the Quiz Editor Page associated with certain \textit{quiz}.
 
 \subsubsection{Edit the quiz}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
-The system shows the quiz editor page. Topic owner enters quiz name in quiz name field; system checks quiz name validity. The topic owner clicks on the add question button, the system adds a question with no name, no image, and 2 empty options to the quiz and adds a question editor component to the question list. The user edits the questions and clicks the save quiz button; the system performs the action defined in the invoking use case.
+The system shows the Quiz Editor Page. \textit{The topic owner} enters \textit{quiz} name in Quiz Name Field; system checks quiz name validity. \textit{The topic owner} clicks on the Add Question Button to add \textit{question}, the system adds a \textit{question} with no name, no image, and 2 empty \textit{options} to \textit{the quiz} and adds a Question Editor Component to the Question List on the Quiz Editor. \textit{The topic owner} clicks on the Remove Question Button to remove \textit{the question}, the system removes \textit{the question} and removes the Question Editor Component Associated with that \textit{question}. \textit{The topic owner} edits \textit{the questions} and clicks the Save Quiz Button; the system performs the action defined in the invoking use case.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
-\textbf{Bad input:} quiz has no questions: System shows no questions text near add question button.
+\textbf{Bad input: \textit{Quiz} has no \textit{questions}:} System shows No Questions Message near Add Question Button.
 
-\textbf{There are bad inputs:} The system disables the save changes button.
+\textbf{Bad input: Text in text fields (both \textit{quiz} name and Question Components) is shorter than 5 characters or longer than 50:} The system shows a name error message near the affected text field.
 
-\textbf{Text in text fields (both quiz name and questions) is shorter than 5 characters or longer than 50:} The system shows a name error message near the affected text field.
-
-\textbf{Topic owner wants to delete question:} The topic owner clicks on the delete question button; the system deletes the question and removes the question editor component associated with that question.
+\textbf{There are bad inputs:} The system disables the Save Quiz Button.
 
 \subsubsection{Edit the question}
 
-The correct option is the option on top of the option list.
+The correct \textit{option} is \textit{the option} on top of the Option List.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
-The topic owner enters the question name in the question name field and option names in the option name fields; the system checks the validity of the entered information. The topic owner clicks on the upload image button; the system opens the file picker. The topic owner chooses an image file; the system downloads the image, saves it, displays the thumbnail and replaces add image button with remove image button.
+\textit{The topic owner} enters the \textit{question} name in the Question Name Field and \textit{option} names in the Option Name Fields; the system checks the validity of the entered information. \textit{The topic owner} clicks on the Upload Image Button; the system opens the file picker. \textit{The topic owner} chooses an image file; the system downloads the image, saves it, displays the thumbnail and replaces the Add Image Button with Remove Image Button.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
-\textbf{Topic owner wants to add an option:} The topic owner clicks on the Add option button; the system adds a new empty option at the end of the option list.
+\textbf{\textit{The topic owner} wants to add \textit{an option}:} \textit{The topic owner} clicks on the Add Option Button; the system adds a new empty \textit{option} at the end of the Option List.
 
-\textbf{Topic owner wants to remove the option:} The topic owner clicks on the remove option button; the system removes the option. If the option was marked as the correct one (was on top of the list), the second option becomes correct.
+\textbf{\textit{The topic owner} wants to remove \textit{the option}:} \textit{The topic owner} clicks on the Remove Option Button; the system removes \textit{the option}. If \textit{the option} was marked as the correct one (was on top of the list), the second \textit{option} becomes correct.
 
-\textbf{There are 4 options:} The system does not show the Add option button.
+\textbf{There are 4 \textit{options}:} The system does not show the Add Option Button.
 
-\textbf{There are 2 options:} The system does not show the remove option button
+\textbf{There are 2 \textit{options}:} The system does not show the Remove Option Button
 
-\textbf{Topic owner wants to change the correct option:} The topic owner drags the option to the top of the option list; the system marks the dragged option as the correct option.
+\textbf{\textit{The topic owner} wants to change the correct \textit{option}:} \textit{The topic owner} drags \textit{the option} to the top of the Option List; the system marks the dragged \textit{option} as the correct \textit{option}.
 
-\textbf{Topic owner wants to remove the image:} The topic owner clicks on the remove image button; the system deletes the image, removes it from the question component and replaces remove image button with add image button.
+\textbf{\textit{The topic owner} wants to remove the image:} \textit{The topic owner} clicks on the Remove Image Button; the system deletes the image, removes it from the Question Component and replaces the Remove Image Button with the Add Image Button.
 
 \section{Requirements}
 
