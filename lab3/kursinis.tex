@@ -216,8 +216,8 @@ We put our business team as core management of the project. They must ensure tha
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{../lab3diags/take-quiz.drawio.png}
-    \caption{Take quiz use case}
+    \includegraphics[width=0.5\textwidth]{../lab3diags/take-quiz.drawio.png}
+    \caption{Take the quiz use case}
     \label{take-quiz}
 \end{figure}
 
@@ -240,7 +240,7 @@ Play Button; the system creates a \textit{quiz session} with \textit{the user}, 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{../lab3diags/topic-owner-actions.drawio.png}
+    \includegraphics[width=0.7\textwidth]{../lab3diags/topic-owner-actions.drawio.png}
     \caption{Topic owner use cases}
     \label{topic-owner}
 \end{figure}
@@ -317,21 +317,38 @@ The correct \textit{option} is \textit{the option} on top of the Option List.
 
 \section{Requirements}
 
-\begin{description}
-    \item[FR1] System shall support creation of quizzes.
-    \item[FR2] System shall ensure that only owner of the topic can create, edit and delete the quiz in that topic.
-    \item[FR3] System shall support editing of quizzes.
-    \item[FR4] System shall support deletion of quizzes.
-    \item[FR5] System shall support JPEG, PNG, SVG, WEBP, GIF image question formats.
-    \item[FR6] System shall prompt for confirmation when deleting quizzes.
-    \item[FR7] System shall support uploading images for questions
-    \item[FR8] System shall remove uploaded images for questions of quiz being deleted.
-    \item[FR9] System shall support setting quiz name.
-    \item[FR10] System shall support adding, editing and deleting quiz questions and options.
-    \item[FR11] System shall support listing quizzes.
-    \item[FR12] System shall support users taking the quiz.
-    \item[FR13] System shall check if user quiz answer was correct and notify the user.
-\end{description}
+\subsection{Functional requirements}
+
+\newlist{frlist}{enumerate}{1}
+\setlist[frlist]{label=\textbf{FR\arabic*.}, align=left, leftmargin=*}
+
+\begin{frlist}
+    \item System shall allow users to list quizzes.
+    \item System shall ensure that only logged in users can access quizzes.
+    \item System shall only allow creation, editing and deletion of the topic quizzes to onwers of that topic.
+    \item System shall support users taking the quiz.
+    \item System shall check whether user answer is correct and display appropirate feedback.
+    \item System shall ensure that users cannot restart the quiz that was edited or deleted during the quiz session.
+    \item System shall allow topic owner to delete any quiz that belongs to their topic.
+    \item System shall allow topic owner to create the quiz in their topic.
+    \item System shall allow topic owner to edit any quiz in their topic.
+    \item System shall prompt for confirmation when deleting quizzes.
+    \item System shall support uploading image for questions.
+    \item System shall support setting quiz name.
+    \item System shall support adding, editing and deleting quiz questions and options.
+\end{frlist}
+
+\subsection{Nonfunctional requirements}
+
+\newlist{nfrlist}{enumerate}{1}
+\setlist[nfrlist]{label=\textbf{NFR\arabic*.}, align=left, leftmargin=*}
+
+\begin{nfrlist}
+    \item System shall support PNG, SVG, JPEG, WEBP, GIF question image formats.
+    \item System shall ensure that quiz functionality related pages are supported by common screenreaders (VoiceOver, Microsoft Narrator, Jaws).
+    \item System shall ensure that quiz functionality related pages are displayed on desktop and mobile without horizontal scrollbars or loss of information.
+    \item System shall ensure that image upload and download speed is at least 500Mbit/s in common locations (Vilnius, Berlin, New York, Paris)
+\end{nfrlist}
 
 \section{Traceability}
 
