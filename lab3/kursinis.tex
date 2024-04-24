@@ -182,8 +182,6 @@ We put our business team as core management of the project. They must ensure tha
     \item[Question] Question has a name and a set of incorrect options as well as correct one.
     \item[Option] Question option is a text answer.
     \item[Quiz session] Users start quiz session when they take the quiz.
-    \item[Quiz session question] Questions are shufled during quiz session.
-    \item[Question feedback] Feedback whether question answer is correct or not.
     \item[User answer] User answer is an option that was picked by user.
 \end{description}
 
@@ -299,21 +297,25 @@ The correct \textit{option} is \textit{the option} on top of the Option List.
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
-\textit{The topic owner} enters the \textit{question} name in the Question Name Field and \textit{option} names in the Option Name Fields; the system checks the validity of the entered information. \textit{The topic owner} clicks on the Upload Image Button; the system opens the file picker. \textit{The topic owner} chooses an image file; the system downloads the image, saves it, displays the thumbnail and replaces the Add Image Button with Remove Image Button.
+\textit{The topic owner} enters the \textit{question} name in the Question Name Field and \textit{option} names in the Option Name Fields; the system checks the validity of the entered information. \textit{The topic owner} clicks on the Upload Image Button; the system opens the file picker. \textit{The topic owner} chooses an image file; the system downloads the image, saves it, displays the thumbnail and replaces the Add Image Button with Remove Image Button. \textit{The topic owner} edits the options; system acts as defined in \textit{Question editor: edit options (\ref{question-editor})}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
-\textbf{\textit{The topic owner} wants to add \textit{an option}:} \textit{The topic owner} clicks on the Add Option Button; the system adds a new empty \textit{option} at the end of the Option List.
+\textbf{\textit{The topic owner} wants to remove the image:} \textit{The topic owner} clicks on the Remove Image Button; the system deletes the image, removes it from the Question Component and replaces the Remove Image Button with the Add Image Button.
 
-\textbf{\textit{The topic owner} wants to remove \textit{the option}:} \textit{The topic owner} clicks on the Remove Option Button; the system removes \textit{the option}. If \textit{the option} was marked as the correct one (was on top of the list), the second \textit{option} becomes correct.
+\subsubsubsection{Question editor: edit options} \label{question-editor}
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
+
+If \textit{the topic owner} wants to add an \textit{option}, they click on the Add Option Button; the system adds a new empty \textit{option} at the end of the Option List. If \textit{the topic owner} wants to remove an \textit{option}, they click on the Remove Option Button; the system removes \textit{the option}. If \textit{the option} was marked as the correct one (was on top of the list), system makes the second \textit{option} correct. If \textit{the topic owner} wants to change the correct \textit{option} to some other \textit{option}, they drag \textit{the option} to the top of the Option List; the system marks the dragged \textit{option} as the correct one.
+
+\noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
+
+\textbf{Bad input: 2 or more options have same text:} The system shows the Duplicate Options Error Message in the Question Component.
 
 \textbf{There are 4 \textit{options}:} The system does not show the Add Option Button.
 
 \textbf{There are 2 \textit{options}:} The system does not show the Remove Option Button
-
-\textbf{\textit{The topic owner} wants to change the correct \textit{option}:} \textit{The topic owner} drags \textit{the option} to the top of the Option List; the system marks the dragged \textit{option} as the correct \textit{option}.
-
-\textbf{\textit{The topic owner} wants to remove the image:} \textit{The topic owner} clicks on the Remove Image Button; the system deletes the image, removes it from the Question Component and replaces the Remove Image Button with the Add Image Button.
 
 \section{Requirements}
 
