@@ -27,7 +27,6 @@
 \renewcommand{\cftdotsep}{1} 
 
 
-% Titulinio aprašas
 \university{Vilnius university}
 \faculty{Faculty of mathematics and informatics}
 \department{Software engineering study program}
@@ -58,11 +57,11 @@ EduPal is a learning aid business which helps both students and teachers by allo
 
 \vspace{\baselineskip}
 
-Currently EduPal system offers no way to revise or test knowledge of a particualr topic. It is responsibility of users to check their own understanding of material by using their own aproach which takes more time than they would like and adds a complexity of choosing a third party service or methodology. Integrating quizzes into a system would boost engagement of users and simplify their studying process.
+Currently EduPal system offers no way to revise or test knowledge of a particular topic. It is responsibility of users to check their own understanding of material by using their own approach which takes more time than they would like and adds a complexity of choosing a third party service or methodology. Integrating quizzes into a system would boost engagement of users and simplify their studying process.
 
 \subsection{Change priority}
 
-Majority of students need to use EduPal with third party active learning tool that provides feedback (typically flashcard or quiz platform). Many major players (such as Quizlet and Kahoot) do not yet have proper conspectus storage system such as EduPal, meaning that users of those platforms tend to rely on solutions such as EduPal. Implementing quizzes can motivate active learning tool users to try EduPal while some may decide that only EduPal is enough for their needs. Additionaly, active learning tool platforms may implement data storage and sharing system similar to EduPal that would result in users migrating away from EduPal. Benefits of built in quiz capability include:
+Majority of students need to use EduPal with third party active learning tool that provides feedback (typically flashcard or quiz platform). Many major players (such as Quizlet and Kahoot) do not yet have proper conspectus storage system such as EduPal, meaning that users of those platforms tend to rely on solutions such as EduPal. Implementing quizzes can motivate active learning tool users to try EduPal while some may decide that only EduPal is enough for their needs. Additionally, active learning tool platforms may implement data storage and sharing system similar to EduPal that would result in users migrating away from EduPal. Benefits of built in quiz capability include:
 
 \begin{enumerate}
     \item EduPal can be treated as all-in-one system
@@ -74,8 +73,8 @@ Majority of students need to use EduPal with third party active learning tool th
 And drawbacks are:
 
 \begin{enumerate}
-    \item Being all-in-one system, EduPal will have to compete with both conspectus storage systems and active learning tool systems which requires more financial investements
-    \item Some users will not want to use EduPal solution as they are acustomed to their setups
+    \item Being all-in-one system, EduPal will have to compete with both conspectus storage systems and active learning tool systems which requires more financial investments
+    \item Some users will not want to use EduPal solution as they are accustomed to their setups
 \end{enumerate}
 
 We consider this change priority to be \textbf{medium to high}.
@@ -163,7 +162,7 @@ Although outsourcing the feature to other developers might help save time and be
 
 \subsection{Project management}
 
-We put our business team as core management of the project. They must ensure that the product acknowledges end user needs, control the budget and execution time, handle advertisement of the feature. Development team must follow business team decision, however developers need to ensure that quiz integration will not have performance or maintenance imapct on other parts of the system and will not result in technical debt.
+We put our business team as core management of the project. They must ensure that the product acknowledges end user needs, control the budget and execution time, handle advertisement of the feature. Development team must follow business team decision, however developers need to ensure that quiz integration will not have performance or maintenance impact on other parts of the system and will not result in technical debt.
 
 \section{Domain model}
 
@@ -329,7 +328,7 @@ If \textit{the topic owner} wants to add an \textit{option}, they click on the A
     \item System shall ensure that only logged in users can access quizzes.
     \item System shall only allow creation, editing and deletion of the topic quizzes to owners of that topic.
     \item System shall support users taking the quiz.
-    \item System shall check whether user answer is correct and display appropirate feedback.
+    \item System shall check whether user answer is correct and display appropriate feedback.
     \item System shall ensure that users cannot restart the quiz that was edited or deleted during the quiz session.
     \item System shall allow topic owner to delete any quiz that belongs to their topic.
     \item System shall allow topic owner to create the quiz in their topic.
