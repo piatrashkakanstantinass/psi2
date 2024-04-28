@@ -356,18 +356,17 @@ If \textit{the topic owner} wants to add an \textit{option}, they click on the A
 \begin{figure}[htbp]
     \centering
     \label{tab:domain_use_cases}
-    \begin{tabular}{|l|*{5}{c|}}
+    \begin{tabular}{|l|*{4}{c|}}
     \hline
-
-    \backslashbox{Entity}{Use Case} & \makecell{List \\ Quizzes} & \makecell{Take \\ Quiz} & \makecell{Delete \\ Quiz} & \makecell{Create \\ Quiz} & \makecell{Edit \\ Quiz}\\ \hline
-    User          & X & X & & & \\ \hline
-    Topic Owner   & X & X & X & X & X \\ \hline
-    Topic         & X & X & X & X & X \\ \hline
-    Quiz          & X & X & X & X & X \\ \hline
-    Question      & & X & X & X & X \\ \hline
-    Option        & & X & X & X & X \\ \hline
-    Quiz Session  & & X & & & \\ \hline
-    User Answer   & & X & & & \\ \hline
+    \backslashbox{Entity}{Use Case} & \makecell{List \\ Quizzes} & \makecell{Take \\ Quiz} & \makecell{Delete \\ Quiz} & \makecell{Create \& Edit \\ Quiz} \\ \hline
+    User          & X & X & & \\ \hline
+    Topic Owner   & X & & X & X \\ \hline
+    Topic         & X & & X & X \\ \hline
+    Quiz          & X & X & X & X \\ \hline
+    Question      & & X & & X \\ \hline
+    Option        & & X & & X \\ \hline
+    Quiz Session  & & X & & \\ \hline
+    User Answer   & & X & & \\ \hline
     \end{tabular}
     \caption{Domain entities to use cases traceability table}
 \end{figure}
@@ -377,13 +376,13 @@ If \textit{the topic owner} wants to add an \textit{option}, they click on the A
     \label{tab:requirements_use_cases}
     \begin{tabular}{|l|*{5}{c|}}
     \hline
-    \backslashbox{Requirement}{Use Case} & \makecell{List \\ Quizzes} & \makecell{Take \\ Quiz} & \makecell{Delete \\ Quiz} & \makecell{Create \\ Quiz} & \makecell{Edit \\ Quiz}\\ \hline
+    \backslashbox{Requirement}{Use Case} & \makecell{List \\ Quizzes} & \makecell{Take \\ Quiz} & \makecell{Delete \\ Quiz} & \makecell{Create \\ Quiz} & \makecell{Quiz Editor \\ Use Cases}\\ \hline
     FR1  & X & & & & \\ \hline
     FR2  & X & X & & & \\ \hline
     FR3  & & & X & X & X \\ \hline
     FR4  & & X & & &              \\ \hline
     FR5  & & X & & & \\ \hline
-    FR6  & & X & X & & \\ \hline
+    FR6  & & X & X & & X \\ \hline
     FR7  & & & X & & \\ \hline
     FR8  & & & & X & \\ \hline
     FR9  & & & & & X  \\ \hline
@@ -391,10 +390,10 @@ If \textit{the topic owner} wants to add an \textit{option}, they click on the A
     FR11 & & & & X & X \\ \hline
     FR12 & & & & X & X \\ \hline
     FR13 & & & X & X & X \\ \hline
-    NFR1 & & & & X & X \\ \hline
+    NFR1 & & X & & X & X \\ \hline
     NFR2 & X & X & X & X & X \\ \hline
     NFR3 & X & X & X & X & X\\ \hline
-    NFR4 & X & X & X & X & X\\ \hline
+    NFR4 & & X & & X & X\\ \hline
     \end{tabular}
     \caption{Requirements to use cases traceability table}
 \end{figure}
