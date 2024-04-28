@@ -164,5 +164,17 @@
       "env": {}
     }
   ],
-  "editor.wordWrap": "wordWrapColumn"
+  "editor.wordWrap": "wordWrapColumn",
+  "files.insertFinalNewline": true,
+  "cSpell.words": [
+    "drawio",
+    "hediet",
+    "Kahoot",
+    "Mbit",
+    "pomodoro",
+    "Quizlet",
+    "screenreaders",
+    "scrollbars",
+    "WEBP"
+  ]
 }
