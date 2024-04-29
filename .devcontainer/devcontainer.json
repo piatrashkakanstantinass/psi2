@@ -18,7 +18,11 @@
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
-      "extensions": ["hediet.vscode-drawio", "James-Yu.latex-workshop"]
+      "extensions": [
+        "hediet.vscode-drawio",
+        "James-Yu.latex-workshop",
+        "streetsidesoftware.code-spell-checker"
+      ]
     }
   }
 
