@@ -53,7 +53,7 @@ EduPal is a learning aid business which helps both students and teachers by allo
 
 \subsection{Change request}
 
-\textbf{User need:} Students want to revise learned material in interactive and efficient way. We propose an idea to integrate quizzes into the system. Every topic should have a quiz section where topic owner  should be able to create, update and delete quizzes. Quiz consists of randomly shuffled questions, question answer interface should be simple and easy to use with mouse or touch device. Upon answering a question, student gets an instant feedback.
+\textbf{User need:} Users want to revise learned material in interactive and efficient way. We propose an idea to integrate quizzes into the system. Every topic should have a quiz section where topic owner  should be able to create, update and delete quizzes. Quiz consists of randomly shuffled questions, question answer interface should be simple and easy to use with mouse or touch device. Upon answering a question, user gets an instant feedback.
 
 \vspace{\baselineskip}
 
@@ -61,7 +61,7 @@ Currently EduPal system offers no way to revise or test knowledge of a particula
 
 \subsection{Change priority}
 
-Majority of students need to use EduPal with third party active learning tool that provides feedback (typically flashcard or quiz platform). Many major players (such as Quizlet and Kahoot) do not yet have proper conspectus storage system such as EduPal, meaning that users of those platforms tend to rely on solutions such as EduPal. Implementing quizzes can motivate active learning tool users to try EduPal while some may decide that only EduPal is enough for their needs. Additionally, active learning tool platforms may implement data storage and sharing system similar to EduPal that would result in users migrating away from EduPal. Benefits of built in quiz capability include:
+Majority of users need to use EduPal with third party active learning tool that provides feedback (typically flashcard or quiz platform). Many major players (such as Quizlet and Kahoot) do not yet have proper conspectus storage system such as EduPal, meaning that users of those platforms tend to rely on solutions such as EduPal. Implementing quizzes can motivate active learning tool users to try EduPal while some may decide that only EduPal is enough for their needs. Additionally, active learning tool platforms may implement data storage and sharing system similar to EduPal that would result in users migrating away from EduPal. Benefits of built in quiz capability include:
 
 \begin{enumerate}
     \item EduPal can be treated as all-in-one system
@@ -84,56 +84,56 @@ We consider this change priority to be \textbf{medium to high}.
 The feature would affect these stakeholders:
 
 \begin{enumerate}
-    \item Teachers would get the opportunity to emphasize more important questions by creating quizzes and would have the chance to provide more helpful material in a different format.
-    \item Students would have the opportunity to learn in an easier and more useful way. The opportunity to test their own knowledge would allow students to realize which topics they know well and on which topics they should revise.
-    \item Developers and Maintainers would have to create, test and maintain the feature.
-    \item Marketers would have to advertise the feature.
-    \item Business owners and Investors will likely see increase in user base and profits.
+    \item \textbf{Teachers} would get the opportunity to emphasize more important questions by creating quizzes and would have the chance to provide more helpful material in a different format.
+    \item \textbf{Students} would have the opportunity to learn in an easier and more useful way. The opportunity to test their own knowledge would allow students to realize which topics they know well and on which topics they should revise.
+    \item \textbf{Developers and Maintainers} would have to create, test and maintain the feature.
+    \item \textbf{Marketers and Support} would have to advertise the feature and help users as well as collect bug reports and future functionality requests for developers and business analysts.
+    \item \textbf{Business owners and Investors} will likely see increase in user base and profits.
 \end{enumerate}
 
 \subsection{Implementation alternatives}
 
 \subsubsection{First option: use notes to provide links to third party quiz service}
 
-This simple implementation alternative requires no implementation whatsoever.  We would create a note with a link to another website, where a new user account would have to be created if the student is using the app for the first time, otherwise logging in is sufficient. Once authenticated the student will be presented with the quiz they wished to take.
+This simple implementation alternative requires no implementation whatsoever.  We would suggest teachers to create a note with a link to quiz on another website, where a new user account would have to be created if the user is using the app for the first time, otherwise logging in is sufficient. Students would be able to list the notes and pick a quiz they like.
 
-\textbf{Duration:} 1 day. Most of the time being consumed by searching for a suitable third-party app.
+\textbf{Correctness:} \textbf{Low}. We force users to do work that could be automated if we picked a more costly solution. Low user satisfaction is expected if we pick this alternative. The disadvantage of this approach is that both the teachers and the students may be forced to create a new account in a separate application. Additionally, different users may prefer different quiz applications resulting in confusion.
 
-\textbf{Pricing:} This option will not cost our client anything if they find the suitable third-party app themselves, otherwise, if we are tasked with determining the most suitable third-party app, this implementation will cost a trivial sum.
+\textbf{Duration:} \textbf{~1 day}. EduPal will only need to suggest using platform in this way in social media. It is enough to make few posts and potential users will know about the possibility.
 
-\textbf{User impact:} High. The disadvantage of this approach is that both the teachers and the students will be forced to create a new account in a separate application.
+\textbf{Pricing:} \textbf{None}. This option does not involve any cost from EduPal side, however, users who the quizzes may need to pay for premium account feature on certain quiz applications. Our research suggests that majority of popular quiz websites provide extensive set of features for free.
 
-\textbf{Scalability:} Not scalable. Meaning we can not add new features or change existing ones
+\textbf{Extendability:} \textbf{Not extendable}. Quiz functionality is not controlled by EduPal.
 
-\textbf{Maintenance:} We do not have to maintain it as it falls upon the owners of the third-party quiz app, saving us money and time as a result.
+\textbf{Maintenance:} \textbf{None} We do not have to maintain it as it falls upon the owners of the third-party quiz app, saving us money and time as a result.
 
 \subsubsection{Second option: integrate third-party API}
 
-This option is a middle ground between the first and the third option detailed below. Our team proposes integrating a third-party quizzing app into our system through an API, perhaps even establishing a potential partnership with a suitable quizzing app. This implementation would feature a button on every topic which would take users to a new tab or a window and immediately begin the quiz with no authorization required. If needed, quiz scores could be stored in our system and displayed to the user.
+Our team proposes integrating a third-party quizzing app into our system through an API or by embedding it, perhaps even establishing a potential partnership with a suitable quizzing app. Users would be able to create and take quizzes without leaving EduPal website, while quiz data will be stored by third-party.
 
-\textbf{Duration:} 2-4 weeks, including time for developing quiz buttons, understanding the API, and establishing potential partnerships.
+\textbf{Correctness:} \textbf{Medium-High}. Using an external API is considered to be a valid and acceptable choice in the industry. Using third party embedded frames would be convenient to use, but may not be uniform with EduPal website style. Using the API, and implementing UI ourselves will result in similar user experience as if the feature was completely implemented by EduPal.
 
-\textbf{Pricing:} 5-10k euros. This option incurs higher costs due to the need for developers, testers, a designer, and software engineers working on the feature for 2-3 weeks.
+\textbf{Duration:} \textbf{1-3 months}, including time for developing quiz buttons, understanding the API, and establishing potential partnerships.
 
-\textbf{User impact:} Medium. Users benefit from not having to create separate accounts or navigate to another webpage, though they may encounter mismatched UI elements and occasional performance issues.
+\textbf{Pricing:} \textbf{5-10k euros}. This option requires finding 
 
-\textbf{Scalability:} Limited scalability, as we lack control over the third-party API, restricting our ability to make extensive changes.
+\textbf{Extendability:} \textbf{Low}, as we lack control over the third-party API, restricting our ability to make extensive changes.
 
-\textbf{Maintenance:} Increased maintenance demands due to shared functionality ownership and the need to keep up with API changes.
+\textbf{Maintenance:} \textbf{Low-Medium}. Increased maintenance demands due to shared functionality ownership and the need to keep up with API changes.
 
 \subsubsection{Third option: add quiz subsystem to EduPal}
 
-In our chosen implementation, our team implements a fully fledged quizzing feature in the EduPal system. In this option our team would develop the quiz app embedded in EduPal with its own API and frontend choices.
+Third option involves our team implementing a fully fledged quizzing feature in the EduPal system. In this option our team would develop the quiz app embedded in EduPal with its own API and frontend choices.
 
-\textbf{Duration:} 1-2 months for full implementation, including development and testing.
+\textbf{Correctness:} \textbf{High}. Implementing quiz subsystem results in a fluid system that has room for new features and integration. Users will experience convenient UI and will not have to navigate to external pages.
 
-\textbf{Pricing:} >10k euros. This option is the most costly due to the need for a dedicated team of developers and testers.
+\textbf{Duration:} \textbf{1-5 months} for full implementation, including development and testing.
 
-\textbf{User impact:} Low. Users can seamlessly access the quiz feature within EduPal without complications.
+\textbf{Pricing:} \textbf{>10k euros}. This option is the most costly due to the need for a dedicated team of developers, designers and testers.
 
-\textbf{Scalability:} Highly scalable as our team maintains complete control over the system, allowing for future enhancements and quick resolution of any issues.
+\textbf{Extendability:} \textbf{High}. Since EduPal team will maintain the quiz subsystem, it will be possible to implement additional features and enable deeper integration with other parts of EduPal.
 
-\textbf{Maintenance:} The addition of a new service increases maintenance challenges, but it enables greater flexibility and autonomy in addressing any concerns.
+\textbf{Maintenance:} \textbf{High}. The addition of a new service increases maintenance challenges as we will have to handle discovering and fixing bugs, maintain a dedicated infrastructure, ensure that implementation does not impose a technical debt on other parts of EduPal system.
 
 \subsection{Implementations comparison}
 
@@ -143,22 +143,34 @@ In our chosen implementation, our team implements a fully fledged quizzing featu
         \hline
                                 & First option & Second option & Third option \\
         \hline
-        Duration                & 1 day        & 2-4 weeks     & 1-2 months   \\
+        Correctness             & Low         &Medium-High         &  High            \\
+        \hline
+        Duration                & 1 day        & 1-3 months     & 1-5 months   \\
         \hline
         Cost                    & 0            & 5-10k euros   & >10k euros   \\
         \hline
-        User impact             & High         & Medium        & Low          \\
+        Extendability           & None      & Low    & High    \\
         \hline
-        Scalability/Maintenance & Low/Low      & Low/Medium    & High/High    \\
+        Maintenance             & None          & Low-Medium           & High          \\
         \hline
     \end{tabular}
     \caption{Implementations comparison}
     \label{tab:implementations-comparison}
 \end{figure}
 
+\subsection{Picked alternative}
+
+EduPal decided to pick third option and implement the quiz functionality ourselves. Quiz functionality is important to users and they wont be satisfied with the workaround like first option, leaving us with two similar considerations: integrate third-party API or write our own subsystem. Both options are costly and take a similar period of time to complete, however implementing quizzes ourselves allows us to:
+
+\begin{itemize}
+    \item Integrate quizzes deeper with other EduPal functionality.
+    \item Extend quiz functionality later.
+    \item Be independent from third party that can shutdown or impose undesirable conditions.
+\end{itemize}
+
 \subsection{Outsourcing capability}
 
-Although outsourcing the feature to other developers might help save time and be an easier option, we decided to build the feature in house. We would have complete control of how our feature would look and work. Also, this way we would avoid any dependencies on third-party services, maintain current application efficiency, and save capital.
+Since quiz subsystem will need to integrate with existing EduPal system, architecture and development are not cost efficient to outsource. However, we may need designers and testers that could be outsourced.
 
 \subsection{Project management}
 
