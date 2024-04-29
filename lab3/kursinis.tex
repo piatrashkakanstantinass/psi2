@@ -207,6 +207,20 @@ We put our business team as core management of the project. They must ensure tha
     \label{list-quizzes}
 \end{figure}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/Quiz list (User).png}
+    \caption{User list of quizzes wireframe}
+    \label{wireframe-quiz-list-user}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/Quiz list.png}
+    \caption{Topic owner list of quizzes wireframe}
+    \label{wireframe-quiz-list-topic-owner}
+\end{figure}
+
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
 \textit{The user} opens the EduPal website; the system displays the Login Page. \textit{The user} enters login information and clicks the Login Button; the system verifies identity of \textit{the user}, initiates the user session, and shows the Subject List Page. \textit{The user} clicks on a specific subject; the system loads its \textit{topics} and shows the Topic List Page for that subject. \textit{The user} clicks on a specific topic; the system loads \textit{topic} data and shows the Topic Page. \textit{The user} clicks the Quizzes Button; the system fetches a list of \textit{quizzes} associated with \textit{the topic} and shows a Quiz List page. \textit{The user} clicks on the particular \textit{quiz}; the system displays the Quiz Page.
@@ -228,6 +242,20 @@ We put our business team as core management of the project. They must ensure tha
     \includegraphics[width=0.5\textwidth]{../lab3diags/take-quiz.drawio.png}
     \caption{Take the quiz use case}
     \label{take-quiz}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/Quiz play (User).png}
+    \caption{Taking the quiz}
+    \label{wireframe-quiz-play}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/Quiz completed (User).png}
+    \caption{Feedback after taking the quiz}
+    \label{wireframe-quiz-completed}
 \end{figure}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
@@ -256,6 +284,13 @@ Play Button; the system creates a \textit{quiz session} with \textit{the user}, 
 
 \subsection{Delete the quiz}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/Quiz delete popup.png}
+    \caption{Confirmation popup for deleting the quiz}
+    \label{wireframe-quiz-delete-popup}
+\end{figure}
+
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
 \textit{The topic owner} is on the particular Quiz Page. \textit{The topic owner} clicks on the Delete Quiz Button; the system shows a Deletion Confirmation Popup. \textit{The topic owner} clicks on the Confirm Deletion Button; the system deletes \textit{the quiz}, shows the Quiz List Page for \textit{the topic} that the deleted \textit{quiz} belonged to, and displays a Quiz Deleted Notification.
@@ -265,6 +300,20 @@ Play Button; the system creates a \textit{quiz session} with \textit{the user}, 
 \textbf{\textit{Topic owner} closes Confirmation Popup:} System aborts deletion.
 
 \subsection{Create the quiz}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/Quiz creation.png}
+    \caption{Creating the quiz}
+    \label{wireframe-quiz-creation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{../lab3diags/Quiz creation error.png}
+    \caption{Error popup when creating the quiz}
+    \label{wireframe-quiz-creation-error}
+\end{figure}
 
 \noindent\textbf{\fontsize{13}{15}\selectfont Main scenario:}
 
