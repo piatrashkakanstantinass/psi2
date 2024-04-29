@@ -164,5 +164,8 @@
       "env": {}
     }
   ],
-  "editor.wordWrap": "wordWrapColumn"
+  "editor.wordWrap": "wordWrapColumn",
+  "cSpell.words": [
+    "Gantt"
+  ]
 }
