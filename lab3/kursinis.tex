@@ -202,7 +202,7 @@ We put our business team as core management of the project. They must ensure tha
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{../lab3diags/list.drawio Large.jpeg}
+    \includegraphics[width=0.9\textwidth]{../lab3diags/list.drawio Large.jpeg}
     \caption{List quizzes use case}
     \label{list-quizzes}
 \end{figure}
@@ -219,7 +219,44 @@ We put our business team as core management of the project. They must ensure tha
 
 \textbf{\textit{The user} is \textit{the topic owner}} The system shows the Create Quiz button on the Quiz List Page. The system shows Edit and Delete Buttons on the Quiz Page.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../lab3diags/Topic page.png}
+    \caption{Topic page wireframe}
+    \label{wireframe-topic-page}
+\end{figure}
+
 \pagebreak
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../lab3diags/Quiz list (User).png}
+    \caption{User list of quizzes wireframe}
+    \label{wireframe-quiz-list-user}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../lab3diags/Quiz list.png}
+    \caption{Topic owner list of quizzes wireframe}
+    \label{wireframe-quiz-list-topic-owner}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../lab3diags/Individual quiz (User).png}
+    \caption{Individual quiz page for user wireframe}
+    \label{wireframe-quiz-page-user}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../lab3diags/Individual quiz.png}
+    \caption{Individual quiz page for topic owner wireframe}
+    \label{wireframe-quiz-page-topic-owner}
+\end{figure}
 
 \subsection{Take the quiz}
 
@@ -247,6 +284,47 @@ Play Button; the system creates a \textit{quiz session} with \textit{the user}, 
 
 \textbf{\textit{The quiz} was edited or deleted during \textit{the session}:} The system does not show a Restart Button on the Quiz Completed Page.
 
+\pagebreak
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../lab3diags/taking-quiz-wireframes/Quiz play.png}
+    \caption{Taking the quiz wireframe}
+    \label{wireframe-quiz-play} 
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../lab3diags/Quiz play with missing options.png}
+    \caption{Taking the quiz with missing options wireframe}
+    \label{wireframe-quiz-play-missing} 
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../lab3diags/taking-quiz-wireframes/Correct answer feedback.png}
+    \caption{Taking the quiz wireframe: correct answer notification}
+    \label{correct-wireframe-quiz-play}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../lab3diags/taking-quiz-wireframes/Incorrect answer feedback.png}
+    \caption{Taking the quiz wireframe: wrong answer page}
+    \label{wrong-wireframe-quiz-play}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../lab3diags/taking-quiz-wireframes/Quiz completed.png}
+    \caption{Quiz end wireframe}
+    \label{wireframe-quiz-completed}
+\end{figure}
+
+\pagebreak
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{../lab3diags/topic-owner-actions.drawio.png}
@@ -263,6 +341,22 @@ Play Button; the system creates a \textit{quiz session} with \textit{the user}, 
 \noindent\textbf{\fontsize{13}{15}\selectfont Alternatives:}
 
 \textbf{\textit{Topic owner} closes Confirmation Popup:} System aborts deletion.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../lab3diags/Quiz delete popup.png}
+    \caption{Confirmation popup for deleting the quiz wireframe}
+    \label{wireframe-quiz-delete-popup}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../lab3diags/Quiz list after deletion.png}
+    \caption{Quiz deleted notification on quiz list page wireframe}
+    \label{wireframe-quiz-delete-popup-notification}
+\end{figure}
 
 \subsection{Create the quiz}
 
@@ -285,6 +379,26 @@ Play Button; the system creates a \textit{quiz session} with \textit{the user}, 
 \textbf{\textit{The topic owner} tries to leave the Quiz Editor Page:} The system displays the Confirmation Popup; if \textit{the topic owner} confirms, the system shows the Quiz List Page and aborts the changes.
 
 \subsection{Quiz editor use cases}
+
+\pagebreak
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../lab3diags/proper-quiz-editor.png}
+    \caption{Quiz editor page wireframe}
+    \label{wireframe-quiz-editor}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../lab3diags/Quiz editor bad inputs.png}
+    \caption{Quiz editor with bad inputs wireframe}
+    \label{wireframe-quiz-editor-bad}
+\end{figure}
+
+\pagebreak
 
 Use cases here assume that \textit{the topic owner} is on the Quiz Editor Page associated with certain \textit{quiz}.
 
