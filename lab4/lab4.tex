@@ -11,6 +11,12 @@
 \hfuzz 0.3pt
 \widowpenalty=10000
 \vfuzz \hfuzz
+
+\newcommand{\includedrawio}[1]{
+    \immediate\write18{xvfb-run drawio --export #1 --output #1.pdf --crop --no-sandbox}
+    \includegraphics{#1}
+}
+
 \begin{document}
 
 \tableofcontents
