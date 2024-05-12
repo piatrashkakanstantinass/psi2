@@ -1,7 +1,8 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[top=2cm,bottom=2cm,left=3cm,right=1.5cm]{geometry}
 \usepackage{hyperref}
-\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{float}
 \hypersetup{
     colorlinks,
     linkcolor=black,
@@ -13,9 +14,9 @@
 \widowpenalty=10000
 \vfuzz \hfuzz
 
-\newcommand{\includedrawio}[1]{
-    \immediate\write18{xvfb-run drawio --export #1 --output #1.pdf --crop --no-sandbox}
-    \includegraphics{#1}
+\newcommand{\includedrawio}[2][]{
+    \immediate\write18{xvfb-run drawio --export #2 --output #2.pdf --crop --no-sandbox}
+    \includegraphics[#1]{#2.pdf}
 }
 
 \begin{document}
@@ -24,5 +25,8 @@
 \newpage
 
 \include{context}
+\include{viewpoints/context/context}
+
+\listoffigures
 
 \end{document}
