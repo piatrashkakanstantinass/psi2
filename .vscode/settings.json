@@ -35,9 +35,13 @@
     {
       "name": "tectonic",
       "tools": ["tectonic"]
+    },
+    {
+      "name": "pdflatex",
+      "tools": ["pdflatex"]
     }
   ],
-  "latex-workshop.latex.recipe.default": "latexmk (lualatex)",
+  "latex-workshop.latex.recipe.default": "pdflatex",
   "latex-workshop.latex.tools": [
     {
       "name": "latexmk",
@@ -94,6 +98,7 @@
         "-synctex=1",
         "-interaction=nonstopmode",
         "-file-line-error",
+        "-shell-escape",
         "%DOC%"
       ],
       "env": {}
