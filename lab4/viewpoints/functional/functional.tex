@@ -1,0 +1,23 @@
+\section{Functional viewpoint}
+
+\subsection{Components}
+
+\begin{figure}[H]
+  \includedrawio{viewpoints/functional/components.drawio}
+  \label{fig:viewpoint-functional-components}
+  \caption{Component diagram}
+\end{figure}
+
+Every interface without explicitly specified protocol is done as a code interface with instance classes knowing about each other via dependency injection.
+
+\begin{description}
+  \item[User Web Browser:] Component responsible for communication with front-facing EduPal interfaces as well as displaying EduPal web pages. Web browser, being external and user controlled entity, is not trusted and its requests are verified by front-facing interfaces.
+  \item[React Web Page Server:] Component responsible for serving EduPal React webpages to the web browser. This component does not have access to other parts of the EduPal system and is only responsible for delivery of hypertext, media and code assets that are executed and rendered on the web browser.
+  \item[API Service:] Component responsible for handling user requests, validating them and communicating with functionality related services (Quiz management, Topic management) to perform the operation and prepare the response.
+  \item[Auhtorization Service:] Component responsible for determining whether certain type of request can be processed (checks whether user has the privilege) and whether user has the right to perform certain operations (such as quiz creation).
+  \item[Topic and Quiz Management Services:] Components that API Service is communicating with. These components offer creation, update, delete and other data management commands and are responsible for checking if operation can be performed based on business rules.
+  \item[Data Storage components:] Components responsible for abstracting data access and update logic. Quiz Game Session Data Storage is extracted as a separate component as a separation of concerns because quiz game sessions are short, require frequent updates and are unrelated to the rest of EduPal system.
+  \item[Quiz Game Session Hub:] Component responsible for maintaining SignalR communication with the web browser, performing identity check via authorization service and passing requests to Quiz Game Session Handler as well as reacting to Quiz Game Session Handler events.
+  \item[Quiz Game Session Handler:] Component responsible for handling the quiz game business logic, grading answers and communicating with the data storage.
+
+\end{description}

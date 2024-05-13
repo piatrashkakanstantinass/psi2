@@ -15,7 +15,7 @@
 \vfuzz \hfuzz
 
 \newcommand{\includedrawio}[2][]{
-    \immediate\write18{xvfb-run -a drawio --export #2 --output #2.pdf --crop --no-sandbox}
+    \immediate\write18{xvfb-run drawio --export #2 --output #2.pdf --crop --no-sandbox}
     \includegraphics[#1]{#2.pdf}
 }
 
@@ -26,6 +26,7 @@
 
 \include{context}
 \include{viewpoints/context/context}
+\include{viewpoints/functional/functional}
 
 \listoffigures
 
