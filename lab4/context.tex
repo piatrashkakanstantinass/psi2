@@ -8,7 +8,7 @@ EduPal follows monolithic architecture approach - it consists of ASP.NET 8 API b
 
 \subsection{System change overview}
 
-Following the latest addition to the EduPal system of an integrated quiz taking feature, which allows regular users to view a list of quizzes on a certain topic and take a quiz with shuffled questions and receive instant feedback upon answering a question. Topic owners, on the other hand, are able to do everything a regular user is, plus create, edit or delete quizzes. A new feature is being added to the system - multiple participant quizzes. This feature will allow users to create a quiz room, receive a randomly generated code, share it with other users, and compete in real-time to see who can answer the most questions correctly. The system will display the results of the quiz to all participants and show their place in the quiz. Users may earn win streaks and achievements when participating in quizzes.
+EduPal is bound to grow and evolve and the latest addition we are considering is a multiple participant real-time quizzing. This feature will allow users to create a quiz room, receive a randomly generated code, share it with other users, and compete in real-time to see who can answer the most questions correctly. Participants will be answering the same questions at the same time. The system will display the results of the quiz to all participants and show their place among other users after each question.
 
 \subsection{System change requirements}
 
@@ -31,7 +31,7 @@ Following the latest addition to the EduPal system of an integrated quiz taking 
     \item System shall support uploading image for questions.
     \item System shall support setting quiz name.
     \item System shall support adding, editing and deleting quiz questions and options.
-    New functional requirements:
+    \item System shall support multiple participant quizzes.
     \item System shall allow users to create a quiz room.
     \item System shall generate a random code for the quiz room.
     \item System shall allow the users to join a quiz room by entering the code.
@@ -39,8 +39,6 @@ Following the latest addition to the EduPal system of an integrated quiz taking 
     \item System shall display feedback and their current position to all participants after answering a question.
     \item System shall display the results of the quiz to all participants.
     \item System shall allow a participant to leave a quiz at any time.
-    \item System shall support win streaks and achievements.
-    \item System shall support displaying the current win streak and achievements of the user. (Not sure about these two. Would be nice but perhaps require changing too many things and overall too much work)
 \end{frlist}
 
 
@@ -53,10 +51,8 @@ Following the latest addition to the EduPal system of an integrated quiz taking 
     \item System shall support PNG, SVG, JPEG, WEBP, GIF question image formats.
     \item System shall ensure that quiz functionality related pages are supported by common screenreaders (VoiceOver, Microsoft Narrator, Jaws).
     \item System shall ensure that quiz functionality related pages are displayed on desktop and mobile without horizontal scrollbars or loss of information.
-    \item System shall support image upload and download speeds of at least 500Mb/s. (Changed this requirement as the average speed in a location is not under our control)
-    \item System shall support multiple participant quizzes.
-    \item System shall ensure that the quiz room code is unique.
-    \item System shall ensure that bot users cannot join the quiz room.
+    \item System shall support image upload and download speeds of at least 500Mb/s.
+    \item System shall ensure that there are no active quiz rooms with the same room code.
     \item System shall support at least 100 participants in a quiz room.
     \item System shall support at least 200 quiz rooms at the same time.
 \end{nfrlist}
