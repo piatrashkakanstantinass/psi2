@@ -52,6 +52,76 @@ Ask if we should put OpenAI into context viewpoint.
 
 Important!!! Reverse interface symbol in component diag.
 
+\section{Deployment viewpoint}
+
+\subsection{Runtime Platform Required}
+\textbf{Concern:} Identifying the operating system or runtime environment needed to execute the software.
+
+\textbf{Explanation:} The runtime platform for both the frontend and backend applications consists of Docker containers hosted on Azure Web App Services. The specific Docker images used are \texttt{node:20} for the frontend and \texttt{mcr.microsoft.com/dotnet/sdk:8.0} for the backend.
+
+\subsection{Specification and Quantity of Hardware or Hosting Required}
+\textbf{Concern:} Determining the necessary hardware resources and the number of physical or virtual machines.
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \textbf{Frontend and Backend Azure Web App Services:}
+    \begin{itemize}
+        \item Memory: 16 GB each
+        \item vCPU: 8 each
+        \item Storage: 512 GB each
+        \item Slots: 3 each (for deployment slots)
+    \end{itemize}
+    \item \textbf{Azure PostgreSQL Server:}
+    \begin{itemize}
+        \item vCPUs: 4
+        \item Memory: 16 GB
+        \item Storage: 512 GB
+    \end{itemize}
+    \item \textbf{Azure Container Registry} is used to store Docker images securely and manage them efficiently.
+\end{itemize}
+The deployment separates frontend and backend resources into different Azure Resource Groups, which improves manageability and resource allocation.
+
+\subsection{Third-Party Software Requirements}
+\textbf{Concern:} Identifying external software dependencies required by the system.
+
+\textbf{Explanation:} The deployment relies on several Azure services:
+\begin{itemize}
+    \item \textbf{Azure Web App Services} for hosting the frontend and backend applications.
+    \item \textbf{Azure PostgreSQL Server} for database management.
+    \item \textbf{Azure Container Registry} for storing Docker images.
+\end{itemize}
+These third-party services are integral to the deployment process, ensuring that the applications are hosted, managed, and scaled effectively.
+
+\subsection{Technology Compatibility}
+\textbf{Concern:} Ensuring that all components of the system are compatible with each other.
+
+\textbf{Explanation:} The chosen technologies are highly compatible:
+\begin{itemize}
+    \item \textbf{Docker} ensures consistency across different environments.
+    \item \textbf{Node.js and .NET} SDKs are well-supported on Azure.
+    \item \textbf{Azure Web App Services} are designed to work seamlessly with Docker containers and Azure databases.
+    \item \textbf{GitLab} CI/CD integrates smoothly with Azure services, automating the deployment process.
+\end{itemize}
+
+\subsection{Network Requirements}
+\textbf{Concern:} Defining the network infrastructure needed for the system.
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \textbf{Private Endpoint} for the Azure PostgreSQL server ensures secure communication between the backend service and the database.
+    \item \textbf{VNet Integration} provides a secure network boundary for the backend services, preventing exposure to the public internet.
+    \item \textbf{Region:} North Europe, ensuring proximity to the target user base for reduced latency.
+\end{itemize}
+
+\subsection{Network Capacity Required}
+\textbf{Concern:} Assessing the necessary network bandwidth and throughput.
+
+\textbf{Explanation:} The manual scaling strategy implies that network capacity must be monitored and adjusted based on the load. As traffic increases, the number of instances for both frontend and backend services can be manually scaled to handle the additional load, ensuring that network performance remains optimal.
+
+\subsection{Physical Constraints}
+\textbf{Concern:} Identifying any physical limitations or environmental factors that could affect the deployment.
+
+\textbf{Explanation:} The deployment is entirely cloud-based, hosted on Microsoft Azure's North Europe region. Physical constraints like data center location, hardware maintenance, and physical security are managed by Azure. The deployment takes advantage of Azure's global infrastructure, ensuring high availability and reliability without the need for on-premises hardware.
 
 \include{context}
 \include{viewpoints/context/context}
