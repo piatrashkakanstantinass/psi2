@@ -8,8 +8,63 @@ EduPal follows monolithic architecture approach - it consists of ASP.NET 8 API b
 
 \subsection{System change overview}
 
-TODO: quiz change overview (a paragraph that summarizes changes listed in lab 3). To make change harder, instead of simple quiz taking session, write about quizzes with multiple people (basically kahoot: user can create a new room, others get a code, enter it and will be able to compete and see results and what is their place (Details up to your imagination))
+EduPal is bound to grow and evolve and the latest addition we are considering is a multiple participant real-time quizzing. This feature will allow users to create a quiz room, receive a randomly generated code, share it with other users, and compete in real-time to see who can answer the most questions correctly. Participants will be answering the same questions at the same time. The system will display the results of the quiz to all participants and show their place among other users after each question.
 
 \subsection{System change requirements}
 
-TODO: a list of functional and non-functional requirements from lab3 alongside with changes/additional ones to reflect multiple participant quizzes.
+\subsubsection{Functional requirements}
+
+\newlist{frlist}{enumerate}{1}
+\setlist[frlist]{label=\textbf{FR\arabic*.}, align=left, leftmargin=*}
+
+\begin{frlist}
+    \item System shall allow users to list quizzes.
+    \item System shall ensure that only logged in users can access quizzes.
+    \item System shall only allow creation, editing and deletion of the topic quizzes to owners of that topic.
+    \item System shall allow topic owner to delete any quiz that belongs to their topic.
+    \item System shall allow topic owner to create the quiz in their topic.
+    \item System shall allow topic owner to edit any quiz in their topic.
+    \item System shall prompt for confirmation when deleting quizzes.
+    \item System shall support uploading image for questions.
+    \item System shall support setting quiz name.
+    \item System shall support adding, editing and deleting quiz questions and options.
+    \item System shall support multiple participant quizzes.
+    \item System shall allow users to create a quiz room.
+    \item System shall generate a random code for the quiz room.
+    \item System shall allow the users to join a quiz room by entering the code.
+    \item System shall display feedback and their current position to all participants after answering a question.
+    \item System shall allow a participant to leave a quiz at any time.
+    \item System shall ensure that there are no active quiz rooms with the same room code.
+\end{frlist}
+
+
+\subsubsection{Nonfunctional requirements}
+
+\newlist{nfrlist}{enumerate}{1}
+\setlist[nfrlist]{label=\textbf{NFR\arabic*.}, align=left, leftmargin=*}
+
+\begin{nfrlist}
+    \item System shall support PNG, SVG, JPEG, WEBP, GIF question image formats.
+    \item System shall support at least 100 participants in a quiz room.
+    \item System shall support at least 200 quiz rooms at the same time.
+\end{nfrlist}
+
+\subsection{Covered perspectives}
+
+\begin{enumerate}
+    \item Security perspective
+    \item Performance and Scalability perspective
+    \item Availability and Resilience perspective
+    \item Evolution perspective
+    \item Location perspective
+    \item Regulation perspective
+    \item Usability perspective
+\end{enumerate}
+
+Development resource perspective is not covered since some of the considerations were outlined in previous business analysis documents and quizzes are not a new system but rather a functional change in existing system that was developed and maintained by our team.
+
+Accessibility perspective is not covered since our funds and development time is limited and it is not the primary concern of current stakeholders. Additionally, many accessibility features do not require a drastic change in any of the viewpoints and some of the accessibility concerns are covered by usability perspective.
+
+Internationalization perspective is not covered since the target users are english speaking and stakeholders do not want to invest money into internationalization until a feature is considered a success.
+
+

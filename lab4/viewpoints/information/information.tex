@@ -1,0 +1,31 @@
+\section{Information viewpoint}
+
+\subsection{Persistent entities}
+
+These are the entities stored by the Data Storage related to quiz functionality.
+
+\begin{figure}[H]
+  \includedrawio{viewpoints/information/entities.drawio}
+  \caption{Persistent entity diagram}
+  \label{fig:viewpoint-information-entity}
+\end{figure}
+
+\subsubsection{Storage}
+
+Single PostgreSQL database is used to store persistent entities. This simplifies architecture, shortens development time and ensures that information is always in correct state. EntityFramework is used as an ORM. Code exposes Entity repositories as a way to abstract the ORM and allow to change the underlying storage backend.
+
+\begin{figure}[H]
+  \includedrawio[width=\textwidth]{viewpoints/information/data-access.drawio}
+  \caption{Repository code diagram}
+  \label{fig:viewpoint-information-repo}
+\end{figure}
+
+\subsection{Quiz game session entities}
+
+These are the entities stored by the Quiz Game Session Data Storage component.
+
+\begin{figure}[H]
+  \includedrawio{viewpoints/information/quiz-game-entities.drawio}
+  \caption{Quiz game session entity diagram}
+  \label{fig:viewpoint-information-quiz-game-entities}
+\end{figure}
