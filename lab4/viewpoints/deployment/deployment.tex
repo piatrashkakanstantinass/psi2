@@ -1,0 +1,64 @@
+\section{Deployment Viewpoint}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{viewpoints/deployment/deployment.svg}
+    \caption{Deployment diagram}
+    \label{deployment-diagram}
+\end{figure}
+
+\subsection{Runtime Platform Required}
+The operating system or runtime environment needed to execute the software includes Docker containers hosted on Azure Web App Services. The specific Docker images used are \texttt{node:20} for the frontend and \texttt{mcr.microsoft.com/dotnet/sdk:8.0} for the backend.
+
+\subsection{Specification and Quantity of Hardware or Hosting Required}
+Necessary hardware resources and the number of physical or virtual machines include:
+\begin{itemize}
+    \item \textbf{Frontend and Backend Azure Web App Services:}
+    \begin{itemize}
+        \item Memory: 16 GB each
+        \item vCPU: 8 each
+        \item Storage: 512 GB each
+        \item Slots: 3 each (for deployment slots)
+    \end{itemize}
+    \item \textbf{Azure PostgreSQL Server:}
+    \begin{itemize}
+        \item vCPUs: 4
+        \item Memory: 16 GB
+        \item Storage: 512 GB
+    \end{itemize}
+    \item \textbf{Azure Container Registry} is used to store Docker images securely and manage them efficiently.
+\end{itemize}
+The deployment separates frontend and backend resources into different Azure Resource Groups, improving manageability and resource allocation.
+
+\subsection{Third-Party Software Requirements}
+External software dependencies required by the system include several Azure services:
+\begin{itemize}
+    \item \textbf{Azure Web App Services} for hosting the frontend and backend applications.
+    \item \textbf{Azure PostgreSQL Server} for database management.
+    \item \textbf{Azure Container Registry} for storing Docker images.
+    \item \textbf{Azure Blob Storage} for storing user-uploaded files.
+\end{itemize}
+These third-party services are integral to the deployment process, ensuring that the applications are hosted, managed, and scaled effectively.
+
+\subsection{Technology Compatibility}
+To ensure all components of the system are compatible with each other, the chosen technologies include:
+\begin{itemize}
+    \item \textbf{Docker} ensures consistency across different environments.
+    \item \textbf{Node.js and .NET} SDKs are well-supported on Azure.
+    \item \textbf{Azure Web App Services} are designed to work seamlessly with Docker containers and Azure databases.
+    \item \textbf{GitLab} CI/CD integrates smoothly with Azure services, automating the deployment process.
+\end{itemize}
+
+\subsection{Network Requirements}
+The network infrastructure needed for the system includes:
+\begin{itemize}
+    \item \textbf{Private Endpoint} for the Azure PostgreSQL server ensures secure communication between the backend service and the database.
+    \item \textbf{VNet Integration} provides a secure network boundary for the backend services, preventing exposure to the public internet.
+    \item \textbf{Region:} North Europe, ensuring proximity to the target user base for reduced latency.
+\end{itemize}
+
+\subsection{Network Capacity Required}
+The necessary network bandwidth and throughput are managed through a manual scaling strategy. As traffic increases, the number of instances for both frontend and backend services can be manually scaled to handle the additional load, ensuring that network performance remains optimal.
+
+\subsection{Physical Constraints}
+Physical limitations or environmental factors that could affect the deployment are managed by hosting the deployment entirely on Microsoft Azure's North Europe region. Physical constraints like data center location, hardware maintenance, and physical security are managed by Azure, taking advantage of Azure's global infrastructure to ensure high availability and reliability.
