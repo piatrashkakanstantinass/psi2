@@ -21,9 +21,6 @@ EduPal is bound to grow and evolve and the latest addition we are considering is
     \item System shall allow users to list quizzes.
     \item System shall ensure that only logged in users can access quizzes.
     \item System shall only allow creation, editing and deletion of the topic quizzes to owners of that topic.
-    \item System shall support users taking the quiz.
-    \item System shall check whether user answer is correct and display appropriate feedback.
-    \item System shall ensure that users cannot restart the quiz that was edited or deleted during the quiz session.
     \item System shall allow topic owner to delete any quiz that belongs to their topic.
     \item System shall allow topic owner to create the quiz in their topic.
     \item System shall allow topic owner to edit any quiz in their topic.
@@ -35,10 +32,9 @@ EduPal is bound to grow and evolve and the latest addition we are considering is
     \item System shall allow users to create a quiz room.
     \item System shall generate a random code for the quiz room.
     \item System shall allow the users to join a quiz room by entering the code.
-    \item System shall support taking quizzes with multiple participants.
     \item System shall display feedback and their current position to all participants after answering a question.
-    \item System shall display the results of the quiz to all participants.
     \item System shall allow a participant to leave a quiz at any time.
+    \item System shall ensure that there are no active quiz rooms with the same room code.
 \end{frlist}
 
 
@@ -49,10 +45,26 @@ EduPal is bound to grow and evolve and the latest addition we are considering is
 
 \begin{nfrlist}
     \item System shall support PNG, SVG, JPEG, WEBP, GIF question image formats.
-    \item System shall ensure that quiz functionality related pages are supported by common screenreaders (VoiceOver, Microsoft Narrator, Jaws).
-    \item System shall ensure that quiz functionality related pages are displayed on desktop and mobile without horizontal scrollbars or loss of information.
-    \item System shall support image upload and download speeds of at least 500Mb/s.
-    \item System shall ensure that there are no active quiz rooms with the same room code.
     \item System shall support at least 100 participants in a quiz room.
     \item System shall support at least 200 quiz rooms at the same time.
 \end{nfrlist}
+
+\subsection{Covered perspectives}
+
+\begin{enumerate}
+    \item Security perspective
+    \item Performance and Scalability perspective
+    \item Availability and Resilience perspective
+    \item Evolution perspective
+    \item Location perspective
+    \item Regulation perspective
+    \item Usability perspective
+\end{enumerate}
+
+Development resource perspective is not covered since some of the considerations were outlined in previous business analysis documents and quizzes are not a new system but rather a functional change in existing system that was developed and maintained by our team.
+
+Accessibility perspective is not covered since our funds and development time is limited and it is not the primary concern of current stakeholders. Additionally, many accessibility features do not require a drastic change in any of the viewpoints and some of the accessibility concerns are covered by usability perspective.
+
+Internationalization perspective is not covered since the target users are english speaking and stakeholders do not want to invest money into internationalization until a feature is considered a success.
+
+
