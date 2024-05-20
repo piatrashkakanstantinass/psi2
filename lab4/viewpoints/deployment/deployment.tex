@@ -10,12 +10,21 @@
 \subsection{Runtime Platform Required}
 The operating system or runtime environment needed to execute the software includes Docker containers hosted on Azure Web App Services. The specific Docker images used are \texttt{node:20} for the frontend and \texttt{mcr.microsoft.com/dotnet/sdk:8.0} for the backend.
 
+\subsection{Artifact Component Mapping}
+
+\begin{figure}[ht]
+    \centering
+    \includesvg[width=\textwidth]{viewpoints/deployment/artifact-component.svg}
+    \caption{Artifact component diagram}
+    \label{artifact-component-diagram}
+\end{figure}
+
 \subsection{Specification and Quantity of Hardware or Hosting Required}
 Necessary hardware resources and the number of physical or virtual machines include:
 \begin{itemize}
     \item \textbf{Frontend and Backend Azure Web App Services:}
     \begin{itemize}
-        \item Memory: 16 GB each
+        \item Memory: 32 GB each
         \item vCPU: 8 each
         \item Storage: 512 GB each
         \item Slots: 3 each (for deployment slots)
@@ -24,9 +33,15 @@ Necessary hardware resources and the number of physical or virtual machines incl
     \begin{itemize}
         \item vCPUs: 4
         \item Memory: 16 GB
-        \item Storage: 512 GB
+        \item Storage: 4 TB
     \end{itemize}
     \item \textbf{Azure Container Registry} is used to store Docker images securely and manage them efficiently.
+    \item \textbf{Azure Blob Storage:}
+    \begin{itemize}
+        \item Access Tier: Hot
+        \item Performance Tier: Standard
+        \item Replication: Locally redundant storage (LRS)
+    \end{itemize}
 \end{itemize}
 The deployment separates frontend and backend resources into different Azure Resource Groups, improving manageability and resource allocation.
 
@@ -58,7 +73,16 @@ The network infrastructure needed for the system includes:
 \end{itemize}
 
 \subsection{Network Capacity Required}
-The necessary network bandwidth and throughput are managed through a manual scaling strategy. As traffic increases, the number of instances for both frontend and backend services can be manually scaled to handle the additional load, ensuring that network performance remains optimal.
+The necessary network bandwidth and throughput are managed through a manual scaling strategy. The Azure Web App Services are configured to handle the expected load, with the ability to scale up or out as needed. The Azure PostgreSQL server is provisioned with sufficient network capacity to handle database requests efficiently.
 
-\subsection{Physical Constraints}
-Physical limitations or environmental factors that could affect the deployment are managed by hosting the deployment entirely on Microsoft Azure's North Europe region. Physical constraints like data center location, hardware maintenance, and physical security are managed by Azure, taking advantage of Azure's global infrastructure to ensure high availability and reliability.
+\subsection{Perspectives}
+
+\textbf{Security Perspective:} We use Azure services to ensure secure communication between components, such as Private Endpoint for the database, VNet Integration for the backend services and blob storage for user-uploaded files. The deployment is designed to minimize exposure to potential security threats.
+
+\textbf{Performance Perspective:} The deployment is optimized for performance, with Azure Web App Services providing scalable resources for the frontend and backend applications. The Azure PostgreSQL server is provisioned with sufficient memory and storage to handle database requests efficiently.
+
+\textbf{Availability and Resilience Perspective:} Azure ensures high availability and resilience for the system, with features such as deployment slots for zero-downtime deployments, locally redundant storage for blob storage, and automatic failover for the PostgreSQL server. The system is designed to minimize downtime and ensure continuous availability.
+
+\textbf{Evolution Perspective:} The deployment is designed to be flexible and adaptable to future changes, with Azure services providing scalability and manageability. The use of Docker containers ensures consistency across different environments, making it easier to update and evolve the system over time.
+
+\textbf{Location Perspective:} The deployment is hosted in the North Europe region to ensure proximity to the target user base for reduced latency. The network infrastructure is designed to provide optimal performance and reliability for users in the region.
