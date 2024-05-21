@@ -1,9 +1,40 @@
 \section{Functional viewpoint}
 
+\subsection{Functional Capabilities}
+
+Based on the requirements presented in Context section, the EduPal must support the following core capabilities:
+
+\begin{enumerate}
+  \item CRUD operations on the quiz
+  \item Real time quiz rooms with multiple players, checking answers and determining the winner
+\end{enumerate}
+
+\subsection{Internal structure}
+
+EduPal follows monolithic service oriented architecture. Each service (also called component in the document) has a defined in-code interface that other services interact with. This allows system to be adequately decoupled while maintaining consistency. Services are tiered into 3 categories:
+
+\begin{enumerate}
+  \item Data access services, services that store the data themselves communicate with external system or database to store and retrieve the data. Such service does not perform any business logic related processing. Its interfaces are used by business logic layer.
+  \item Business logic services, services that perform the processing, determines if operation is valid, if needed, communicates with the data access layer services.
+  \item Interface services, services that are responsible for communicating with external systems, converting requests into format that is acceptable by a particular business logic service, and turning business logic service responses into a valid communication object between the interfaces.
+\end{enumerate}
+
+\subsection{External Interfaces}
+
+\subsubsection{User Web Browser}
+
+External actor responsible for communication with front-facing EduPal interfaces as well as displaying EduPal web pages. Web browser, being external and user controlled entity, is not trusted and its requests are verified by front-facing interfaces.
+
+The communication is done via two channels : HTTP REST API and SignalR sockets. Most of the CRUD operations are done via REST API and the control flow is inbound - EduPal receives a request, checks whether it is valid and performs the required action yielding a response. Real time functionality (real time quiz rooms in our case) or functionality requiring the system to notify the web browser is performed using SignalR sockets. Data can flow in any direction and system and browser may not respond to certain requests. Communication is always initiated by the browser.
+
+\subsubsection{Image Data Storage}
+
+External system that is responsible for storing data objects and is used for storing question images. Data Flow is outbound - EduPal requests the system, to store, update or delete the file or permissions and requests an URI that is either passed to the user web browser, or processed by EduPal. Communication method is dependant on external system - EduPal must have an adapter responsible for performing the communication and exposing code interface.
+
 \subsection{Components}
 
 \begin{figure}[H]
-  \includedrawio{viewpoints/functional/components.drawio}
+  \includedrawio[width=\textwidth]{viewpoints/functional/components.drawio}
   \label{fig:viewpoint-functional-components}
   \caption{Component diagram}
 \end{figure}
@@ -16,8 +47,98 @@ Every interface without explicitly specified protocol is done as a code interfac
   \item[API Service:] Component responsible for handling user requests, validating them and communicating with functionality related services (Quiz management, Topic management) to perform the operation and prepare the response.
   \item[Auhtorization Service:] Component responsible for determining whether certain type of request can be processed (checks whether user has the privilege) and whether user has the right to perform certain operations (such as quiz creation).
   \item[Topic and Quiz Management Services:] Components that API Service is communicating with. These components offer creation, update, delete and other data management commands and are responsible for checking if operation can be performed based on business rules.
+  \item[Object Data Storage Adapter:] Component responsible for communication with the data object storage system in order to store or retrieve the data. 
   \item[Data Storage components:] Components responsible for abstracting data access and update logic. Quiz Game Session Data Storage is extracted as a separate component as a separation of concerns because quiz game sessions are short, require frequent updates and are unrelated to the rest of EduPal system.
   \item[Quiz Game Session Hub:] Component responsible for maintaining SignalR communication with the web browser, performing identity check via authorization service and passing requests to Quiz Game Session Handler as well as reacting to Quiz Game Session Handler events.
   \item[Quiz Game Session Handler:] Component responsible for handling the quiz game business logic, grading answers and communicating with the data storage.
-
 \end{description}
+  
+\subsection{Characteristics}
+
+\begin{description}
+  \item[Separation of converns] Service responsibilities are based on their layer, that together form a whole system. Every layer has its own defined responsibilities.
+  \item[Cohesive] Functionality related to the same entities (e.g. quiz operations) belongs to the same service component resulting in a highly cohesive system.
+  \item[Consistency] Same design decision are applied through entirety of EduPal.
+  \item[Coupling] Design results in a low coupling. Business logic does not depend on data access method and external communication method, API layer does not depend on data access method.
+  \item[Extensibility and functional flexibility] System is extensible since it is enough to simply add new services to a particular layer. Functionality changes will require changing a particular set service or services, making the system flexible.
+  \item[Simplicity] Layered structure is easy to understand, build and extend.
+\end{description}
+  
+\subsection{Traceability}
+
+\begin{figure}[H]
+  \label{tab:functional-viewpoint-component-traceability}
+  \centering
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+      \hline
+      \textbf{Component/Requirement} & \textbf{FR1} & \textbf{FR2} & \textbf{FR3} & \textbf{FR4-6,8-10} & \textbf{FR7} & \textbf{FR11-17} & \textbf{NFR1} & \textbf{NFR2-3} \\ \hline
+      \textbf{React Web Page Server} & X & X & X & X & X & X & X & ~ \\ \hline
+      \textbf{API Service} & X & X & X & X & ~ & X & ~ & X \\ \hline
+      \textbf{Quiz Game Session Hub} & ~ & ~ & ~ & ~ & ~ & X & ~ & X \\ \hline
+      \textbf{Authorization Service} & ~ & X & X & X & ~ & X & ~ & X \\ \hline
+      \textbf{Quiz Game Session Handler} & ~ & ~ & ~ & ~ & ~ & X & ~ & X \\ \hline
+      \textbf{Topic Management Service} & ~ & ~ & X & X & ~ & ~ & ~ & ~ \\ \hline
+      \textbf{Quiz Management Service} & X & ~ & X & X & ~ & X & ~ & X \\ \hline
+      \textbf{Data Storage} & X & ~ & X & X & ~ & X & ~ & X \\ \hline
+      \textbf{Quiz Game Session Data Storage} & ~ & ~ & ~ & ~ & ~ & X & ~ & X \\ \hline
+      \textbf{Object Data Storage Adapter} & ~ & ~ & ~ & X & ~ & X & X & X \\ \hline
+  \end{tabular}
+\end{adjustbox}
+  \caption{Traceability between components and requirements}
+\end{figure}
+
+\subsection{Security Perspective}
+
+\subsubsection{Resources}
+
+System resource storage is responsibility of the data access layer, however it is not concern of the layer to determine who has the right to access the data and who does not. It is the business layer services that determine if resource can be accessed and the business layer depends on security context information (security cookies, auth tokens and similar) provided by interface layer. Authorization component is responsible for determining whether operation can be performed by the current user.
+
+\subsubsection{Principle auth}
+
+Interface layer is responsible for secure exchange of authentication tokens that Authorization component uses to determine, who is the user that performs the action and what privileges they have depending on the operation.
+
+\subsubsection{Policies}
+
+Authorization component will deny requests as unauthorized in the following cases:
+
+\begin{enumerate}
+  \item Any operation by unauthenticated user, except login and register.
+  \item Quiz modification operations performed by the user, who is not owner of the topic.
+\end{enumerate}
+
+\subsubsection{Threats}
+
+Since EduPal does not have high security requirements there are less possible threats. Attacker may take advantage of of lack of security processing of certain operations (e.g. developer's mistake) to do unauthorized action.
+
+\subsubsection{Availability}
+
+Interface layer is responsible for rate limiting of the connections.
+
+\subsection{Performance perspective}
+
+\subsubsection{Response time, throughput and scalability}
+
+Data access layer may use caching to speed up database lookup. Services being stateless ensures that multiple threads can process multiple requests. However, a monolithic architecture heavily limits the throughput and does not scale well, since it is impossible to scale horizontally (and vertical scaling has an upper bound). Current architecture is acceptable since non-functional requirements are not demanding and other concerns (such as time to implement new features and data consistency) are more important.
+
+\subsection{Availability and resilience}
+
+No functional changes are required since there are no system availability requirements (such as offline mode).
+
+\subsection{Evolution perspective}
+
+Layered model ensures that it is easy to add new functionality or change existing one.
+
+\subsection{Location perspective}
+
+Unrelated.
+
+\subsection{Regulation perspective}
+
+Due to GDPR and other law enforcements, EduPal must ensure that business logic services only retrieve and store the data that is absolutely required for operation.
+
+\subsection{Usability perspective}
+
+API services must expose convenient API that does not require to do multiple requests. For example, it is considered inconvenient if adding 2 questions to a quiz requires 2 API calls, instead system must quiz edit API must be flexible and allow complex state changes within single request. Overall component structure does not have a great effect on usability and it is mostly the concern of interface layer.
+
+

@@ -1,0 +1,63 @@
+\section{Concurrency viewpoint}
+
+\subsection{Overview}
+
+EduPal primary task is to handle requests by the interface layer. ASP.NET Core is used for efficient task processing - every request is handled asynchronously by the system using the thread pool managed by the ASP.NET Core.
+
+Quiz sessions are handled differently - when new quiz session is created, the system initiates the session thread that is responsible for quiz session management and handling of SignalR connections and timing.
+
+Since EduPal is a monolithic system, processes communicate via code interfaces.
+
+\subsection{Quiz session state management}
+
+Quiz session processing is one of the hardest part of the system. The following diagram displays quiz session state changes
+
+\begin{figure}[H]
+  \includedrawio[width=\textwidth]{viewpoints/concurrency/quizSessionState.drawio}
+  \caption{Quiz session state diagram}
+  \label{fig:concurrency-viewpoint-quiz-session-state}
+\end{figure}
+
+\subsection{Synchronization and Integrity}
+
+The following things help EduPal to keep information uncorrupted:
+
+\begin{itemize}
+  \item Business and interface layer services must be stateless and not store any data.
+  \item Data access layer is responsible for caching ensure that upper layers will not have differently cached data.
+  \item There is only one thread per quiz session.
+\end{itemize}
+
+\subsection{Scalability support}
+
+EduPal concurrency model is scalable but limited by a monolithic architecture. Still, vertical scaling of core count is possible as this allows more requests to be processed simultaneously.
+
+\subsection{Startup and shutdown}
+
+EduPal being a monolithic architecture makes startup and shutdown simple.
+
+Startup:
+
+\begin{enumerate}
+  \item Database migrations are applied
+  \item EduPal monolithic backend is started
+  \item React Page Server is started
+\end{enumerate}
+
+Shutdown:
+
+\begin{enumerate}
+  \item System stops allowing creation of new sessions.
+  \item A 1 hour shutdown timer is started.
+  \item Once time is out, system sends a message to all active quiz sessions about shutdown.
+  \item Backend is stopped.
+  \item FReact Page Server is stopped.
+\end{enumerate}
+
+\subsection{Task failure}
+
+In order to handle component failure, components cannot depend on processes of other components.
+
+\subsection{Reentrancy}
+
+Stateless process operation ensures reentrancy.
