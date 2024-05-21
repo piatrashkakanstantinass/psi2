@@ -1,20 +1,23 @@
 <mxfile host="65bd71144e">
     <diagram id="63LNHlixaCYrb73oKvIO" name="Page-1">
-        <mxGraphModel dx="1203" dy="1777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="460" dy="1725" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
+                <mxCell id="13" style="edgeStyle=none;html=1;endArrow=none;endFill=0;" parent="1" source="2" target="6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=none;html=1;endArrow=none;endFill=0;" parent="1" source="2" target="10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <mxCell id="2" value="«system»&lt;br&gt;&lt;b&gt;EduPal system&lt;/b&gt;" style="html=1;" parent="1" vertex="1">
-                    <mxGeometry x="360" y="-440" width="110" height="50" as="geometry"/>
+                    <mxGeometry x="130" y="-1055" width="110" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="180" y="-440" width="30" height="60" as="geometry"/>
+                <mxCell id="6" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="-1070" width="30" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="" style="endArrow=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="2">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="220" y="-420" as="sourcePoint"/>
-                        <mxPoint x="270" y="-540" as="targetPoint"/>
-                    </mxGeometry>
+                <mxCell id="10" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;Object storage system&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="-1070" width="60" height="80" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

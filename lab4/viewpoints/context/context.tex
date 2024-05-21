@@ -1,8 +1,220 @@
 \section{Context viewpoint}
 
 \begin{figure}[H]
-  \includedrawio[width=\textwidth]{viewpoints/context/context.drawio}
-  \label{fig:viewpoint-context-main}
+    \includedrawio[width=\textwidth]{viewpoints/context/context.drawio}
+    \caption{Context diagram}
+    \label{context-view-context-diagram}
 \end{figure}
 
-test
+
+\subsection{System Scope and Responsibilities}
+
+\subsection*{Scope}
+EduPal is a learning aid platform for students and teachers. It allows educators to upload course information, and students to access learning material and tools.
+
+\begin{itemize}
+    \item Real-Time Multiple Participant Quizzes: This will allow users to create quiz rooms, share access codes, and compete in real-time quizzes with other users, with results displayed immediately.
+\end{itemize}
+
+
+\subsection{Identity, Nature and Characteristics of External Entities and Services and Data Used}
+
+\subsection*{External Entities}
+\begin{itemize}
+    \item \textbf{Users (Students and Teachers):} Interact with EduPal to upload, manage, and access course content or take quizzes, utilise the features such as Pomodoro timer, quizzes, etc.
+    \item \textbf{Object Storage System:} The external data storage system for EduPal. Stores all conspectus files.
+\end{itemize}
+
+\subsection*{Users}
+\begin{itemize}
+    \item Require a reliable and user-friendly interface.
+    \item Access the system from various devices and locations.
+    \item Depend on system availability and performance for effective learning.
+\end{itemize}
+
+\subsection*{Object Storage System}
+\begin{itemize}
+    \item High availability and reliability.
+    \item Capable of handling large amounts of data.
+\end{itemize}
+
+\subsection*{Data Used}
+\begin{itemize}
+    \item \textbf{User Data:} Includes quiz related data, such as results.
+    \item \textbf{Quiz Data:} Includes questions, answers, and results of the real-time quizzes.
+\end{itemize}
+
+
+\subsection{Identity and Responsibilities, and Nature and Characteristics of External Interfaces}
+
+\subsection*{External Interfaces}
+\begin{itemize}
+    \item \textbf{User Interface:}
+          \begin{itemize}
+              \item \textbf{Identity:} The web-based interface accessed by users (students and teachers) via browsers on various devices.
+              \item \textbf{Responsibilities:}
+                    Users do not have any responsibilities.
+          \end{itemize}
+    \item \textbf{Object Storage System Interface:}
+          \begin{itemize}
+              \item \textbf{Identity:} The interface through which the backend communicates with the object storage system.
+              \item \textbf{Responsibilities:}
+                    \begin{itemize}
+                        \item Store and retrieve conspectus files.
+                        \item Ensure high availability, reliability, and data integrity.
+                        \item Scale to accommodate growing data volumes.
+                    \end{itemize}
+          \end{itemize}
+\end{itemize}
+
+\subsection*{User Interface}
+\begin{itemize}
+    \item \textbf{Expected Volumes:}
+          \begin{itemize}
+              \item High volume of requests during peak hours such as during exam periods or assignment deadlines.
+              \item Varying data sizes, from small interactions (e.g., note-taking) to larger uploads (e.g., course material).
+              \item Growth expected as user base increases.
+          \end{itemize}
+    \item \textbf{Interaction Types:}
+          \begin{itemize}
+              \item Mostly ad hoc interactions initiated by users.
+              \item Automatic topic archival is scheduled.
+          \end{itemize}
+    \item \textbf{Interaction Automation Level:}
+          \begin{itemize}
+              \item Almost all interactions are fully manual, except some that are in between manual and automated, such as the Pomodoro timer.
+          \end{itemize}
+    \item \textbf{Transactional Nature:}
+          \begin{itemize}
+              \item None of the interactions are fully transactional, as all of them can be cancelled.
+          \end{itemize}
+    \item \textbf{Criticality and Timeliness:}
+          \begin{itemize}
+              \item Timely responses critical for a smooth user experience.
+          \end{itemize}
+    \item \textbf{Interaction Mode:}
+          \begin{itemize}
+              \item Primarily message-based, with occasional batch operations (e.g., bulk uploads).
+          \end{itemize}
+    \item \textbf{Security Requirements:}
+          \begin{itemize}
+              \item High level of security required, including user authentication and data confidentiality.
+          \end{itemize}
+    \item \textbf{Service Levels:}
+          \begin{itemize}
+              \item High availability and low latency expected to ensure user satisfaction.
+          \end{itemize}
+    \item \textbf{Technical Nature:}
+          \begin{itemize}
+              \item Uses web technologies and open standards (e.g., HTTPS, REST API).
+          \end{itemize}
+    \item \textbf{Data and File Formats:}
+          \begin{itemize}
+              \item Supports various file formats for conspectus uploads (PDF) and quiz question images (PNG, SVG, JPEG, WEBP, GIF).
+          \end{itemize}
+\end{itemize}
+
+\subsection*{Object Storage System Interface}
+\begin{itemize}
+    \item \textbf{Expected Volumes:}
+          \begin{itemize}
+              \item Average data volume of data transactions dependent on frequent user interactions with topic conspectuses.
+              \item Expected growth as more data is accumulated.
+          \end{itemize}
+    \item \textbf{Interaction Types:}
+          \begin{itemize}
+              \item Automated interactions from backend services.
+              \item A few scheduled interactions.
+          \end{itemize}
+    \item \textbf{Interaction Automation Level:}
+          \begin{itemize}
+              \item All operations are automated.
+          \end{itemize}
+    \item \textbf{Transactional Nature:}
+          \begin{itemize}
+              \item Interactions are transactional to ensure data integrity.
+          \end{itemize}
+    \item \textbf{Criticality and Timeliness:}
+          \begin{itemize}
+              \item High criticality for data retrieval and storage operations.
+              \item Timeliness is only somewhat important as users can endure some loading times.
+          \end{itemize}
+    \item \textbf{Interaction Mode:}
+          \begin{itemize}
+              \item Entirely message-based.
+          \end{itemize}
+    \item \textbf{Security Requirements:}
+          \begin{itemize}
+              \item High security required, including data encryption.
+          \end{itemize}
+    \item \textbf{Service Levels:}
+          \begin{itemize}
+              \item High availability, scalability, and performance required.
+          \end{itemize}
+    \item \textbf{Technical Nature:}
+          \begin{itemize}
+              \item Standard Object Storage System protocols.
+          \end{itemize}
+    \item \textbf{Data and File Formats:}
+          \begin{itemize}
+              \item Data is stored in large binary objects.
+          \end{itemize}
+\end{itemize}
+
+
+\subsection{Other External Interdependencies}
+
+No other external interdependencies are identified.
+
+
+\subsection{Impact of the System on Its Environment}
+
+\begin{itemize}
+    \item Improved learning management for students and teachers.
+    \item Potential reduction in the usage of other learning systems if EduPal is more efficient.
+    \item Students may migrate their conspectuses and other content to EduPal.
+\end{itemize}
+
+
+\subsection{Overall Completeness, Consistency, and Coherence}
+
+\begin{itemize}
+    \item Ensure all functionalities are well-integrated and user experiences are seamless.
+    \item Maintain data consistency across all modules and interfaces.
+    \item Plan for scalability and future integrations.
+\end{itemize}
+
+
+\subsection{The Security perspective}
+
+User interactions, both students and teachers, demand robust authentication and data confidentiality protocols to safeguard sensitive information. The external Object Storage System, handling significant volumes of educational content, must ensure data integrity and protection against unauthorized access through encryption and high-security protocols.
+
+
+\subsection{The Performance and Scalability Perspective}
+
+EduPal must efficiently handle high volumes of user interactions, especially during peak times. The system should scale smoothly to support increasing users and data without compromising performance, ensuring fast response times and uninterrupted access.
+
+
+\subsection{The Availability and Resilience Perspective}
+
+EduPal requires high availability and minimal downtime. Implementing redundancy, failover mechanisms, and robust disaster recovery plans will maintain continuous service and protect against data loss, ensuring system reliability.
+
+
+\subsection{The Evolution Perspective}
+
+EduPal should support future growth and adaptability. The platform must accommodate new features and integrations seamlessly, with modular updates and backward compatibility to remain valuable and relevant over time.
+
+
+\subsection{The Location Perspective}
+
+Unrelated, as the system is deployed where the target users are located.
+
+
+\subsection{The Regulation Perspective}
+
+EduPal must comply with educational and data protection regulations like GDPR. Ensuring data privacy and security measures align with these laws is critical, with regular audits to maintain compliance and user trust.
+
+
+\subsection{The Usability Perspective}
+
+EduPal should offer an intuitive, user-friendly interface that supports easy navigation and accessibility for all users. Continuous feedback and usability testing will refine the interface, enhancing the learning experience.
