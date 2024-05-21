@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\begin{document}
+
+\section{Development View}
+
+\subsection{Module Organization}
+
+The EduPal quiz integration feature is organized into several interconnected modules, each responsible for specific aspects of the system:
+
+\subsubsection{User Interface Module}
+
+\begin{itemize}
+  \item \textbf{QuizPage}: The main page where users can start the quiz.
+  \item \textbf{QuestionPage}: The page that displays quiz questions to the users.
+  \item \textbf{ResultPage}: The page that shows the results after the quiz is completed.
+\end{itemize}
+
+\subsubsection{Quiz Session Module}
+
+\begin{itemize}
+  \item \textbf{QuizSessionController}: Manages user interactions during a quiz session.
+  \item \textbf{QuizSessionService}: Handles the business logic associated with a quiz session.
+  \item \textbf{QuizSessionRepository}: Manages the data storage and retrieval for quiz sessions.
+\end{itemize}
+
+\subsubsection{Quiz Management Module}
+
+\begin{itemize}
+  \item \textbf{QuizController}: Manages the interactions related to quiz management.
+  \item \textbf{QuizService}: Contains the business logic for quiz management.
+  \item \textbf{QuizRepository}: Responsible for storing and retrieving quiz-related data.
+\end{itemize}
+
+\subsubsection{Question Bank Module}
+
+\begin{itemize}
+  \item \textbf{QuestionController}: Manages interactions related to question management.
+  \item \textbf{QuestionService}: Contains the business logic for question management.
+  \item \textbf{QuestionRepository}: Responsible for storing and retrieving question data.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includedrawio[width=\textwidth]{viewpoints/development/development.drawio}
+    \caption{Module Organization Diagram}
+    \label{fig:development}
+\end{figure}
+
+
+\subsubsection{Common Processing}
+
+\item \textbf{Data Validation:} Uses React with Formik and Yup for form handling and schema-based validation.
+
+\item \textbf{Error Handling:} Uses ASP.NET Core middleware for global exception handling, logging errors to a centralized logging service (like Serilog) and returning standardized error responses.
+
+\item \textbf{User Authentication:} Manages user authentication and authorization using JWT tokens for securing API endpoints. Middleware checks token validity and user roles before processing quiz-related requests.
+
+\subsection{Standardization of Design}
+
+\subsubsection{Design Patterns}
+
+\begin{enumerate}[label= \arabic*.] \item \textbf{Factory Pattern:} \begin{itemize}[label=$\bullet$] \item \textbf{Purpose:} Used for creating instances of different quiz types. \item \textbf{Implementation:} Utilize a \texttt{QuizFactory} class responsible for encapsulating the instantiation logic based on the provided quiz type. \end{itemize}
+
+\item \textbf{Repository Pattern:} \begin{itemize}[label=$\bullet$] \item \textbf{Purpose:} Abstracts data access and creates a clean separation between the business logic and data access layers. \item \textbf{Implementation:} All repository classes must adhere to a common interface, named \texttt{IBaseRepository}, which defines methods for CRUD operations. \item \textbf{Interface Requirement:} Any new repository must implement the \texttt{IBaseRepository} interface. \end{itemize}
+
+\item \textbf{Singleton Pattern:} \begin{itemize}[label=$\bullet$] \item \textbf{Purpose:} Ensures a single instance of certain services, like \texttt{QuizSessionService}, for managing application-wide state. \item \textbf{Implementation:} Implement the Singleton pattern to guarantee that only one instance of the service is created and accessed throughout the application's lifecycle. \end{itemize}
+
+\end{enumerate}
+
+\subsubsection{Logging Package and Usage}
+
+\begin{itemize}[label=$\bullet$] \item \textbf{Logging Package:} Consistently use a logging framework like Serilog. \item \textbf{Configuration:} Ensure the presence of a logging configuration file (e.g., \texttt{serilog.json}) in the application's directory. This file describes logging behavior, such as log levels and output destinations. \item \textbf{Usage in Code:} Log messages using the logger obtained from the logging framework's logging API. This logger should be declared as a private static readonly field within the class. \end{itemize}
+
+\subsubsection{Repository Implementation}
+
+\begin{itemize}[label=$\bullet$] \item \textbf{Interface Requirement:} All repository implementations must adhere to the common interface. \item \textbf{Consistency:} Maintain consistency in method signatures and behavior defined by the \texttt{IBaseRepository} interface. \end{itemize}
+
+\subsubsection{Dependency Injection}
+
+Dependency Injection (DI) is heavily employed throughout our system. By facilitating loose coupling between components. 
+
+\subsubsection{ Layered Structure and Module Organization}
+
+To enhance organization and clarity, we advocate for a structured approach to module organization:
+
+\begin{itemize}[label=$\bullet$] \item \textbf{Interface Module:} This module serves external interactions and communication, providing a clear interface for external systems or users to interact with our application.
+
+  \item \textbf{Core Module (Business Logic):} At the heart of our system lies the core module, responsible for orchestrating operations and enforcing business rules. This module encapsulates the essential logic driving our application's functionality.
+
+  \item \textbf{Data Access Layer:} The data access layer provides an interface for interacting with data storage, ensuring separation of concerns and facilitating efficient data management. \end{itemize}
+
+\subsubsection{Consistent User Flows}
+
+  \item \textbf{Quiz Taking Flow:} Users navigate from the quiz list to the quiz page, answer questions sequentially, and then view results. Each step is guided by consistent visual cues and navigation buttons.
+
+  \item \textbf{Quiz Management Flow:} Admins follow a flow from creating a new quiz, adding questions, setting correct answers, and publishing the quiz.
+
+\subsection{Standardization of Testing}
+
+\subsubsection{Unit Testing}
+For our backend unit testing, we use NUnit and Moq for testing ASP.NET Core services and repositories. These tests cover validation logic, business rules, and data access methods, focusing on service methods and repository functions. They follow the Arrange-Act-Assert pattern and are organized in a dedicated test project that mirrors the main codebase structure. Mock objects are used to simulate dependencies, and cleanup functions reset the state between tests to ensure isolation and reliability of test results.
+
+\subsubsection{Integration Testing}
+For API endpoints, we use Postman to automate comprehensive integration tests. Postman scripts verify responses to various HTTP requests (GET, POST, PUT, DELETE). These tests are organized in collections and executed across multiple environments.
+
+We use Cypress for detailed end-to-end tests. For example, in our upcoming quiz editor implementation, the following test scenarios are covered:
+
+\begin{itemize}
+    \item \textbf{Quiz Editor Access:} The test runner opens the quiz management page and verifies that the quiz edit button is visible for the topic owner and not visible for non-owners.
+    \item \textbf{Quiz Creation and Editing:} The test runner navigates to the quiz creation page, enters quiz details (e.g., title, questions, answers), and submits the form. It then checks the backend response to confirm the quiz was successfully created. The runner subsequently opens the quiz edit page, modifies quiz details, submits changes, and confirms updates were successful.
+    \item \textbf{Quiz Deletion:} The test runner clicks the delete button for a quiz, confirms the action, and checks the backend response.
+\end{itemize}
+
+These tests are stored in a cypress directory and focus on critical workflows, such as user authentication, role-based access, form submissions, data validation, and ensuring data passes correctly between the frontend and backend.
+
+\subsection{Instrumentation}
+
+\item \textbf{Monitoring Performance and Usage:}
+
+\item \textbf{Logging:} Incorporates Serilog for structured logging. Logs include details on user interactions with quizzes, errors, and performance metrics.
+
+\item \textbf{Analytics:} Uses Google Analytics to track user behavior, quiz engagement rates, and completion statistics. Custom events track specific actions like quiz start, question answer, and quiz completion.
+
+\item \textbf{Usage Metrics:} Stores data on question difficulty, user scores, and completion times in a PostgreSQL database. Regular reports are generated to identify trends and areas for improvement.
+
+\subsection{Codeline Organization}
+
+\textbf{Modular Structure:}
+
+\item \textbf{Frontend:} Organized into directories for components (/components), pages (/pages), services (/services), and utilities (/utils). Each component and page related to the quiz feature has its own directory.
+
+\item \textbf{Backend:} Follows a similar structure with directories for controllers (/Controllers), services (/Services), repositories (/Repositories), and models (/Models). The quiz feature-specific code is encapsulated within its own subdirectories.
+
+\item \textbf{Branching Strategy:} Uses Git with a feature branch workflow.
+
+\subsection{Stakeholder Concerns}
+
+\subsubsection{Developers}
+
+\begin{itemize}
+  \item Need clear module boundaries and documentation to facilitate development and maintenance.
+  \item Require standardized testing and instrumentation practices to ensure code quality and performance.
+\end{itemize}
+
+\subsubsection{Production Engineers}
+
+\begin{itemize}
+  \item Concerned with the reliability and scalability of the quiz feature.
+  \item Need comprehensive logging and monitoring to quickly identify and resolve issues.
+\end{itemize}
+
+\subsubsection{Testers}
+
+\begin{itemize}
+  \item Require detailed test plans and automated testing scripts to efficiently validate the system.
+  \item Benefit from standardized testing approaches to ensure consistent test coverage and results.
+\end{itemize}
+
+\end{document}

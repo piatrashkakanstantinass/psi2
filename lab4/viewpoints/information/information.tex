@@ -1,31 +1,80 @@
 \section{Information viewpoint}
 
-\subsection{Persistent entities}
-
-These are the entities stored by the Data Storage related to quiz functionality.
+\subsection{Information Structure and Content}
 
 \begin{figure}[H]
-  \includedrawio{viewpoints/information/entities.drawio}
+  \includedrawio[width=\textwidth]{viewpoints/information/entities.drawio}
   \caption{Persistent entity diagram}
   \label{fig:viewpoint-information-entity}
 \end{figure}
 
-\subsubsection{Storage}
+\subsection{Information Purpose and Usage}
 
-Single PostgreSQL database is used to store persistent entities. This simplifies architecture, shortens development time and ensures that information is always in correct state. EntityFramework is used as an ORM. Code exposes Entity repositories as a way to abstract the ORM and allow to change the underlying storage backend.
+All presented entities are required for EduPal operation with quiz functionality. User, Topic, Quiz, Question and Option entities are responsible for static data storage, while Quiz Game Session, Quiz Game Player and Quiz Game Player Answer are used for multiplayer quizzes. Entities are used only for OLTP processing as no data analysis requirements exist. Purposes and caveats of certain entities and relations:
 
-\begin{figure}[H]
-  \includedrawio[width=\textwidth]{viewpoints/information/data-access.drawio}
-  \caption{Repository code diagram}
-  \label{fig:viewpoint-information-repo}
-\end{figure}
+\begin{enumerate}
+  \item Topic may have the owner and quiz has the topic - required to trace who is the owner of a particular quiz.
+  \item Quiz Game Session stores pointers to shuffled questions (it is expected that implementation will be using id's of questions) to ensure that order of questions in every game is different.
+  \item Quiz Game Player is a separate entity of user to decrease coupling between entities and ensure that possible future requirement of anonymous players will be possible to implement without complex changes.
+  \item Question may point to an image URI stored in external object storage system.
+  \item Quiz Game session is only stored while session is active.
+  \item Last access field is need for archivation purposes in the future - entities that have not been used for a long time will move to future archive database.
+\end{enumerate}
 
-\subsection{Quiz game session entities}
+\subsection{Information Ownership}
 
-These are the entities stored by the Quiz Game Session Data Storage component.
+EduPal uses a single centric database to simplify operations. This ensures that we do not have to deal with information ownership issues.
 
-\begin{figure}[H]
-  \includedrawio{viewpoints/information/quiz-game-entities.drawio}
-  \caption{Quiz game session entity diagram}
-  \label{fig:viewpoint-information-quiz-game-entities}
-\end{figure}
+\subsection{Identifiers}
+
+Every entity must have an explicit Id attribute with unique (for the entity group) UUID value. Id attribute acts as a primary key and cannot change throughout the operation. The decision to have explicit primary key attribute and not to use some other data (such as username) as a primary key ensures that every entity has a similar structure and constraints of other attributes can be changed (username may or may not be unique). Every image has a unique URI and it is the responsibility of external object storage system to ensure this.
+
+\subsection{Volatility of Information Semantics}
+
+Database schema and its migrations are tracked by Entity Framework Core ORM. Since the database is only accessed by the monolithic EduPal application and none of the other systems, this management option is enough and allows to save developer time and cut down unnecessary costs.
+
+\subsection{Information Storage Models}
+
+Static data will be stored in a relational database - this ensures data consistency and allows to specify proper constraints for the data. Images will be stored in external object storage system (that is optimized for quick access and upload of 1-100Mb files).
+
+Quiz game sessions require fast data reads and writes and are deleted upon completion. To achieve high performance NoSQL document or key-value database with efficient caching capabilities should be used. A support for in-memory operation would also be beneficial.
+
+\subsection{Information Flow}
+
+Information is created, accessed, destroyed and modified by the business layer of the EduPal.
+
+\subsection{Information consistency}
+
+In order to increase performance during request processing EduPal chooses to use eventual consistency model - data access layer may cache certain data changes and not update the database in case the entity is commonly queried or updated.
+
+\subsection{Archiving and Information Retention}
+
+EduPal is still a young and developing system without a huge amount of data. Because of that and not a huge amount of information stored (Every question is typically one sentence, option is a few words), we currently do not need any automatic or even manual archivation processes. In the future, the data access layer will need to be extended - we will add archive database that old entities will go to. Data access layer and business layer will need to be updated to move information between databases.
+
+\subsection{Security perspective}
+
+Every static information is publicly available to the end users, therefore the only resources we need to securely store are user credentials. Because of low amount of entities with high sensitivity, we do not think it is necessary to separate data into a separate database. Data integrity is ensured by the fact that database is only accessed and updated by the EduPal system. Since every entity has a single owner, every data state change can be traced to the user.
+
+\subsection{Performance and Scalability}
+
+In order to increase performance, quiz sessions are stored in a NoSQL database. Scalability is primarily limited by a monolithic system architecture and for such architecture single database is enough.
+
+\subsection{Availability and recovery}
+
+In case of a controllable system crash (such as unhandled exception or similar), before the shutdown the system data access layer will perform the synchronization with the database. In case of a serious and uncontrollable crash (hardware failure or recovery crash and similar) temporary data will be lost. While this is a critical issue, considering the scope of EduPal the scenario is acceptable. Additionally, to minimize the losses, data access layer must synchronize the changes that are at least one hour old.
+
+\subsection{Evolution perspective}
+
+Information model is flexible as entities are related only when necessary and only required attributes are stored ensuring that the information model may evolve as need. Additionally, Some entities (such as Quiz Game Player and User) are decoupled to minimize future changes in case of new requirements.
+
+\subsection{Location perspective}
+
+Unrelated, since data is not distributed.
+
+\subsection{Regulation perspective}
+
+Only necessary data that is identified by terms of service is collected. EduPal does not archive data of deleted users and instead completely deletes the data entries (in case of user deletion it means that their topics and quizzes will be deleted). Data that is necessary only during quiz session is deleted by the end of it.
+
+\subsection{Usability perspective}
+
+High information quality and properly defined relations make the information highly usable and convenient to operate in business layers.
