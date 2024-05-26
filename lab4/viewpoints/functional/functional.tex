@@ -1,14 +1,5 @@
 \section{Functional viewpoint}
 
-\subsection{Functional Capabilities}
-
-Based on the requirements presented in Context section, the EduPal must support the following core capabilities:
-
-\begin{enumerate}
-  \item CRUD operations on the quiz
-  \item Real time quiz rooms with multiple players, checking answers and determining the winner
-\end{enumerate}
-
 \subsection{Internal structure}
 
 EduPal follows monolithic service oriented architecture. Each service (also called component in the document) has a defined in-code interface that other services interact with. This allows system to be adequately decoupled while maintaining consistency. Services are tiered into 3 categories:
@@ -18,18 +9,6 @@ EduPal follows monolithic service oriented architecture. Each service (also call
   \item Business logic services, services that perform the processing, determines if operation is valid, if needed, communicates with the data access layer services.
   \item Interface services, services that are responsible for communicating with external systems, converting requests into format that is acceptable by a particular business logic service, and turning business logic service responses into a valid communication object between the interfaces.
 \end{enumerate}
-
-\subsection{External Interfaces}
-
-\subsubsection{User Web Browser}
-
-External actor responsible for communication with front-facing EduPal interfaces as well as displaying EduPal web pages. Web browser, being external and user controlled entity, is not trusted and its requests are verified by front-facing interfaces.
-
-The communication is done via two channels : HTTP REST API and SignalR sockets. Most of the CRUD operations are done via REST API and the control flow is inbound - EduPal receives a request, checks whether it is valid and performs the required action yielding a response. Real time functionality (real time quiz rooms in our case) or functionality requiring the system to notify the web browser is performed using SignalR sockets. Data can flow in any direction and system and browser may not respond to certain requests. Communication is always initiated by the browser.
-
-\subsubsection{Image Data Storage}
-
-External system that is responsible for storing data objects and is used for storing question images. Data Flow is outbound - EduPal requests the system, to store, update or delete the file or permissions and requests an URI that is either passed to the user web browser, or processed by EduPal. Communication method is dependant on external system - EduPal must have an adapter responsible for performing the communication and exposing code interface.
 
 \subsection{Components}
 
