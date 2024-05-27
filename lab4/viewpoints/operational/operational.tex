@@ -53,18 +53,27 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 
 \subsection{Alerting}
 
-%TODO fix this chapter
-
 \begin{itemize}
     \item \textbf{Alert Rules:}
           \begin{itemize}
-              \item Set up alerts for critical events such as system outages, performance degradation, and failed quiz submissions.
-              \item Use PagerDuty to ensure alerts reach the relevant personnel promptly.
+              \item \textbf{System Outages:}
+                    Alert when any major components of the system (database, object storage system) go offline. Trigger alerts immediately upon detecting downtime.
+              \item \textbf{Performance:}
+                    Set up alerts to be fired for high CPU or memory usage exceeding 85\% for more than 3 minutes. Alert on prolonged response times. Monitor and alert on unusual spikes in network latency.
+              \item \textbf{Failed Quizzes:}
+                    Alert when a there are more than 5 crashed or otherwise failed quiz sessions in 10 minutes.
+              \item \textbf{Security Events:}
+                    Alert on multiple failed login attempts from the same IP address, indicating potential brute-force attacks.
+                    Trigger alerts for unauthorized access attempts or changes to critical system configurations.
+              \item \textbf{Other Critical Events:}
+                    Alert on application errors and exceptions that are not handled gracefully by the system.
           \end{itemize}
     \item \textbf{Alert Management:}
           \begin{itemize}
-              \item Integrate alerts with a central console to manage and track incidents.
-              \item Define escalation policies to ensure timely response to unresolved alerts.
+              \item Integrate with PagerDuty to ensure alerts are routed to the relevant personnel based on severity and nature of the incident.
+              \item Configure PagerDuty to escalate alerts if not acknowledged within a predefined timeframe.
+              \item Maintain a log of all incidents, their resolution status, and any follow-up actions required.
+              \item Periodically review alert thresholds and rules to ensure they remain effective and relevant.
           \end{itemize}
 \end{itemize}
 
@@ -89,13 +98,14 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 \begin{itemize}
     \item \textbf{Performance Metrics:}
           \begin{itemize}
-              \item Track metrics such as response times, system load, CPU/memory usage, and network latency.
-              \item Use APM (Application Performance Management) tools like New Relic or AppDynamics to get detailed insights into application performance.
+              \item Track key metrics: response times, system load, CPU/memory usage, network latency, and error rates.
+              \item Track the number of active users and concurrent quiz sessions to identify peak usage times.
+              \item Use APM tools for detailed performance insights.
           \end{itemize}
     \item \textbf{Scalability:}
           \begin{itemize}
-              \item Implement horizontal scaling for the backend to handle increased loads during peak quiz times.
-              \item Use load balancers to distribute traffic evenly across instances.
+              \item Implement horizontal scaling and use load balancers to handle increased loads.
+              \item Use auto-scaling to adjust resources based on demand.
           \end{itemize}
 \end{itemize}
 
@@ -105,7 +115,7 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 \begin{itemize}
     \item \textbf{Support Channels:}
           \begin{itemize}
-              \item Provide some sort of support channel, such as email, ticketing system, for users to report issues and request assistance.
+              \item Provide email support, ticketing system, for users to report issues and request assistance.
               \item Ensure support staff are trained on the new quizzing feature and have access to internal documentation.
           \end{itemize}
     \item \textbf{Documentation:}
@@ -121,12 +131,12 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 \begin{itemize}
     \item \textbf{Data Backup:}
           \begin{itemize}
-              \item Schedule regular backups of quiz-related data, including questions, answers, and user results.
+              \item Use cloud configurations to schedule regular backups of quiz-related data, including questions, answers, and user results.
               \item Use a combination of full and incremental backups to balance between redundancy and resource usage.
           \end{itemize}
     \item \textbf{Restore Procedures:}
           \begin{itemize}
-              \item Develop and document procedures for restoring quiz data from backups.
+              \item Develop and document cloud-based procedures for restoring quiz data from backups.
               \item Regularly test restore procedures to ensure they work as expected in the event of data loss.
           \end{itemize}
 \end{itemize}
@@ -142,7 +152,7 @@ The operational viewpoint describes how the EduPal system, particularly the new 
           \end{itemize}
     \item \textbf{Integration:}
           \begin{itemize}
-              \item Integrate with third-party monitoring and alerting tools if hosted externally.
+              \item Integrate with third-party monitoring and alerting tools.
               \item Ensure compliance with third-party SLA (Service Level Agreement) requirements.
           \end{itemize}
 \end{itemize}
@@ -154,7 +164,7 @@ The operational viewpoint describes how the EduPal system, particularly the new 
     \item \textbf{System Administrators:}
           \begin{itemize}
               \item Ensure the new feature is installed, configured, and maintained properly.
-              \item Monitor the system’s performance and handle alerts promptly.
+              \item Monitor the system's performance and handle alerts promptly.
           \end{itemize}
     \item \textbf{Production Engineers:}
           \begin{itemize}
@@ -173,7 +183,7 @@ The operational viewpoint describes how the EduPal system, particularly the new 
           \end{itemize}
     \item \textbf{Communicators:}
           \begin{itemize}
-              \item Facilitate clear communication about changes and new features to users.
+              \item Clearly communicate about changes and new features to users.
               \item Provide training materials, release notes, and support documentation.
           \end{itemize}
     \item \textbf{Assessors:}
@@ -194,7 +204,7 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 
 \subsection{Performance and Scalability}
 
-The operational readiness of the real-time quizzing feature requires robust performance monitoring and scalability measures. Performance metrics such as response times, system load, and resource usage will be continually tracked using APM tools like New Relic or AppDynamics. Scalability will be addressed by implementing horizontal scaling for backend services and using load balancers to evenly distribute user traffic, ensuring the system can handle increased loads during peak quiz times without degradation in user experience.
+The operational readiness of the real-time quizzing feature requires performance monitoring and scalability measures. Performance metrics such as response times, system load, and resource usage will be continually tracked. Scalability will be addressed by implementing horizontal or vertical scaling for backend services and using load balancers to evenly distribute user traffic, ensuring the system can handle increased loads during peak quiz times without degradation in user experience.
 
 
 \subsection{Availability and Recovery}
@@ -204,7 +214,7 @@ High availability and quick recovery are critical for the real-time quizzing fea
 
 \subsection{Evolution Perspective}
 
-To accommodate future enhancements and changes, the operational processes will include provisions for continuous integration and continuous deployment (CI/CD). This will allow for seamless updates and improvements to the quizzing feature with minimal disruption. Regular feedback from users and stakeholders will inform iterative development and operational adjustments.
+To accommodate future enhancements and changes, the operational processes will include provisions for continuous integration and continuous deployment. This will allow for seamless updates and improvements to the quizzing feature with minimal disruption. Regular feedback from users and stakeholders will make iterative development and operational adjustments.
 
 
 \subsection{Location Perspective}
