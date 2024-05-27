@@ -173,6 +173,7 @@
   "files.insertFinalNewline": true,
   "cSpell.words": [
     "archivation",
+    "Codeline",
     "drawio",
     "gameplay",
     "Gantt",
@@ -185,6 +186,7 @@
     "Reentrancy",
     "screenreaders",
     "scrollbars",
+    "Serilog",
     "WEBP",
     "wireframe"
   ]

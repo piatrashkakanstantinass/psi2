@@ -1,0 +1,150 @@
+<mxfile host="65bd71144e">
+    <diagram id="hREbQcUVon-8MDboGict" name="Page-1">
+        <mxGraphModel dx="737" dy="691" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="100" width="640" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="«layer»&lt;br&gt;Interface layer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="40" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="320" width="760" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="«layer»&lt;br&gt;Business logic layer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="260" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="550" width="640" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="«layer»&lt;br&gt;Data access layer" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="490" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="115" width="90" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="TopicController" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="8">
+                    <mxGeometry width="90" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="120" y="335" width="100" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="TopicCRUDService" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="10">
+                    <mxGeometry width="100" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="365" y="115" width="90" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="QuizController" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="12">
+                    <mxGeometry width="90" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="115" width="100" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="QuizSessionHub" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="14">
+                    <mxGeometry width="100" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;endArrow=open;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="2">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="410" y="220" as="sourcePoint"/>
+                        <mxPoint x="410" y="320" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="17" value="User Input" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="260" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=8 8;endArrow=open;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="6">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="410" y="420" as="sourcePoint"/>
+                        <mxPoint x="410" y="540" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="19" value="Data management" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="480" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="250" y="335" width="110" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="QuizCrudService" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="20">
+                    <mxGeometry width="110.00000000000001" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="22" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="335" width="110" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="QuizSessionHandler" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="22">
+                    <mxGeometry width="110.00000000000001" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="335" width="150" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="QuizAnswerGradingService" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="24">
+                    <mxGeometry width="150.00000000000003" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="565" width="100" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="DBContext" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="26">
+                    <mxGeometry width="100" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="28" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="565" width="100" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="TopicRepository" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="28">
+                    <mxGeometry width="100" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="30" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="565" width="100" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="QuizRepository" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="30">
+                    <mxGeometry width="100" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="32" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="455" y="565" width="130" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="QuizSessionRepository" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="32">
+                    <mxGeometry width="130" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="34" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="565" width="110" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="ObjectRepository" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="34">
+                    <mxGeometry width="110.00000000000001" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="36" value="" style="shape=folder;fontStyle=1;tabWidth=45;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="690" y="335" width="150" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="UserPermissionService" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;" vertex="1" parent="36">
+                    <mxGeometry width="150.00000000000003" height="49" relative="1" as="geometry">
+                        <mxPoint y="30" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

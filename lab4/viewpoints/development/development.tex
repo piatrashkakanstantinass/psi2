@@ -44,17 +44,6 @@ The EduPal quiz integration feature is organized into several interconnected mod
 \end{figure}
 
 
-\subsubsection{Common Processing}
-
-\begin{itemize}
-  \item \textbf{Data Validation:} Uses React with Formik and Yup for form handling and schema-based validation.
-
-  \item \textbf{Error Handling:} Uses ASP.NET Core middleware for global exception handling, logging errors to a centralized logging service (like Serilog) and returning standardized error responses.
-
-  \item \textbf{User Authentication:} Manages user authentication and authorization using JWT tokens for securing API endpoints. Middleware checks token validity and user roles before processing quiz-related requests.
-\end{itemize}
-
-
 \subsection{Standardization of Design}
 
 \subsubsection{Design Patterns}

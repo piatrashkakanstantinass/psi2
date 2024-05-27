@@ -1,0 +1,113 @@
+\section{Development viewpoint}
+
+\subsection{Module organization}
+
+EduPal follows monolithic service oriented architecture. Each service (also called component in the document) has a defined in-code interface that other services interact with. This allows system to be adequately decoupled while maintaining consistency. Services are tiered into 3 categories:
+
+\begin{enumerate}
+  \item Data access services, services that store the data themselves communicate with external system or database to store and retrieve the data. Such service does not perform any business logic related processing. Its interfaces are used by business logic layer.
+  \item Business logic services, services that perform the processing, determines if operation is valid, if needed, communicates with the data access layer services.
+  \item Interface services, services that are responsible for communicating with external systems, converting requests into format that is acceptable by a particular business logic service, and turning business logic service responses into a valid communication object between the interfaces.
+\end{enumerate}
+
+Therefore there are 3 main modules: interface, business logic and data access.
+
+\begin{figure}
+  \includedrawio[width=\textwidth]{viewpoints/development-v2/development-v2.drawio}
+  \caption{Module organization diagram}
+  \label{fig:module-orgaz}
+\end{figure}
+
+\subsection{Common Processing}
+
+\begin{description}
+  \item[Data Validation:] Requests are validated using ASP.NET built-in middleware alongside with user auth validation. Any other validation is performed by business services responsible for particular data.
+
+  \item[Error Handling:] ASP.NET Core middleware is used for global exception handling, logging errors to a centralized Serilog logging service  and returning standardized error responses.
+
+  \item[User Authentication:] Auth middleware performs token checking and maps tokens to user entities.
+\end{description}
+
+\subsection{Standardization of Design}
+
+\subsubsection{Architecture styles and patterns}
+
+EduPal follows monolithic layered SOA where each layer depends on bottom layers and exposes functionality to the top layer. Services are modeled as classes that are managed by standard ASP.NET dependency injection container.
+
+\begin{description}
+  \item[Data Centered:] EduPal has a single database that allows to easily maintain consistency and simplify service development. Since EduPal does not have critical non-functional requirements, this approach is used.
+  \item[Master Data Management:] Business layer CRUD services are responsible for communicating with data access layer and performs requests of other business layer services. This ensures that business logic rules are always followed and that other services know what data is correct. No other services can do data storage.
+  \item[CRUD:] CRUD patterns is used partially - business, data access and interface layers expose CRUD operations on quiz, question and similar objects, however business and interface layers abstract certain relations and provide more convenient interface than just "DB via HTTP".
+  \item[OLTP:] EduPal's primary focus is to handle user requests with no requirements for analytical processing, for this OLTP pattern is the most suitable.
+  \item[REST:] EduPal exposes REST API.
+  \item[Layered:] 3 layers are used to a. abstract the underlying database b. write business logic in application interface independent way. c. have a layer only concerned with communication with business layer and representing the results. 
+\end{description}
+
+\subsubsection{Design Patterns}
+
+\begin{description}
+  \item[Repository pattern:] used in business and data access layer to abstract the underlying database/ORM API and provide the same API for all entities.
+  \item[Dependency injection:] DI is a central part of the EduPal system allowing to decouple the classes by implementing interface segregation principle.
+\end{description}
+
+\subsection{Instrumentation}
+
+Serilog is used for logging and its logger is injected using dependency injection. It is possible to change logging severity via configuration option. Debug builds of the EduPal rely on code assertions to detect errors as soon as possible.
+
+\subsection{Codeline organization}
+
+Git is used with a feature branch workflow. EduPal has a centric monorepo hosted on the private GitLab instance that is used for backend, frontend and tests. It contains Visual Studio Solution file with the following projects: Core (Business logic), WebApi (interface layer exposing REST API), Infrastructure (Data access layer + infrastructure needs), UnitTests (business logic unit tests), IntegrationTests (whole system integration tests) and a folder for React frontend. Codebase contains backend and frontend Dockerfiles and docker compose file used for deployment.
+
+EduPal utilizes GitLab CI/CD pipelines to automate the build, test, and deployment processes. The CI/CD pipelines are configured to perform the following tasks:
+
+\begin{description}
+\item[Build:] The codebase is built using predefined scripts that compile the projects, ensuring that there are no compilation errors.
+
+\item[Test:] Automated tests, including unit tests and integration tests, are executed to validate the functionality and integration of the code. Test results are reported back to the development team.
+
+\item[Deploy:] Successful builds and passing tests trigger the deployment pipeline, which can deploy the application to various environments (e.g., development, staging, production) based on predefined rules. Deployments are performed on merge to main branch.
+\end{description}
+
+\section{Security perspective}
+
+The primary way of ensuring that EduPal is secure is by requiring developers to perform data query and mutation via CRUD business services that are responsible for enforcing business rules regarding policies and similar.
+
+\section{Performance and scalability perspective}
+
+Dos:
+
+\begin{enumerate}
+  \item Put data caching into data access layer
+  \item Keep business services stateless
+  \item Optimize database queries - extend generic repository interface and provide specific queries when necessary
+  \item Keep code methods asynchronous
+\end{enumerate}
+
+Don'ts:
+
+\begin{enumerate}
+  \item Avoid stateful business services
+  \item Do not overuse caching
+  \item Avoid excessive logging
+  \item Avoid synchronous I/O
+\end{enumerate}
+
+\section{Availability and resilience perspective}
+
+EduPal must have code that handles shutdown signals - it should close all current connections and flush temporary cache and quiz session data.
+
+\section{Evolution perspective}
+
+Layered separation allows to keep only required dependencies in each project, allowing to change the ORM and API interface without impacting the business logic. .NET platform allows to use different languages as long as they can be compiled to CLR bytecode.
+
+\section{Location perspective}
+
+Unrelated since developed is managed in a single location.
+
+\section{Regulation perspective}
+
+Unrelated.
+
+\section{Usability perspective}
+
+Every business layer class must implement a predefined interface, classes cannot depend on other classes, only on interfaces. .NET exceptions and custom ones are used to make errors clear. 
