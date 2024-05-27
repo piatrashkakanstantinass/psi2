@@ -21,10 +21,6 @@ All presented entities are required for EduPal operation with quiz functionality
   \item Last access field is need for archivation purposes in the future - entities that have not been used for a long time will move to future archive database.
 \end{enumerate}
 
-\subsection{Information Ownership}
-
-EduPal uses a single centric database to simplify operations. This ensures that we do not have to deal with information ownership issues.
-
 \subsection{Identifiers}
 
 Every entity must have an explicit Id attribute with unique (for the entity group) UUID value. Id attribute acts as a primary key and cannot change throughout the operation. The decision to have explicit primary key attribute and not to use some other data (such as username) as a primary key ensures that every entity has a similar structure and constraints of other attributes can be changed (username may or may not be unique). Every image has a unique URI and it is the responsibility of external object storage system to ensure this.
@@ -41,11 +37,11 @@ Quiz game sessions require fast data reads and writes and are deleted upon compl
 
 \subsection{Information Flow}
 
-Information is created, accessed, destroyed and modified by the business layer of the EduPal.
+Information is created, accessed, destroyed and modified by the CRUD Handler.
 
 \subsection{Information consistency}
 
-In order to increase performance during request processing EduPal chooses to use eventual consistency model - data access layer may cache certain data changes and not update the database in case the entity is commonly queried or updated.
+CRUD Handler component is responsible for ensuring that data in the database is consistent. Since no other systems use the database, achieving consistency is not a huge problem.
 
 \subsection{Archiving and Information Retention}
 
@@ -55,13 +51,13 @@ EduPal is still a young and developing system without a huge amount of data. Bec
 
 Every static information is publicly available to the end users, therefore the only resources we need to securely store are user credentials. Because of low amount of entities with high sensitivity, we do not think it is necessary to separate data into a separate database. Data integrity is ensured by the fact that database is only accessed and updated by the EduPal system. Since every entity has a single owner, every data state change can be traced to the user.
 
-\subsection{Performance and Scalability}
+\subsection{Performance and scalability perspective}
 
 In order to increase performance, quiz sessions are stored in a NoSQL database. Scalability is primarily limited by a monolithic system architecture and for such architecture single database is enough.
 
-\subsection{Availability and recovery}
+\subsection{Availability and resilience perspective}
 
-In case of a controllable system crash (such as unhandled exception or similar), before the shutdown the system data access layer will perform the synchronization with the database. In case of a serious and uncontrollable crash (hardware failure or recovery crash and similar) temporary data will be lost. While this is a critical issue, considering the scope of EduPal the scenario is acceptable. Additionally, to minimize the losses, data access layer must synchronize the changes that are at least one hour old.
+It is possible to do database backups manually that can later help recover the system in case central database becomes corrupted.
 
 \subsection{Evolution perspective}
 
@@ -77,4 +73,4 @@ Only necessary data that is identified by terms of service is collected. EduPal 
 
 \subsection{Usability perspective}
 
-High information quality and properly defined relations make the information highly usable and convenient to operate in business layers.
+High information quality and properly defined relations make the information highly usable and convenient to operate by the EduPal backend.
