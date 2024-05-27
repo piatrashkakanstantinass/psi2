@@ -14,7 +14,6 @@ The operational viewpoint describes how the EduPal system, particularly the new 
     \item \textbf{Upgrade Approach:}
           \begin{itemize}
               \item \textbf{Big Bang Upgrade:} Plan for a scheduled downtime where the entire system is upgraded at once. Ensure comprehensive testing in a staging environment before the upgrade.
-              \item \textbf{Incremental Upgrade:} Deploy the quizzing feature to a subset of users first (canary deployment) to identify and resolve issues before a full rollout.
               \item Include rollback procedures in case the upgrade needs to be reverted due to unforeseen issues.
           \end{itemize}
 \end{itemize}
@@ -23,8 +22,7 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 \subsection{Functional Migration}
 
 \begin{itemize}
-    \item \textbf{Big Bang Migration:} If applicable, perform a single-step migration during a maintenance window to switch from any existing quizzing mechanisms to the new feature.
-    \item \textbf{Parallel Run:} Optionally, run both the old and new quizzing systems concurrently. This allows users to transition gradually and provides a fallback if issues arise with the new feature.
+    \item \textbf{Big Bang Migration:} A single-step migration will be performed during a maintenance window to introduce the new multiple participant quizzing feature.
 \end{itemize}
 
 
@@ -32,15 +30,9 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 
 \begin{itemize}
     \item \textbf{Existing Data:}
-          \begin{itemize}
-              \item Identify any existing quiz data that needs to be migrated.
-              \item Develop scripts to extract, transform, and load (ETL) this data into the new quizzing system’s format.
-          \end{itemize}
+          As this is a new feature, there is no data related to quizzes that needs to be migrated. However, the system will be designed to handle future data migration requirements.
     \item \textbf{ETL Tools:}
-          \begin{itemize}
-              \item Use ETL tools such as Talend or Apache NiFi for automating data migration processes.
-              \item Test data migration in a staging environment to ensure accuracy and completeness.
-          \end{itemize}
+          No ETL tools are necessary, as there is no existing data to extract, transform, or load.
 \end{itemize}
 
 
@@ -49,7 +41,7 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 \begin{itemize}
     \item \textbf{Monitoring Tools:}
           \begin{itemize}
-              \item Implement tools such as Prometheus, Grafana, or Datadog to monitor system performance, resource usage, and user activity in real-time.
+              \item Implement Prometheus to monitor system performance, resource usage, and user activity in real-time.
           \end{itemize}
     \item \textbf{Control Operations:}
           \begin{itemize}
@@ -61,15 +53,17 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 
 \subsection{Alerting}
 
+%TODO fix this chapter
+
 \begin{itemize}
-    \item \textbf{Alerts Configuration:}
+    \item \textbf{Alert Rules:}
           \begin{itemize}
               \item Set up alerts for critical events such as system outages, performance degradation, and failed quiz submissions.
-              \item Use tools like PagerDuty or Opsgenie to ensure alerts reach the relevant personnel promptly.
+              \item Use PagerDuty to ensure alerts reach the relevant personnel promptly.
           \end{itemize}
     \item \textbf{Alert Management:}
           \begin{itemize}
-              \item Integrate alerts with a central console (e.g., ServiceNow) to manage and track incidents.
+              \item Integrate alerts with a central console to manage and track incidents.
               \item Define escalation policies to ensure timely response to unresolved alerts.
           \end{itemize}
 \end{itemize}
@@ -80,12 +74,12 @@ The operational viewpoint describes how the EduPal system, particularly the new 
 \begin{itemize}
     \item \textbf{Centralized Management:}
           \begin{itemize}
-              \item Store configuration files in a version-controlled repository (GitLab) and use a configuration management tool like Ansible, Puppet, or Chef to apply configurations consistently across environments.
+              \item Store configuration files in a version-controlled repository (GitLab) and use Ansible - a configuration management tool, to apply configurations consistently across environments.
           \end{itemize}
     \item \textbf{Parameter Management:}
           \begin{itemize}
               \item Maintain environment-specific configuration files for different stages (development, staging, production).
-              \item Ensure sensitive configuration parameters (e.g., API keys, database credentials) are stored securely, using tools like HashiCorp Vault.
+              \item Ensure sensitive configuration parameters (e.g., API keys, database credentials) are stored securely, using HashiCorp Vault.
           \end{itemize}
 \end{itemize}
 
