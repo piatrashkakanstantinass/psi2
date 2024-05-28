@@ -50,6 +50,45 @@ EduPal follows monolithic layered SOA where each layer depends on bottom layers 
   \item[Dependency injection:] DI is a central part of the EduPal system allowing to decouple the classes by implementing interface segregation principle.
 \end{description}
 
+\subsection{Standardization of Testing}
+
+\subsubsection{Unit Testing}
+For our backend unit testing, we use XUnit and Moq for testing ASP.NET Core services and repositories. These tests cover validation logic, business rules, and data access methods, focusing on service methods and repository functions. They follow the Arrange-Act-Assert pattern and are organized in a dedicated test project that mirrors the main codebase structure. Mock objects are used to simulate dependencies, and cleanup functions reset the state between tests to ensure isolation and reliability of test results. We strive for 90\% unit test coverage.
+
+\subsubsection{Integration Testing}
+Integration testing for EduPal focuses on verifying the interactions between different components of the system, particularly the API endpoints. This is achieved through two ASP.NET Web Host and In-Memory Test Server. These tools simulate a real web server environment, allowing us to test our API endpoints in a controlled, in-memory context. This setup ensures that the integration tests are fast, reliable, and do not depend on external services.
+These tests validate the end-to-end data flow within the backend components, ensuring that different layers (interface, business logic, data access) interact correctly. We strive to ensure that 70\% of exposed APIS are tested with integration tests.
+
+\subsubsection{Integration Testing scenarios}
+
+The following are sample integration testing scenarios that could be implemented by the EduPal developer team.
+
+\subsubsection{Quiz creation}
+
+\begin{enumerate}
+  \item Setup: Seed the database with sample topics
+  \item Send GET request to get a list of topics of a particular subject and select the first topic.
+  \item Use the GET request to get a list of quizzes for selected topic
+  \item Send the quiz POST request to create a new quiz.
+  \item Use the GET request to get a new list of quizzes
+  \item Ensure that new list is 1 item longer
+  \item Ensure that new list item has quiz name and questions same as in request.
+\end{enumerate}
+
+\subsubsection{Quiz CRUD topic owner restrictions}
+
+\begin{enumerate}
+  \item Setup: Seed the database with 2 users A and B and one topic that belongs to user A.
+  \item Perform quiz creation steps by user A.
+  \item Try to perform quiz creation steps by user B and ensure that API returns Unauthorized response.
+  \item Try to perform quiz deletion by user B and ensure that API returns Unauthorized response.
+  \item Perform quiz deletion request by user A and ensure that quiz was deleted.
+\end{enumerate}
+
+\subsubsection{End-to-end Testing}
+
+We use Cypress for detailed end-to-end tests. These tests are stored in a cypress directory and focus on critical workflows, such as user authentication, role-based access, form submissions, data validation, and ensuring data passes correctly between the frontend and backend. The purpose of the tests is to ensure that critical system functionality is available through the React frontend. We keep end-to-end tests minimal as they are harder to write and maintain, we primarily test parts of the system that are not actively used and may break by future changes.
+
 \subsection{Instrumentation}
 
 Serilog is used for logging and its logger is injected using dependency injection. It is possible to change logging severity via configuration option. Debug builds of the EduPal rely on code assertions to detect errors as soon as possible.
