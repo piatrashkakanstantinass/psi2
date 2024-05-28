@@ -61,3 +61,34 @@ In order to handle component failure, components cannot depend on processes of o
 \subsection{Reentrancy}
 
 Stateless process operation ensures reentrancy.
+
+\section{Security perspective}
+
+In the context of concurrency, EduPal employs several measures to ensure that concurrent processing does not compromise security. One key aspect is the isolation of quiz sessions into individual threads. This isolation prevents cross-thread data contamination and ensures that any security breach in one thread does not affect the integrity of other concurrent processes.
+EduPal uses thread-safe coding practices to mitigate risks associated with race conditions and deadlocks. For example, access to shared resources is controlled using locking mechanisms such as mutexes and semaphores, ensuring that concurrent threads do not interfere with each other in a way that could lead to data corruption or unauthorized access.
+Authentication and authorization processes are tightly integrated with the concurrency model. Each request handled asynchronously by the ASP.NET Core thread pool is authenticated individually, ensuring that only authorized users can access specific functionalities or data. Role-based access control (RBAC) is enforced at the thread level, preventing unauthorized threads from accessing restricted areas of the application.
+To further enhance security, EduPal encrypts sensitive data in transit and at rest. This includes data being processed concurrently, ensuring that even if a thread is compromised, the data remains protected. Secure communication protocols, such as HTTPS, are employed for all data exchanges between threads and external services, preventing interception and tampering.
+
+\section{Performance and scalability perspective}
+
+EduPal's performance in handling concurrent tasks is optimized through the use of ASP.NET Core's efficient asynchronous processing model, which effectively manages the thread pool. This allows the system to handle a large number of concurrent requests with minimal latency. The monolithic architecture supports vertical scaling, meaning that as more CPU cores are added, the system can manage more concurrent threads, enhancing its ability to process multiple quiz sessions simultaneously. Every quiz session gets a separate thread to increase performance as this is the most demanding part of EduPal.
+
+\section{Availability and resilience perspective}
+
+EduPal ensures high availability and resilience through robust concurrency management. By isolating quiz sessions into individual threads, the system can prevent a failure in one session from affecting others. This thread isolation is critical for maintaining the overall system stability. The system employs health checks and redundancy for critical processes to ensure they are always operational. In the event of a failure, the system is designed to restart individual threads without disrupting the entire application, ensuring that users experience minimal downtime.
+
+\section{Evolution perspective}
+
+As EduPal evolves, the concurrency model is designed to accommodate new features and improvements without disrupting existing processes. The monolithic architecture, while less flexible than microservices, allows for straightforward updates to the concurrency model. Future enhancements might include more sophisticated load balancing and improved thread management techniques.
+
+\section{Location perspective}
+
+EduPal processes run on a single machine ensuring that process synchronization is easy and that there are no reliability or latency issues.
+
+\section{Regulation perspective}
+
+Unrelated.
+
+\section{Usability perspective}
+
+Unrelated.
