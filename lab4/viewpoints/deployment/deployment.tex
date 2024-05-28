@@ -1,8 +1,8 @@
 \section{Deployment Viewpoint}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includesvg[width=\textwidth]{viewpoints/deployment/deployment.svg}
+    \includedrawio[width=0.7\textwidth]{viewpoints/deployment/deployment.drawio}
     \caption{Deployment diagram}
     \label{deployment-diagram}
 \end{figure}
@@ -12,9 +12,9 @@ The operating system or runtime environment needed to execute the software inclu
 
 \subsection{Artifact Component Mapping}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includesvg[width=\textwidth]{viewpoints/deployment/artifact-component.svg}
+    \includedrawio[width=0.7\textwidth]{viewpoints/deployment/artifact-component.drawio}
     \caption{Artifact component diagram}
     \label{artifact-component-diagram}
 \end{figure}
@@ -42,6 +42,7 @@ Necessary hardware resources and the number of physical or virtual machines incl
         \item Performance Tier: Standard
         \item Replication: Locally redundant storage (LRS)
     \end{itemize}
+    Hot tier has the highest storage costs, but the lowest access costs. That makes it the best option for us, as we will be accessing the data frequently and thus saving money in the long run. As opposed to cool or cold access tier, which have lower storage costs but higher access costs.
 \end{itemize}
 The deployment separates frontend and backend resources into different Azure Resource Groups, improving manageability and resource allocation.
 
@@ -75,14 +76,23 @@ The network infrastructure needed for the system includes:
 \subsection{Network Capacity Required}
 The necessary network bandwidth and throughput are managed through a manual scaling strategy. The Azure Web App Services are configured to handle the expected load, with the ability to scale up or out as needed. The Azure PostgreSQL server is provisioned with sufficient network capacity to handle database requests efficiently.
 
-\subsection{Perspectives}
+\subsection{Security Perspective}
+We use Azure services to ensure secure communication between components, such as Private Endpoint for the database, VNet Integration for the backend services and blob storage for user-uploaded files. The deployment is designed to minimize exposure to potential security threats.
 
-\textbf{Security Perspective:} We use Azure services to ensure secure communication between components, such as Private Endpoint for the database, VNet Integration for the backend services and blob storage for user-uploaded files. The deployment is designed to minimize exposure to potential security threats.
+\subsection{Performance and Scalability Perspective}
+The deployment is optimized for performance, with Azure Web App Services providing scalable resources for the frontend and backend applications. The Azure PostgreSQL server is provisioned with sufficient memory and storage to handle database requests efficiently.
 
-\textbf{Performance Perspective:} The deployment is optimized for performance, with Azure Web App Services providing scalable resources for the frontend and backend applications. The Azure PostgreSQL server is provisioned with sufficient memory and storage to handle database requests efficiently.
+\subsection{Availability and Resilience Perspective}
+Azure ensures high availability and resilience for the system, with features such as deployment slots for zero-downtime deployments, locally redundant storage for blob storage, and automatic failover for the PostgreSQL server. The system is designed to minimize downtime and ensure continuous availability.
 
-\textbf{Availability and Resilience Perspective:} Azure ensures high availability and resilience for the system, with features such as deployment slots for zero-downtime deployments, locally redundant storage for blob storage, and automatic failover for the PostgreSQL server. The system is designed to minimize downtime and ensure continuous availability.
+\subsection{Evolution Perspective}
+The deployment is designed to be flexible and adaptable to future changes, with Azure services providing scalability and manageability. The use of Docker containers ensures consistency across different environments, making it easier to update and evolve the system over time.
 
-\textbf{Evolution Perspective:} The deployment is designed to be flexible and adaptable to future changes, with Azure services providing scalability and manageability. The use of Docker containers ensures consistency across different environments, making it easier to update and evolve the system over time.
+\subsection{Location Perspective}
+The deployment is hosted in the North Europe region to ensure proximity to the target user base for reduced latency. The network infrastructure is designed to provide optimal performance and reliability for users in the region.
 
-\textbf{Location Perspective:} The deployment is hosted in the North Europe region to ensure proximity to the target user base for reduced latency. The network infrastructure is designed to provide optimal performance and reliability for users in the region.
+\subsection{The Regulation Perspective}
+Unrelated
+
+\subsection{The Usability Perspective}
+Unrelated
