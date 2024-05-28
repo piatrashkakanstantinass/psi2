@@ -107,11 +107,11 @@ EduPal utilizes GitLab CI/CD pipelines to automate the build, test, and deployme
 \item[Deploy:] Successful builds and passing tests trigger the deployment pipeline, which can deploy the application to various environments (e.g., development, staging, production) based on predefined rules. Deployments are performed on merge to main branch.
 \end{description}
 
-\section{Security perspective}
+\subsection{Security perspective}
 
 The primary way of ensuring that EduPal is secure is by requiring developers to perform data query and mutation via CRUD business services that are responsible for enforcing business rules regarding policies and similar.
 
-\section{Performance and scalability perspective}
+\subsection{Performance and scalability perspective}
 
 Dos:
 
@@ -131,22 +131,22 @@ Don'ts:
   \item Avoid synchronous I/O
 \end{enumerate}
 
-\section{Availability and resilience perspective}
+\subsection{Availability and resilience perspective}
 
 EduPal must have code that handles shutdown signals - it should close all current connections and flush temporary cache and quiz session data.
 
-\section{Evolution perspective}
+\subsection{Evolution perspective}
 
 Layered separation allows to keep only required dependencies in each project, allowing to change the ORM and API interface without impacting the business logic. .NET platform allows to use different languages as long as they can be compiled to CLR bytecode.
 
-\section{Location perspective}
+\subsection{Location perspective}
 
 Unrelated since developed is managed in a single location.
 
-\section{Regulation perspective}
+\subsection{Regulation perspective}
 
 Unrelated.
 
-\section{Usability perspective}
+\subsection{Usability perspective}
 
 Every business layer class must implement a predefined interface, classes cannot depend on other classes, only on interfaces. .NET exceptions and custom ones are used to make errors clear. 
