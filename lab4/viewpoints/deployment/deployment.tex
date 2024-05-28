@@ -2,7 +2,7 @@
 
 \begin{figure}[ht]
     \centering
-    \includesvg[width=\textwidth]{viewpoints/deployment/deployment.svg}
+    \includedrawio[width=\textwidth]{viewpoints/deployment/deployment.drawio}
     \caption{Deployment diagram}
     \label{deployment-diagram}
 \end{figure}
@@ -14,7 +14,7 @@ The operating system or runtime environment needed to execute the software inclu
 
 \begin{figure}[ht]
     \centering
-    \includesvg[width=\textwidth]{viewpoints/deployment/artifact-component.svg}
+    \includedrawio[width=\textwidth]{viewpoints/deployment/artifact-component.drawio}
     \caption{Artifact component diagram}
     \label{artifact-component-diagram}
 \end{figure}
@@ -79,7 +79,7 @@ The necessary network bandwidth and throughput are managed through a manual scal
 \subsection{Security Perspective}
 We use Azure services to ensure secure communication between components, such as Private Endpoint for the database, VNet Integration for the backend services and blob storage for user-uploaded files. The deployment is designed to minimize exposure to potential security threats.
 
-\subsection{Performance Perspective}
+\subsection{Performance and Scalability Perspective}
 The deployment is optimized for performance, with Azure Web App Services providing scalable resources for the frontend and backend applications. The Azure PostgreSQL server is provisioned with sufficient memory and storage to handle database requests efficiently.
 
 \subsection{Availability and Resilience Perspective}
@@ -90,3 +90,9 @@ The deployment is designed to be flexible and adaptable to future changes, with 
 
 \subsection{Location Perspective}
 The deployment is hosted in the North Europe region to ensure proximity to the target user base for reduced latency. The network infrastructure is designed to provide optimal performance and reliability for users in the region.
+
+\subsection{The Regulation Perspective}
+Unrelated
+
+\subsection{The Usability Perspective}
+Unrelated
